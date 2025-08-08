@@ -1,4 +1,4 @@
-# A2A and MCP Detailed Comparison
+# A2A and MCP: Detailed Comparison
 
 In AI agent development, two key protocol types are essential for building
 robust and collaborative systems:
