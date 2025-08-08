@@ -129,19 +129,29 @@ enterprise-grade capabilities, and future-proofing.
     capabilities and exchanged context. This preserves intellectual property and
     enhances security.
 
-### A2A in the Broader AI Ecosystem
+### Understanding the Agent Stack: A2A, MCP, Agent Frameworks and Models
 
 A2A fits into a larger agentic stack:
 
- - **A2A protocol**: Standardizes communication across agents deployed in different
-    organizations and built on different frameworks.
- - **MCP**: Connects models to data and external resources.
- - **Frameworks (like ADK)**: Provide a toolkit to assemble your agent.
- - **Models**: Fundamental to an agent's reasoning, these include any Large
-    Language Model (LLM).
+-   **A2A:** Standardizes communication across agents deployed in different organizations built on different frameworks.
+-   **MCP:** Connects models to data and external resources.
+-   **Frameworks (like ADK):** Provide a toolkit to assemble your agent.
+-   **Models:** Fundamental to the agent’s reasoning, these could be any LLM of choice.
 
+#### A2A and MCP 
 
-### A2A and ADK 
+In the broader ecosystem of AI communication, you might be familiar with protocols designed for agents to interact with models and tools. Notably, the Model Context Protocol (MCP) is an emerging standard focused on connecting Large Language Models (LLMs) with data and external resources.
+
+The Agent2Agent (A2A) protocol is designed to standardize communication between AI agents themselves, particularly for those deployed in external systems. A2A is positioned to complement MCP, addressing a different, yet related, layer of the agent interaction problem.
+
+-   **MCP's Focus:** Lowering the complexity to connect agents with tools and data. Tools are typically stateless and perform specific, predefined functions (e.g., a calculator, a database query).
+-   **A2A's Focus:** Enabling agents to collaborate in their natural modalities, allowing them to communicate as agents (or as users) instead of as tools. This enables complex, multi-turn interactions where agents reason, plan, and delegate tasks to other agents. For example, back-and-forth communication when you want to order something, involving negotiation or clarification.
+
+ The practice of wrapping an agent as a simple tool is fundamentally limiting, as it fails to capture its true capabilities. This critical distinction is explored in the post, [Why Agents Are Not Tools](https://discuss.google.dev/t/agents-are-not-tools/192812).
+ 
+For a more in-depth comparison, refer to the [A2A and MCP Comparison](./topics/a2a-and-mcp.md) document.
+
+#### A2A and ADK 
 
 The [Agent Development Kit (ADK)](https://google.github.io/adk-docs)
 is an open source agent development toolkit developed by Google. A2A is a
