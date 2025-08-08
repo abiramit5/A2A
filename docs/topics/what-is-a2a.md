@@ -104,7 +104,7 @@ The following diagram provides a high-level overview of the A2A protocol:
 
 <figure>
  <img src="/application-integration/images/a2a-high-level-overview.png" alt="A high-level overview of the A2A protocol showing two agents, each with its own LLM and Agent Framework, communicating across organizational or technological boundaries using the A2A protocol, while using MCP internally to connect to APIs & Enterprise Applications.">
- <figcaption><b>Figure 2.</b>: A high-level overview of the A2A protocol.</figcaption>
+ <figcaption><b>Figure 2.</b> A high-level overview of the A2A protocol.</figcaption>
 </figure>
 
 
