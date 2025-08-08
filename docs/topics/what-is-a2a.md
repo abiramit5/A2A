@@ -39,7 +39,7 @@ Without A2A, integrating these diverse agents presents several challenges:
     the number of agents and interactions grows.
 -  **Interoperability**: This approach limits interoperability,
     preventing the organic formation of complex AI ecosystems.
--  **Security Gaps**: Ad hoc communication often lacks consistent security
+-  **Security gaps**: Ad hoc communication often lacks consistent security
     measures.
 
 The A2A protocol addresses these challenges by establishing interoperability for
