@@ -264,18 +264,18 @@ distributing extension implementations.
 
         This example showcases how A2A SDKs or libraries (like `a2a.server` in
         Python) facilitate the implementation of A2A agents and extensions.
-      
 -   **Security**:
     Extensions modify the core behavior of the A2A protocol, and therefore
         introduce new security considerations:
+    
     - **Input validation**: Any new data fields, parameters, or methods
         introduced by an extension MUST be rigorously validated. Treat all
-        extension-related data from an external party as untrusted input.
+        extension-related data from an external party as untrusted input.    
     - **Scope of required extensions**: Be mindful when marking an extension as
         `required: true` in an Agent Card. This creates a hard dependency for
         all clients and should only be used for extensions fundamental to the
         agent's core function and security (for example, a message signing
-        extension).
+        extension).      
     - **Authentication and authorization**: If an extension adds new methods,
         the implementation MUST ensure these methods are subject to the same
         authentication and authorization checks as the core A2A methods. An
