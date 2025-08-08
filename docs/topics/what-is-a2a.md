@@ -212,6 +212,6 @@ sequenceDiagram
     end
 ```
 
-## What's next
+## What's Next
 
 Learn about the [Key Concepts](./key-concepts.md) that form the foundation of the A2A protocol.
