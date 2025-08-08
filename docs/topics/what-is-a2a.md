@@ -19,22 +19,27 @@ problems A2A solves and the benefits it offers.
 Consider a user request for an AI assistant to plan an international trip. This
 task involves orchestrating multiple specialized agents, such as:
 
-*   A flight booking agent
-*   A hotel reservation agent
-*   An agent for local tour recommendations
-*   A currency conversion agent
+-  A flight booking agent
+-  A hotel reservation agent
+-  An agent for local tour recommendations
+-  A currency conversion agent
 
 Without A2A, integrating these diverse agents presents several challenges:
 
-*   **Custom integrations**: Each interaction requires custom, point-to-point
+-  **Agent Exposure**: Developers often wrap agents as tools to expose them to
+    other agents, similar to how tools are exposed in a Multi-agent Control
+    Platform (Model Context Protocol). However, this approach is inefficient because agents are
+    designed to negotiate directly. Wrapping agents as tools limits their capabilities.
+    A2A allows agents to be exposed as they are, without requiring this wrapping.
+-  **Custom integrations**: Each interaction requires custom, point-to-point
     solutions, creating significant engineering overhead.
-*   **Slow innovation**: Bespoke development for each new integration slows
+-  **Slow innovation**: Bespoke development for each new integration slows
     innovation.
-*   **Scalability issues**: Systems become difficult to scale and maintain as
+-  **Scalability issues**: Systems become difficult to scale and maintain as
     the number of agents and interactions grows.
-*   **Limited interoperability**: This approach limits interoperability,
+-  **Interoperability**: This approach limits interoperability,
     preventing the organic formation of complex AI ecosystems.
-*   **Security Gaps**: Ad hoc communication often lacks consistent security
+-  **Security Gaps**: Ad hoc communication often lacks consistent security
     measures.
 
 The A2A protocol addresses these challenges by establishing interoperability for
@@ -86,40 +91,40 @@ The AI assistant, now acting as an orchestrator, receives the cohesive informati
 ### Core Benefits of A2A
 
 Implementing the A2A protocol offers significant advantages across the AI ecosystem:
-
-*   **Increased interoperability**: A2A breaks down silos between different AI
+ 
+-  **Secure collaboration**: Without a standard, it's difficult to ensure
+    secure communication between agents. A2A uses HTTPS for secure communication
+    and maintains opaque operations, so agents can't see the inner workings of
+    other agents during collaboration.
+ - **Interoperability**: A2A breaks down silos between different AI
     agent ecosystems, enabling agents from various vendors and frameworks to work
     together seamlessly.
-*   **Enhanced agent capabilities**: A2A allows developers to create more
-    sophisticated applications by composing the strengths of multiple
-    specialized agents.
-*   **Reduced integration complexity**: The protocol standardizes agent
+ - **Agent autonomy**: A2A allows agents to retain their individual capabilities
+    and act as autonomous entities while collaborating with other agents.
+ - **Reduced integration complexity**: The protocol standardizes agent
     communication, enabling teams to focus on the unique value their agents
     provide.
-*   **Fostered innovation**: A2A encourages the development of a richer
-    ecosystem of specialized agents that can readily plug into larger
-    collaborative workflows.
-*   **Future-proofing**: The protocol provides a flexible framework that adapts
-    as AI agent technologies continue to evolve.
+ - **Support for LRO**: The protocol supports long-running operations (LRO) and
+    streaming with Server-Sent Events (SSE) and asynchronous execution.
 
 ### Key Design Principles of A2A
 
 A2A development follows principles that prioritize broad adoption,
 enterprise-grade capabilities, and future-proofing.
 
-*   **Simplicity**: A2A leverages existing standards like HTTP, JSON-RPC, and
+ - **Simplicity**: A2A leverages existing standards like HTTP, JSON-RPC, and
     Server-Sent Events (SSE). This avoids reinventing core technologies and
     accelerates developer adoption.
-*   **Enterprise readiness**: A2A addresses critical enterprise needs. It aligns
+ - **Enterprise readiness**: A2A addresses critical enterprise needs. It aligns
     with standard web practices for robust authentication, authorization,
     security, privacy, tracing, and monitoring.
-*   **Asynchronous first**: A2A natively supports long-running tasks. It handles
+ - **Asynchronous first**: A2A natively supports long-running tasks. It handles
     scenarios where agents or users might not remain continuously connected. It
     uses mechanisms like streaming and push notifications.
-*   **Modality independent**: The protocol allows agents to communicate using a
+ - **Modality independent**: The protocol allows agents to communicate using a
     wide variety of content types. This enables rich and flexible interactions
     beyond plain text.
-*   **Opaque execution**: Agents collaborate effectively without exposing their
+ - **Opaque execution**: Agents collaborate effectively without exposing their
     internal logic, memory, or proprietary tools. Interactions rely on declared
     capabilities and exchanged context. This preserves intellectual property and
     enhances security.
@@ -128,11 +133,11 @@ enterprise-grade capabilities, and future-proofing.
 
 A2A fits into a larger agentic stack:
 
-*   **A2A protocol**: Standardizes communication across agents deployed in different
+ - **A2A protocol**: Standardizes communication across agents deployed in different
     organizations and built on different frameworks.
-*   **MCP**: Connects models to data and external resources.
-*   **Frameworks (like ADK)**: Provide a toolkit to assemble your agent.
-*   **Models**: Fundamental to an agent's reasoning, these include any Large
+ - **MCP**: Connects models to data and external resources.
+ - **Frameworks (like ADK)**: Provide a toolkit to assemble your agent.
+ - **Models**: Fundamental to an agent's reasoning, these include any Large
     Language Model (LLM).
 
 
