@@ -63,7 +63,7 @@ and resources.
 
 <div style="text-align: center; margin: 20px;" markdown>
 
-![Diagram showing A2A and MCP working together. A User interacts with Agent A via A2A. Agent A interacts with Agent B via A2A. Agent B uses MCP to interact with Tool 1 and Tool 2.](../assets/a2a-mcp.png){width="80%"}
+![Diagram showing A2A and MCP working together. A User interacts with Agent A using A2A. Agent A interacts with Agent B using A2A. Agent B uses MCP to interact with Tool 1 and Tool 2.](../assets/a2a-mcp.png){width="80%"}
 
 _An agentic application might use A2A to communicate with other agents, while each agent internally uses MCP to interact with its specific tools and resources._
 
@@ -77,20 +77,20 @@ repair manuals, and platform lifts, to diagnose and repair problems. The repair
 process can involve extensive conversations, research, and interaction with part
 suppliers.
 
--   **Customer interaction (user-to-agent via A2A)**: A customer (or their
+-   **Customer interaction (user-to-agent using A2A)**: A customer (or their
     primary assistant agent) uses A2A to communicate with the "Shop Manager"
     agent.
 
     For example, the customer might say, "My car is making a rattling
     noise".
--   **Multi-turn diagnostic conversation (agent-to-agent via A2A)**: The Shop
+-   **Multi-turn diagnostic conversation (agent-to-agent using A2A)**: The Shop
     Manager agent uses A2A for a multi-turn diagnostic conversation.
 
     For example,
-    the Shop Manager might ask, "Can you send a video of the noise?" or "I see 
+    Manager might ask, "Can you send a video of the noise?" or "I see 
     some fluid leaking. How long has this been happening?".
--   **Internal tool usage (agent-to-tool via MCP)**: The Mechanic agent,
-    assigned the task by the Shop Manager, needs to diagnose the issue. The 
+-   **Internal tool usage (agent-to-tool using MCP)**: The Mechanic agent,
+    assigned the task by the Shop Manager, needs to diagnose the issue. The
     Mechanic agent uses MCP to interact with its specialized tools.
 
     For example:
@@ -100,14 +100,14 @@ suppliers.
         `get_repair_procedure(error_code='P0300', vehicle_make='Toyota',
         vehicle_model='Camry')`
     -   MCP call to a "Platform Lift" tool: `raise_platform(height_meters=2)`
--   **Supplier interaction (agent-to-agent via A2A)**: The Mechanic agent
+-   **Supplier interaction (agent-to-agent using A2A)**: The Mechanic agent
     determines that a specific part is needed. The Mechanic agent uses A2A to
     communicate with a "Parts Supplier" agent to order a part.
 
     For example, the
     Mechanic agent might ask, "Do you have part # 12345 in stock for a Toyota
     Camry 2018?"
--   **Order processing (agent-to-agent via A2A)**: The Parts Supplier agent,
+-   **Order processing (agent-to-agent using A2A)**: The Parts Supplier agent,
     which is also an A2A-compliant system, responds, potentially leading to an
     order.
 
@@ -127,7 +127,7 @@ agents using capabilities.
 
 ## Representing A2A Agents as MCP Resources
 
-An A2A Server (a remote agent) could expose some of its skills as MCP-compatible resources, especially if those skills are well-defined and can be invoked in a more tool-like, stateless manner. In such a case, another agent might "discover" this A2A agent's specific skill through an MCP-style tool description (perhaps derived from its Agent Card). 
+An A2A Server (a remote agent) could expose some of its skills as MCP-compatible resources, especially if those skills are well-defined and can be invoked in a more tool-like, stateless manner. In such a case, another agent might "discover" this A2A agent's specific skill through an MCP-style tool description (perhaps derived from its Agent Card).
 
 However, the primary strength of A2A lies in its support for more flexible, stateful, and collaborative interactions that go beyond typical tool invocation. A2A is about agents *partnering* on tasks, while MCP is more about agents *using* capabilities.
 
