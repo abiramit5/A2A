@@ -40,6 +40,47 @@ Without A2A, integrating these diverse agents presents several challenges:
 The A2A protocol addresses these challenges by establishing interoperability for
 AI agents to interact reliably and securely.
 
+### A2A Example Scenario
+This section provides an example scenario to illustrate the benefits of using an A2A (Agent-to-Agent) protocol for complex interactions between AI agents.
+
+#### Scene 1: A User's Complex Request
+
+<img src="scene1.png" alt="Scene 1: A User's Complex Request">
+
+A user interacts with an AI assistant, giving it a complex prompt like "Plan an international trip."
+
+#### Scene 2: The Need for Collaboration
+
+<img src="scene2.png" alt="Scene 2: The Need for Collaboration">
+
+The AI assistant receives the prompt and realizes it needs to call upon multiple specialized agents to fulfill the request. These agents include a Flight Booking Agent, a Hotel Reservation Agent, a Currency Conversion Agent, and a Local Tours Agent.
+
+#### Scene 3: The Interoperability Challenge
+
+<img src="scene3.png" alt="Scene 3: The Interoperability Challenge">
+
+The core problem: The agents are unable to work together because each has its own bespoke development and deployment.
+
+#### Scene 4: The "Without A2A" Problem
+
+<img src="scene4.png" alt="Scene 4: The 'Without A2A' Problem">
+
+The consequence of a lack of a standardized protocol is that these agents cannot collaborate with each other let alone discover what they can do. The individual agents (Flight, Hotel, Currency, and Tours) are isolated. Symbols like "X" indicate failed communication or incompatibility between them, representing the "significant engineering overhead" and "limited interoperability" of point-to-point solutions.
+
+#### Scene 5: The "With A2A" Solution
+
+<img src="scene5.png" alt="Scene 5: The 'With A2A' Solution">
+
+The same agents are now shown as an interconnected system, communicating seamlessly through the standardized protocol (A2A). This represents how the protocol addresses the challenges of scalability and security.
+
+#### Scene 6: The Cohesive Result
+
+<img src="scene6.png" alt="Scene 6: The Cohesive Result">
+
+The AI assistant, now acting as an orchestrator, receives the cohesive information from all the A2A-enabled agents. It then presents a single, complete travel plan as a seamless response to the user's initial prompt.
+
+
+
 ### Core Benefits of A2A
 
 Implementing the A2A protocol offers significant advantages across the AI ecosystem:
@@ -81,7 +122,7 @@ enterprise-grade capabilities, and future-proofing.
     capabilities and exchanged context. This preserves intellectual property and
     enhances security.
 
-### A2A in the broader AI ecosystem {:#a2a-ai-ecosystem}
+### A2A in the Broader AI Ecosystem
 
 A2A fits into a larger agentic stack:
 
@@ -93,22 +134,7 @@ A2A fits into a larger agentic stack:
     Language Model (LLM).
 
 
-The following diagram illustrates a possible agentic stack:
-
-<figure>
- <img src="/application-integration/images/a2a-agentic-stack.png" alt="A possible agentic stack, showing the layers from A2A protocol at the bottom, through Vertex AI Agent Engine, Model Context Protocol, and Agent Development Kit at the top.">
- <figcaption><b>Figure 1.</b> A possible agentic stack.</figcaption>
-</figure>
-
-The following diagram provides a high-level overview of the A2A protocol:
-
-<figure>
- <img src="/application-integration/images/a2a-high-level-overview.png" alt="A high-level overview of the A2A protocol showing two agents, each with its own LLM and Agent Framework, communicating across organizational or technological boundaries using the A2A protocol, while using MCP internally to connect to APIs & Enterprise Applications.">
- <figcaption><b>Figure 2.</b> A high-level overview of the A2A protocol.</figcaption>
-</figure>
-
-
-### A2A and ADK {:#a2a-adk}
+### A2A and ADK 
 
 The [Agent Development Kit (ADK)](/application-integration/docs/agents/about-adk)
 is an open source agent development toolkit developed by Google. A2A is a
@@ -120,6 +146,9 @@ model-agnostic, deployment-agnostic, and built for compatibility with other
 frameworks.
 
 ### A2A Request Lifecycle
+
+The A2A request lifecycle is a sequence that details the four main steps a request follows: agent discovery, authentication, `sendMessage` API, and `sendMessageStream` API. The following diagram provides a deeper look into the operational flow, illustrating the interactions between the client, A2A server, and auth server.
+
 
 ```mermaid
 sequenceDiagram
