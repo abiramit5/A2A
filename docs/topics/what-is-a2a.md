@@ -158,7 +158,7 @@ is an open source agent development toolkit developed by Google. A2A is a
 communication protocol for agents that helps agents communicate with each other,
 regardless of the framework used to build them (for example, ADK, LangGraph, or
 Crew AI). ADK is a flexible and modular framework for developing and deploying
-AI agents. While optimized for {{gemini_name}} and the Google ecosystem, ADK is
+AI agents. While optimized for Gemini AI and the Google ecosystem, ADK is
 model-agnostic, deployment-agnostic, and built for compatibility with other
 frameworks.
 
