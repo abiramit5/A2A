@@ -3,7 +3,7 @@
 In AI agent development, two key protocol types are essential for building
 robust and collaborative systems:
 
- -  **Model context protocol (MCP)**: This protocol focuses on how an agent
+ -  **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)**: This protocol focuses on how an agent
     interacts with individual tools and resources. It's about enabling an agent
     to use a specific tool, such as a database or an API.
  -  **Agent2Agent (A2A) protocol**: This protocol focuses on how different
