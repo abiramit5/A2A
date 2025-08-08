@@ -122,8 +122,4 @@ recommended. This provides:
 
 By adhering to these enterprise-grade practices, A2A implementations can be
 deployed securely, reliably, and manageably within complex organizational
-environments, fostering trust and enabling scalable inter-agent collaboration.
-
-
-
-  
+environments, fostering trust and enabling scalable inter-agent collaboration. 
