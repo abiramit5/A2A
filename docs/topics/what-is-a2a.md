@@ -45,37 +45,36 @@ This section provides an example scenario to illustrate the benefits of using an
 
 #### Scene 1: A User's Complex Request
 
-<img src="scene1.png" alt="Scene 1: A User's Complex Request">
+![A User's Complex Request](../assets/scene1.png){ width="70%" style="margin:20px auto;display:block;" }
 
 A user interacts with an AI assistant, giving it a complex prompt like "Plan an international trip."
 
 #### Scene 2: The Need for Collaboration
 
-<img src="scene2.png" alt="Scene 2: The Need for Collaboration">
+![The Need for Collaboration](../assets/scene2.png){ width="70%" style="margin:20px auto;display:block;" }
 
 The AI assistant receives the prompt and realizes it needs to call upon multiple specialized agents to fulfill the request. These agents include a Flight Booking Agent, a Hotel Reservation Agent, a Currency Conversion Agent, and a Local Tours Agent.
 
 #### Scene 3: The Interoperability Challenge
 
-<img src="scene3.png" alt="Scene 3: The Interoperability Challenge">
-
+![The Interoperability Challenge](../assets/scene3.png){ width="70%" style="margin:20px auto;display:block;" }
 The core problem: The agents are unable to work together because each has its own bespoke development and deployment.
 
 #### Scene 4: The "Without A2A" Problem
 
-<img src="scene4.png" alt="Scene 4: The 'Without A2A' Problem">
+![The Without A2A Problem](../assets/scene4.png){ width="70%" style="margin:20px auto;display:block;" }
 
 The consequence of a lack of a standardized protocol is that these agents cannot collaborate with each other let alone discover what they can do. The individual agents (Flight, Hotel, Currency, and Tours) are isolated. Symbols like "X" indicate failed communication or incompatibility between them, representing the "significant engineering overhead" and "limited interoperability" of point-to-point solutions.
 
 #### Scene 5: The "With A2A" Solution
 
-<img src="scene5.png" alt="Scene 5: The 'With A2A' Solution">
+![The with A2A solution](../assets/scene5.png){ width="70%" style="margin:20px auto;display:block;" }
 
 The same agents are now shown as an interconnected system, communicating seamlessly through the standardized protocol (A2A). This represents how the protocol addresses the challenges of scalability and security.
 
 #### Scene 6: The Cohesive Result
 
-<img src="scene6.png" alt="Scene 6: The Cohesive Result">
+![Scene 5: The cohesive result](../assets/scene6.png){ width="70%" style="margin:20px auto;display:block;" }
 
 The AI assistant, now acting as an orchestrator, receives the cohesive information from all the A2A-enabled agents. It then presents a single, complete travel plan as a seamless response to the user's initial prompt.
 
