@@ -8,7 +8,7 @@ designs with enterprise requirements at its core.
 Ensuring the confidentiality and integrity of data in transit is fundamental for
 any enterprise application.
 
-*   **HTTPS mandate**: All A2A communication in production environments must
+-   **HTTPS mandate**: All A2A communication in production environments must
     occur over HTTPS.
 *   **Modern TLS standards**: Implementations should use modern TLS versions
     (TLS 1.2 or higher is recommended) with strong, industry-standard cipher
