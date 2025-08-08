@@ -18,8 +18,8 @@ a standardized way for agents to communicate and collaborate.
 
 ## Supported Languages and Code Samples 
 
-The A2A Project hosts SDKs in four languages. Contributors are adding
-more, including Go.
+The A2A Project currently hosts SDKs in four languages (Python, JS, Java, .NET)
+and contributors are adding more, including Go.
 
 
 The following table lists the supported languages and their stability.
