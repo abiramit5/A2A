@@ -76,9 +76,10 @@ The A2A project provides numerous samples across supported languages.
             uv run . --agent http://localhost:10002
             ```
 
-
         If you changed the port when starting the agent, use that port instead.
+        
         For example:
+        
             ```bash
             # Connect to the agent (specify the agent URL with correct port)
             uv run . --agent http://localhost:YOUR_PORT
