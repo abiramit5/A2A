@@ -17,8 +17,7 @@ systems.
 - **A2A server (remote agent)**: This represents an AI agent or an agentic
    system. It exposes an HTTP endpoint that implements the A2A protocol. It
    receives requests from clients, processes tasks, and returns results or
-   status updates.
-  
+   status updates.   
 ## Fundamental Communication Elements
 
 The following table describes the fundamental communication elements in A2A.
