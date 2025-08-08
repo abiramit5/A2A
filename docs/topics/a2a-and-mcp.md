@@ -31,8 +31,7 @@ interacts with.
         engage in complex, often multi-turn dialogues to achieve novel or
         evolving tasks.
     -  **Purpose:** Agents collaborate with other agents to tackle broader, more
-        complex goals.
-        
+        complex goals.        
 ## Model Context Protocol (MCP)
 
 -  Standardizes how AI models and agents connect to and interact with tools,
