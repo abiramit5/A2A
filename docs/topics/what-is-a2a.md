@@ -86,11 +86,11 @@ enterprise-grade capabilities, and future-proofing.
 A2A fits into a larger agentic stack:
 
 *   **A2A protocol**: Standardizes communication across agents deployed in different
-   organizations and built on different frameworks.
+    organizations and built on different frameworks.
 *   **MCP**: Connects models to data and external resources.
 *   **Frameworks (like ADK)**: Provide a toolkit to assemble your agent.
 *   **Models**: Fundamental to an agent's reasoning, these include any Large
-   Language Model (LLM).
+    Language Model (LLM).
 
 
 The following diagram illustrates a possible agentic stack:
