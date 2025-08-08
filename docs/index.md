@@ -96,8 +96,10 @@ A2A and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) are
 
     Understand the core ideas behind A2A.
 
-    [:octicons-arrow-right-24: What is A2A?](./topics/what-is-a2a.md) 
+    [:octicons-arrow-right-24: What is A2A?](./topics/what-is-a2a.md)
+  
     [:octicons-arrow-right-24: Get Started with A2A](./topics/getting-started.md)
+  
     [:octicons-arrow-right-24: Key Concepts](./topics/key-concepts.md)
 
 - :material-file-document-outline:{ .lg .middle } **Dive into the Specification**
