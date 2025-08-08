@@ -7,6 +7,7 @@ AClient
 ACo
 ADK
 AError
+affef
 afet
 airbnb
 AIP
@@ -83,6 +84,7 @@ QFdk
 Qvandrcy
 RPCs
 RUF
+scm
 SLAs
 SLF
 Solax
