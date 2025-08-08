@@ -147,6 +147,8 @@ The Agent2Agent (A2A) protocol is designed to standardize communication between 
 -   **MCP's Focus:** Lowering the complexity to connect agents with tools and data. Tools are typically stateless and perform specific, predefined functions (e.g., a calculator, a database query).
 -   **A2A's Focus:** Enabling agents to collaborate in their natural modalities, allowing them to communicate as agents (or as users) instead of as tools. This enables complex, multi-turn interactions where agents reason, plan, and delegate tasks to other agents. For example, back-and-forth communication when you want to order something, involving negotiation or clarification.
 
+![ADK versus MCP](../assets/mcp.png){ width="70%" style="margin:20px auto;display:block;" }
+
  The practice of wrapping an agent as a simple tool is fundamentally limiting, as it fails to capture its true capabilities. This critical distinction is explored in the post, [Why Agents Are Not Tools](https://discuss.google.dev/t/agents-are-not-tools/192812).
  
 For a more in-depth comparison, refer to the [A2A and MCP Comparison](./topics/a2a-and-mcp.md) document.
@@ -161,6 +163,9 @@ Crew AI). ADK is a flexible and modular framework for developing and deploying
 AI agents. While optimized for {{gemini_name}} and the Google ecosystem, ADK is
 model-agnostic, deployment-agnostic, and built for compatibility with other
 frameworks.
+
+![ADK versus MCP](../assets/adk.gif){ width="70%" style="margin:20px auto;display:block;" }
+
 
 ### A2A Request Lifecycle
 
