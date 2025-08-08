@@ -65,21 +65,21 @@ A2A development follows principles that prioritize broad adoption,
 enterprise-grade capabilities, and future-proofing.
 
 *   **Simplicity**: A2A leverages existing standards like HTTP, JSON-RPC, and
-   Server-Sent Events (SSE). This avoids reinventing core technologies and
-   accelerates developer adoption.
+    Server-Sent Events (SSE). This avoids reinventing core technologies and
+    accelerates developer adoption.
 *   **Enterprise readiness**: A2A addresses critical enterprise needs. It aligns
-   with standard web practices for robust authentication, authorization,
-   security, privacy, tracing, and monitoring.
+    with standard web practices for robust authentication, authorization,
+    security, privacy, tracing, and monitoring.
 *   **Asynchronous first**: A2A natively supports long-running tasks. It handles
-   scenarios where agents or users might not remain continuously connected. It
-   uses mechanisms like streaming and push notifications.
+    scenarios where agents or users might not remain continuously connected. It
+    uses mechanisms like streaming and push notifications.
 *   **Modality independent**: The protocol allows agents to communicate using a
-   wide variety of content types. This enables rich and flexible interactions
-   beyond plain text.
+    wide variety of content types. This enables rich and flexible interactions
+    beyond plain text.
 *   **Opaque execution**: Agents collaborate effectively without exposing their
-   internal logic, memory, or proprietary tools. Interactions rely on declared
-   capabilities and exchanged context. This preserves intellectual property and
-   enhances security.
+    internal logic, memory, or proprietary tools. Interactions rely on declared
+    capabilities and exchanged context. This preserves intellectual property and
+    enhances security.
 
 ### A2A in the broader AI ecosystem {:#a2a-ai-ecosystem}
 
