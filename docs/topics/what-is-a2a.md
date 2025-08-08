@@ -87,11 +87,9 @@ The AI assistant, now acting as an orchestrator, receives the cohesive informati
 
 ![Scene 5: The cohesive result](../assets/scene6.png){ width="70%" style="margin:20px auto;display:block;" }
 
-
 ### Core Benefits of A2A
 
-Implementing the A2A protocol offers significant advantages across the AI ecosystem:
- 
+Implementing the A2A protocol offers significant advantages across the AI ecosystem: 
 -  **Secure collaboration**: Without a standard, it's difficult to ensure
     secure communication between agents. A2A uses HTTPS for secure communication
     and maintains opaque operations, so agents can't see the inner workings of
