@@ -10,7 +10,7 @@ A2A defines how independent AI agent systems interact. It provides
 a standardized way for agents to communicate and collaborate.
 
 *   It utilizes JSON-RPC 2.0 over HTTP(S) for structuring and transmitting messages.
-*   It allows agents to advertise their capabilities and be found by others through "Agent Cards."
+*   It allows agents to advertise their capabilities and be found by others through `Agent Cards`.
 *   It outlines workflows for initiating, progressing, and completing tasks.
 *   It facilitates the exchange of text, files, and structured data.
 *   It offers guidelines for secure communication and managing long-running tasks.
