@@ -31,7 +31,7 @@ interacts with.
         engage in complex, often multi-turn dialogues to achieve novel or
         evolving tasks.
     -  **Purpose:** Agents collaborate with other agents to tackle broader, more
-        complex goals.        
+        complex goals.
 ## Model Context Protocol (MCP)
 
 -  Standardizes how AI models and agents connect to and interact with tools,
@@ -113,7 +113,7 @@ suppliers.
 
 In this example:
 
--   A2A facilitates the higher-level, conversational, and task-oriented 
+-   A2A facilitates the higher-level, conversational, and task-oriented
     interactions between the customer and the shop, and between the shop's
     agents and external supplier agents.
 -   MCP enables the mechanic agent to use its specific, structured tools to
@@ -125,7 +125,6 @@ and collaborative interactions. These interactions go beyond a typical tool
 invocation. A2A focuses on agents partnering on tasks, whereas MCP focuses on
 agents using capabilities.
 
-
 ## Representing A2A Agents as MCP Resources
 
 An A2A Server (a remote agent) could expose some of its skills as MCP-compatible resources, especially if those skills are well-defined and can be invoked in a more tool-like, stateless manner. In such a case, another agent might "discover" this A2A agent's specific skill through an MCP-style tool description (perhaps derived from its Agent Card).
@@ -133,3 +132,4 @@ An A2A Server (a remote agent) could expose some of its skills as MCP-compatible
 However, the primary strength of A2A lies in its support for more flexible, stateful, and collaborative interactions that go beyond typical tool invocation. A2A is about agents _partnering_ on tasks, while MCP is more about agents _using_ capabilities.
 
 By leveraging both A2A for inter-agent collaboration and MCP for tool integration, developers can build more powerful, flexible, and interoperable AI systems.
+
