@@ -1,6 +1,6 @@
 # Agent Discovery in A2A
 
-To collaborate using the Agent-to-Agent (A2A) protocol, AI agents must first find each other and understand their capabilities. A2A standardizes agent self-descriptions through the **[Agent Card](../specification.md#5-agent-discovery-the-agent-card)**. However, discovery methods for these Agent Cards vary by environment and requirements.
+To collaborate using the Agent2Agent (A2A) protocol, AI agents must first find each other and understand their capabilities. A2A standardizes agent self-descriptions through the **[Agent Card](../specification.md#5-agent-discovery-the-agent-card)**. However, discovery methods for these Agent Cards vary by environment and requirements.
 
 ## The Role of the Agent Card
 
