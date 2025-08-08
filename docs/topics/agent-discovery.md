@@ -7,8 +7,8 @@ To collaborate using the Agent-to-Agent (A2A) protocol, AI agents must first fin
 The Agent Card is a JSON document, a digital "business card" for an A2A Server (the remote agent). It's crucial for discovery and interaction. Key information includes:
 
 - **Identity:** `name`, `description`, `provider` information.
-- **Service Endpoint:** The `url` for the A2A service.
-- **A2A Capabilities:** Supported features like `streaming` or `pushNotifications`.
+- **Service endpoint:** The `url` for the A2A service.
+- **A2A capabilities:** Supported features like `streaming` or `pushNotifications`.
 - **Authentication:** Required `schemes` (e.g., "Bearer", "OAuth2").
 - **Skills:** Agent's tasks (`AgentSkill` objects) with `id`, `name`, `description`, `inputModes`, `outputModes`, and `examples`.
 
@@ -66,11 +66,11 @@ Agent Cards may contain protected information, such as:
 
 **Protection Mechanisms:**
 
-- **Endpoint Access Control:** Secure the HTTP endpoint serving the Agent Card (e.g., `/.well-known/agent-card.json`, registry API) if not for public access.
+- **Endpoint access control:** Secure the HTTP endpoint serving the Agent Card (e.g., `/.well-known/agent-card.json`, registry API) if not for public access.
     -   **mTLS:** Require mutual TLS.
-    -   **Network Restrictions:** Limit to specific IP ranges or networks.
+    -   **Network restrictions:** Limit to specific IP ranges or networks.
     -   **Authentication:** Require HTTP authentication (e.g., OAuth 2.0).
-- **Selective Disclosure by Registries:** Registries can return different cards based on client identity and permissions.
+- **Selective disclosure by registries:** Registries can return different cards based on client identity and permissions.
 
 If an Agent Card contains sensitive data (**not recommended** for secrets), it **must** be protected with strong authentication and authorization. A2A encourages out-of-band dynamic credentials, not static secrets in the Agent Card.
 
