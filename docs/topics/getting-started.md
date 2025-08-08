@@ -36,7 +36,7 @@ The A2A project provides numerous samples across supported languages.
 
 ### Python
 
-*   **ADK expense reimbursement agent:** This sample uses the [agent development
+*   **ADK expense reimbursement agent:** This sample uses the [Agent Development
     Kit (ADK)](/application-integration/docs/agents/about-adk) to create an
     "Expense Reimbursement" agent. The agent hosts
     as an A2A server. This agent takes text requests from the client. If any
