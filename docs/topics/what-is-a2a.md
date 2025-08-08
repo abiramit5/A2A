@@ -97,7 +97,7 @@ The following diagram illustrates a possible agentic stack:
 
 <figure>
  <img src="/application-integration/images/a2a-agentic-stack.png" alt="A possible agentic stack, showing the layers from A2A protocol at the bottom, through Vertex AI Agent Engine, Model Context Protocol, and Agent Development Kit at the top.">
- <figcaption><b>Figure 1.</b>: A possible agentic stack.</figcaption>
+ <figcaption><b>Figure 1.</b> A possible agentic stack.</figcaption>
 </figure>
 
 The following diagram provides a high-level overview of the A2A protocol:
