@@ -1,6 +1,6 @@
 # Get Started with A2A 
 
-This section provides practical guidance and examples to help you get started
+This guide provides practical guidance and examples to help you get started
 with A2A. It covers how the protocol works, supported languages, and how to use
 the Python SDK.
 
