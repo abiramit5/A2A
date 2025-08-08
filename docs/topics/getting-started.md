@@ -1,10 +1,10 @@
-# Get Started with A2A 
+# Get Started with A2A
 
 This guide provides practical guidance and examples to help you get started
 with A2A. It covers how the protocol works, supported languages, and how to use
 the Python SDK.
 
-## How the A2A Protocol Works 
+## How the A2A Protocol Works
 
 A2A defines how independent AI agent systems interact. It provides
 a standardized way for agents to communicate and collaborate.
@@ -16,7 +16,7 @@ a standardized way for agents to communicate and collaborate.
 *   It offers guidelines for secure communication and managing long-running tasks.
 
 
-## Supported Languages and Code Samples 
+## Supported Languages and Code Samples
 
 The A2A Project currently hosts SDKs in four languages (Python, JS, Java, .NET)
 and contributors are adding more, including Go.
@@ -75,15 +75,13 @@ The A2A project provides numerous samples across supported languages.
             cd samples/python/hosts/cli
             uv run . --agent http://localhost:10002
             ```
-
-        If you changed the port when starting the agent, use that port instead.
-        
-        For example:
-        
-            ```bash
-            # Connect to the agent (specify the agent URL with correct port)
-            uv run . --agent http://localhost:YOUR_PORT
-            ```
+           If you changed the port when starting the agent, use that port instead.
+            For example:
+            
+              ```bash
+                    # Connect to the agent (specify the agent URL with correct port)
+                    uv run . --agent http://localhost:YOUR_PORT
+              ```
 
     -   For additional Python samples, see the following:
         *   [A2A Samples](https://github.com/a2aproject/a2a-samples/tree/main/samples/python)
@@ -103,15 +101,12 @@ The A2A project provides numerous samples across supported languages.
 
   *   For all .NET samples, see [.NET samples](https://github.com/a2aproject/a2a-dotnet/tree/main/samples).
 
-
 ## A2A Python SDK 
 The A2A Python SDK provides Pydantic models for resources like `AgentSkill`,
 `AgentCapabilities`, and `AgentCard`. This provides an interface for expediting
 development and integration with the A2A protocol.
-
 An `AgentSkill` advertises a tool to other agents. For example, a currency agent
 has a tool for `get_exchange_rate`:
-
 
 ```python
 # A2A Agent Skill definition
