@@ -1,211 +1,282 @@
-# Life of a Task
+# Extensions in A2A
 
-When a message is sent to an agent, it can choose to reply with either:
+The core Agent2Agent (A2A) protocol provides a robust foundation for inter-agent
+communication. However, specific domains or advanced use cases often require
+additional structure, custom data, or new interaction patterns beyond the
+generic methods. Extensions are A2A's powerful mechanism for layering new
+capabilities onto the core protocol.
 
-- A stateless `Message`.
-- A stateful `Task` followed by zero or more `TaskStatusUpdateEvent` or `TaskArtifactUpdateEvent`.
+Extensions allow for extending the A2A protocol with new data, requirements,
+RPC methods, and state machines. Agents declare their support for specific
+extensions in their Agent Card, and clients can then opt-in to the behavior
+offered by an extension as part of requests they make to the agent. Extensions
+are identified by a URI and defined by their own specification. Anyone is able
+to define, publish, and implement an extension.
 
-If the response is a `Message`, the interaction is completed. On the other hand, if the response is a `Task`, then the task will be processed by the agent, until it is in a interrupted state (`input-required` or `auth-required`) or a terminal state (`completed`, `cancelled`, `rejected` or `failed`).
+The flexibility of extensions allows for customizing A2A without fragmenting
+the core standard, fostering innovation and domain-specific optimizations.
 
-## Context
+## Scope of Extensions
 
-A `contextId` logically composes many `Task` objects and independent `Message` objects. If the A2A agent uses an LLM internally, it can utilize the `contextId` to manage the LLM context.
+The exact set of possible ways to use extensions is intentionally broad,
+facilitating the ability to expand A2A beyond currently known use cases.
+However, some foreseeable applications include:
 
-For the first message, the agent responds with a server-generated `contextId`. If the agent creates a task, it will also include a server-generated `taskId`. Subsequent client messages can include the same `contextId` to continue the interaction, and optionally the `taskId` to continue a specific task.
+-   **Data-only extensions**: Exposing new, structured information in the Agent
+    Card that doesn't impact the request/response flow. For example, an
+    extension could add structured data about an agent's GDPR compliance.
+-   **Profile extensions**: Overlaying additional structure and state change
+    requirements on the core request/response messages. This type effectively
+    acts as a profile on the core A2A protocol, narrowing the space of allowed
+    values (for example, requiring all messages to use `DataParts` adhering to
+    a specific schema).
+-   **Method extensions (extended skills)**: Adding entirely new RPC methods
+    beyond the core set defined by the protocol. An Extended Skill refers to a
+    capability or function an agent gains or exposes specifically through the
+    implementation of an extension that defines new RPC methods. For example, a
+    `task-history` extension might add a `tasks/search` RPC method to retrieve
+    a list of previous tasks, effectively providing the agent with a new,
+    extended skill.
+- **State machine extensions**: Adding new states or transitions to the task
+  state machine.
 
-`contextId` allows collaboration over a goal or share a single contextual session across multiple tasks.
+## Limitations
 
-## Agent: Message or a Task
+There are some changes to the protocol that extensions do not allow, primarily
+to prevent breaking core type validations:
 
-Messages can be used for trivial interactions which do not require long-running processing or collaboration. An agent can use messages to negotiate the acceptance of a task. Once an agent maps the intent of an incoming message to a supported capability, it can reply back with a `Task`.
+-   **Changing the definition of core data structures**: For example, adding new
+    fields or removing required fields to protocol-defined data structures).
+    Extensions should place custom attributes in the metadata map present on
+    core data structures.
+-   **Adding new values to enum types**: Extensions should use existing enum values
+    and annotate additional semantic meaning in the metadata field.
 
-So conceptually there can be three levels of agents:
+## Extension Declaration
 
-1. An agent which always responds with `Message` objects only. Doesn't do complex state management, no long running execution and uses contextID to tie messages together. Agent most probably directly wraps around an LLM invocation and simple tools.
-2. Generates a `Task`, does more substantial work that can be tracked and runs over extended life time.
-3. Generates both `Message` and `Task` objects. Uses messages to negotiate agent capability and scope of work for a task. Then sends `Task` object to track its execution and collaborate over task states like more input-needed, error handling, etc.
+Agents declare their support for extensions in their Agent Card by including
+`AgentExtension` objects within their `AgentCapabilities` object.
 
-An agent can choose to always reply back with `Task` objects and model simple responses as tasks in `completed` state.
+The following table describes the fields of the `AgentExtension` object:
 
-## Task Refinements & Follow-ups
+| Field Name  | Type    | Required | Description                                                                                                                               |
+| ----------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `uri`       | `string`| Yes      | The URI that uniquely identifies the extension. Implementations use this URI to activate, and clients use it to determine compatibility. |
+| `required`  | `boolean`| No       | Indicates whether the agent requires clients to use this extension for specific interactions.                                             |
+| `description`| `string`| No       | A brief explanation of how the agent uses the declared extension.                                                                         |
+| `params`    | `object` | No       | Extension-specific configuration parameters, as defined by the extension's specification.                                                  |
 
-Clients may want to follow up with new asks based on the results of a task, and/or refine upon the task results. This can be modeled by starting another interaction using the same `contextId` as the original task. Clients can further hint the agent by providing the reference to the original task using `referenceTaskIds` in `Message` object. Agent would then respond with either a new `Task` or a `Message`.
 
-Once a task has reached a terminal state (`completed`, `cancelled`, `rejected` or `failed`), it can't be restarted. There are some benefits to this:
-
-- **Task Immutability**: Clients can reliably reference tasks and their associated state, artifacts, and messages.
-    - This provides a clean mapping of inputs to outputs.
-    - Useful for mapping client orchestrator to task execution.
-- **Clear Unit of Work**: Every new request, refinement, or a follow-up becomes a distinct task, simplifying bookkeeping and allowing for granular tracking of an agent's work.
-    - Each artifact can be traced to a unit task.
-    - This unit of work can be referenced much more granularly by parent agents or other systems like agent optimizers. In case of restartable tasks, all the subsequent refinements are combined, and any reference to an interaction would need to resort to some kind of message index range.
-- **Easier Implementation**: No ambiguity for agent developers, whether to create a new task or restart an existing task. Once a task is in terminal state, any related subsequent interaction would need to be within a new task.
-
-### Parallel Follow-ups
-
-Parallel work is supported by having agents create distinct, parallel tasks for each follow-up message sent within the same contextId. This allows clients to track individual tasks and create new dependent tasks as soon as a prerequisite task is complete.
-
-For example:
-
-```none
-Task 1: Book a flight to Helsinki.
-(After Task 1 finishes)
-Task 2: Based on Task 1, book a hotel.
-Task 3: Based on Task 1, book a snowmobile activity.
-(After Task 2 finishes, while Task 3 is still in progress)
-Task 4: Based on Task 2, add a spa reservation to the hotel booking.
-```
-
-### Referencing Previous Artifacts
-
-The serving agent is responsible for inferring the relevant artifact from the referenced task or from the `contextId`. The serving agent, as the domain expert, is best suited to resolve ambiguity or identify missing information because they are the ones who generated the artifacts.
-
-If there is ambiguity (e.g., multiple artifacts could fit the request), the agent will ask the client for clarification by returning an input-required state. The client can then specify the artifact in its response. Client can optionally populate artifact reference {artifactId, taskId} in part metadata. This allows for linkage between inputs for follow-up tasks and previously generated artifacts.
-
-This approach allows for the client implementation to be simple.
-
-### Tracking Artifact Mutation
-
-A follow up or refinement can result in an older artifact being modified and newer artifacts being generated. It would be good to know this linkage and maybe track all mutations of the artifact to make sure only the latest copy is used for future context. Something like a linked list, with the head as the latest version of the task result.
-
-But the client is best suited, as well as is the real judge of what it considers as an acceptable result. And in fact can reject the mutation as well. Hence, the serving agent should not own this linkage and hence this linkage does not need to be part of A2A protocol spec. Clients can maintain the linkage on their end and show the latest version to the user.
-
-To help with the tracking, the serving agent should maintain the same artifact-name when generating a refinement on the original artifact.
-
-For follow-up or refinement tasks, the client is best suited to refer to the "latest" or what it considers to be the intended artifact to be refined upon. If the artifact reference is not explicitly specified, the serving agent can:
-
-- Use context to figure out the latest artifact.
-- Or in case of ambiguity or context not supported, agent can use `input-required` task state.
-
-### Example Follow-up
-
-#### Client sends message to agent
+The following is an example of an Agent Card with an extension:
 
 ```json
 {
+  "name": "Magic 8-ball",
+  "description": "An agent that can tell your future... maybe.",
+  "version": "0.1.0",
+  "url": "https://example.com/agents/eightball",
+  "capabilities": {
+    "streaming": true,
+    "extensions": [
+      {
+        "uri": "https://example.com/ext/konami-code/v1",
+        "description": "Provide cheat codes to unlock new fortunes",
+        "required": false,
+        "params": {
+          "hints": [
+            "When your sims need extra cash fast",
+            "You might deny it, but we've seen the evidence of those cows."
+          ]
+        }
+      }
+    ]
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain"],
+  "skills": [
+    {
+      "id": "fortune",
+      "name": "Fortune teller",
+      "description": "Seek advice from the mystical magic 8-ball",
+      "tags": ["mystical", "untrustworthy"]
+    }
+  ]
+}
+```
+
+## Required Extensions
+
+While extensions generally offer optional functionality, some agents may have
+stricter requirements. When an Agent Card declares an extension as `required:
+true`, it signals to clients that some aspect of the extension impacts how
+requests are structured or processed, and that the client must abide by it.
+Agents should not mark data-only extensions as required. If a client does not
+request activation of a required extension, or fails to follow its protocol,
+the agent should reject the incoming request with an appropriate error.
+
+## Extension Specification
+
+The detailed behavior and structure of an extension are defined by its
+specification. While the exact format is not mandated, it should contain at
+least:
+
+*   The specific URI(s) that identify the extension.
+*   The schema and meaning of objects specified in the `params` field of the
+    `AgentExtension` object.
+*   Schemas of any additional data structures communicated between client and
+    agent.
+*   Details of new request/response flows, additional endpoints, or any other
+    logic required to implement the extension.
+
+## Extension Dependencies
+
+Extensions may depend on other extensions. This can be a required dependency
+(where the extension cannot function without the dependent) or an optional one
+(where additional functionality is enabled if another extension is present).
+Extension specifications should document these dependencies. It is the client's
+responsibility to activate an extension and all its required dependencies as
+listed in the extension's specification.
+
+## Extension Activation
+
+Extensions default to being inactive, providing a "default to baseline"
+experience for extension-unaware clients. Clients and agents perform
+negotiation to determine which extensions are active for a specific request.
+
+1.  **Client request**: A client requests extension activation by including the
+    `X-A2A-Extensions` header in the HTTP request to the agent. The value is a
+    comma-separated list of extension URIs the client intends to activate.
+2.  **Agent processing**: Agents are responsible for identifying supported
+    extensions in the request and performing the activation. Any requested
+    extensions not supported by the agent can be ignored.
+3.  **Response**: Once the agent has identified all activated extensions, the
+    response SHOULD include the `X-A2A-Extensions` header, listing all
+    extensions that were successfully activated for that request.
+
+**Example request showing extension activation:**
+
+```text
+POST /agents/eightball HTTP/1.1
+Host: example.com
+Content-Type: application/json
+X-A2A-Extensions: https://example.com/ext/konami-code/v1
+Content-Length: 519
+{
   "jsonrpc": "2.0",
-  "id": "req-001",
   "method": "message/send",
+  "id": "1",
   "params": {
     "message": {
+      "kind": "message",
+      "messageId": "1",
       "role": "user",
-      "parts": [
-        {
-          "kind": "text",
-          "text": "Generate an image of a sailboat on the ocean."
-        }
-      ],
-      "messageId": "msg-user-001"
+      "parts": [{"kind": "text", "text": "Oh magic 8-ball, will it rain today?"}]
+    },
+    "metadata": {
+      "https://example.com/ext/konami-code/v1/code": "motherlode"
     }
   }
 }
 ```
 
-#### Agent responds with boat image
+**Corresponding response echoing activated extensions:**
 
-```json
+```text
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-A2A-Extensions: https://example.com/ext/konami-code/v1
+Content-Length: 338
 {
   "jsonrpc": "2.0",
-  "id": "req-001",
+  "id": "1",
   "result": {
-    "id": "task-boat-gen-123",
-    "contextId": "ctx-conversation-abc",
-    "status": {
-      "state": "completed",
-    },
-    "artifacts": [
-      {
-        "artifactId": "artifact-boat-v1-xyz",
-        "name": "sailboat_image.png",
-        "description": "A generated image of a sailboat on the ocean.",
-        "parts": [
-          {
-            "kind": "file",
-            "file": {
-              "name": "sailboat_image.png",
-              "mimeType": "image/png",
-              "bytes": "<base64_encoded_png_data_of_a_sailboat>"
-            }
-          }
-        ]
-      }
-    ],
-    "kind": "task"
+    "kind": "message",
+    "messageId": "2",
+    "role": "agent",
+    "parts": [{"kind": "text", "text": "That's a bingo!"}]
   }
 }
 ```
 
-#### Client asks for coloring the boat red
+## Implementation Considerations
 
-Refers to previous taskID and uses same contextId.
+While the A2A protocol defines the "what" of extensions, this section provides
+guidance on the "how"—best practices for authoring, versioning, and
+distributing extension implementations.
 
-```json
-{
-  "jsonrpc": "2.0",
-  "id": "req-002",
-  "method": "message/send",
-  "params": {
-    "message": {
-      "role": "user",
-      "messageId": "msg-user-002",
-      "contextId": "ctx-conversation-abc", // Same contextId
-      "referenceTaskIds": ["task-boat-gen-123"] // Optional: Referencing the previous task
-      "parts": [
-        {
-          "kind": "text",
-          "text": "That's great! Can you make the sailboat red?"
-          // Optional: In case the agent asked for actual relevant artifact.
-          // Client could provide the artifact data in parts.
-          // Also it could add metadata to the part to
-          // reference the specific artifact.
-          // "metadata": {
-          //   "referenceArtifacts: [
-          //      {
-          //        "artifactId": "artifact-boat-v1-xyz",
-          //        "taskId": "task-boat-gen-123"
-          //      }
-          //   ]
-          // }
-        }
-      ],
-    }
-  }
-}
-```
+-   **Versioning**: Extension specifications evolve. It is
+    crucial to have a clear versioning strategy to ensure that clients and
+    agents can negotiate compatible implementations.
+    - **Recommendation**: Use the extension's URI as the primary version
+        identifier, ideally including a version number (for example,
+        `https://example.com/ext/my-extension/v1`).
+    - **Breaking changes**: A new URI MUST be used when introducing a breaking
+        change to an extension's logic, data structures, or required parameters.
+    - Handling Mismatches: If a client requests a version not supported by
+        the agent, the agent SHOULD ignore the activation request for that
+        extension; it MUST NOT fall back to a different version.
+-   **Discoverability and publication**:
+    - **Specification hosting**: The extension specification document **should** be
+        hosted at the extension's URI.
+    - **Permanent identifiers**: Authors are encouraged to use a permanent
+        identifier service, such as `w3id.org`, for their extension URIs to
+        prevent broken links.
+    - **Community registry (future)**: The A2A community may establish a
+        central registry for discovering and browsing available extensions in
+        the future.
+-   **Packaging and reusability (A2A SDKs and libraries)**:
+    To promote adoption, extension logic should be packaged into reusable
+        libraries that can be easily integrated into existing A2A client and
+        server applications.
+    - An extension implementation should be distributed as a
+        standard package for its language ecosystem (for example, a PyPI
+        package for Python, an npm package for TypeScript/JavaScript).
+    - The goal should be a near "plug-and-play"
+        experience for developers. A well-designed extension package should
+        allow a developer to add it to their server with minimal code, for
+        example:
 
-#### Agent responds with new image artifact
+        ```python
+        # Hypothetical Python Server Integration
+        from konami_code_extension import CheatCodeHandler
+        from a2a.server import A2AServer, DefaultRequestHandler
 
-- Creates new task in same contextId.
-- Boat image artifact has same name. but a new artifactId.
+        # Using a2a.server, a component of the A2A Python library
+        # The extension hooks into the request handler to process its logic
+        extension = CheatCodeHandler(description="")
+        extension.add_cheat(
+            code="motherlode",
+            hint="When your sims need extra cash fast",
+        )
+        extension.add_cheat(
+            code="thereisnocowlevel",
+            hint="You might deny it, but we've seen the evidence of those cows.",
+        )
+        request_handler = DefaultRequestHandler(
+            agent_executor=MyAgentExecutor(extension),
+            task_store=InMemoryTaskStore(),
+            extensions=[extension]
+        )
+        server = A2AServer(agent_card, request_handler)
+        server.run()
+        ```
 
-```json
-{
-  "jsonrpc": "2.0",
-  "id": "req-002",
-  "result": {
-    "id": "task-boat-color-456", // New task ID
-    "contextId": "ctx-conversation-abc", // Same contextId
-    "status": {
-      "state": "completed",
-    },
-    "artifacts": [
-      {
-        "artifactId": "artifact-boat-v2-red-pqr", // New artifactId
-        "name": "sailboat_image.png", // Same name as the original artifact
-        "description": "A generated image of a red sailboat on the ocean.",
-        "parts": [
-          {
-            "kind": "file",
-            "file": {
-              "name": "sailboat_image.png",
-              "mimeType": "image/png",
-              "bytes": "<base64_encoded_png_data_of_a_RED_sailboat>"
-            }
-          }
-        ]
-      }
-    ],
-    "kind": "task"
-  }
-}
-```
+        This example showcases how A2A SDKs or libraries (like `a2a.server` in
+        Python) facilitate the implementation of A2A agents and extensions.
+      
+-   **Security**:
+    Extensions modify the core behavior of the A2A protocol, and therefore
+        introduce new security considerations:
+    - **Input validation**: Any new data fields, parameters, or methods
+        introduced by an extension MUST be rigorously validated. Treat all
+        extension-related data from an external party as untrusted input.
+    - **Scope of required extensions**: Be mindful when marking an extension as
+        `required: true` in an Agent Card. This creates a hard dependency for
+        all clients and should only be used for extensions fundamental to the
+        agent's core function and security (for example, a message signing
+        extension).
+    - **Authentication and authorization**: If an extension adds new methods,
+        the implementation MUST ensure these methods are subject to the same
+        authentication and authorization checks as the core A2A methods. An
+        extension MUST NOT provide a way to bypass the agent's primary security
+        controls.
