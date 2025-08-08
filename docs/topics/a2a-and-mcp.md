@@ -24,7 +24,7 @@ interacts with.
         functions. Examples include a calculator, a database query API, or a
         weather lookup service.
     -  **Purpose:** Agents use tools to gather information and perform discrete
-        actions.
+        functions.
  -  **Agents (A2A domain)**:
     -  **Characteristics:** These are more autonomous systems. They reason,
         plan, use multiple tools, maintain state over longer interactions, and
@@ -71,7 +71,7 @@ _An agentic application might use A2A to communicate with other agents, while ea
 
 ### Example Scenario: The Auto Repair Shop
 
-Consider an auto repair shop that is staffed by autonomous AI agent "mechanics."
+Consider an auto repair shop that is staffed by autonomous AI agent "mechanics".
 These mechanics use special-purpose tools, such as vehicle diagnostic scanners,
 repair manuals, and platform lifts, to diagnose and repair problems. The repair
 process can involve extensive conversations, research, and interaction with part
@@ -82,15 +82,15 @@ suppliers.
     agent.
 
     For example, the customer might say, "My car is making a rattling
-    noise."
+    noise".
 -   **Multi-turn diagnostic conversation (agent-to-agent via A2A)**: The Shop
     Manager agent uses A2A for a multi-turn diagnostic conversation.
 
     For example,
-    the Shop Manager might ask, "Can you send a video of the noise?" or "I see
-    some fluid leaking. How long has this been happening?"
+    the Shop Manager might ask, "Can you send a video of the noise?" or "I see 
+    some fluid leaking. How long has this been happening?".
 -   **Internal tool usage (agent-to-tool via MCP)**: The Mechanic agent,
-    assigned the task by the Shop Manager, needs to diagnose the issue. The
+    assigned the task by the Shop Manager, needs to diagnose the issue. The 
     Mechanic agent uses MCP to interact with its specialized tools.
 
     For example:
@@ -127,9 +127,8 @@ agents using capabilities.
 
 ## Representing A2A Agents as MCP Resources
 
-An A2A Server (a remote agent) could expose some of its skills as MCP-compatible resources, especially if those skills are well-defined and can be invoked in a more tool-like, stateless manner. In such a case, another agent might "discover" this A2A agent's specific skill through an MCP-style tool description (perhaps derived from its Agent Card).
+An A2A Server (a remote agent) could expose some of its skills as MCP-compatible resources, especially if those skills are well-defined and can be invoked in a more tool-like, stateless manner. In such a case, another agent might "discover" this A2A agent's specific skill through an MCP-style tool description (perhaps derived from its Agent Card). 
 
-However, the primary strength of A2A lies in its support for more flexible, stateful, and collaborative interactions that go beyond typical tool invocation. A2A is about agents _partnering_ on tasks, while MCP is more about agents _using_ capabilities.
+However, the primary strength of A2A lies in its support for more flexible, stateful, and collaborative interactions that go beyond typical tool invocation. A2A is about agents *partnering* on tasks, while MCP is more about agents *using* capabilities.
 
 By leveraging both A2A for inter-agent collaboration and MCP for tool integration, developers can build more powerful, flexible, and interoperable AI systems.
-
