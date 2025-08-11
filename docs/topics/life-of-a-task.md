@@ -184,15 +184,6 @@ The following example illustrates a typical task flow with a follow-up:
     }
     ```
 
-    Replace the following:
-
-*   `req-001`, `req-002`: Request IDs.
-*   `msg-user-001`, `msg-user-002`: Message IDs.
-*   `ctx-conversation-abc`: Context ID.
-*   `task-boat-gen-123`, `task-boat-color-456`: Task IDs.
-*   `artifact-boat-v1-xyz`, `artifact-boat-v2-red-pqr`: Artifact IDs.
-*   `base64_encoded_png_data_of_a_sailboat`, `base64_encoded_png_data_of_a_RED_sailboat`: Base64 encoded image data.
-
 3.  Client asks to color the boat red (refinement): This request refers to the previous
     `taskId` and uses the same `contextId`.
 
