@@ -1,16 +1,16 @@
 # Life of a Task
 
 In the Agent2Agent (A2A) protocol, interactions can be simple, stateless
-exchanges or complex, long-running processes. When a client sends a message to
-an agent, the agent can respond in one of two ways:
+exchanges or complex, long-running processes. When a client sends a message to an
+agent, the agent can respond in one of two ways:
 
-*   **Message**: The agent replies with a simple, stateless `Message`. In this
+*   **Message**: The agent replies with a stateless `Message`. In this
     case, the interaction is typically complete.
 *   **Task**: The agent initiates a stateful `Task`. In this case, the agent
     processes the task through a defined lifecycle. It communicates progress and
     requires input as needed, until the task reaches an interrupted state (for
-    example, `input-required`, `auth-required`) or a terminal state (for
-    example, `completed`, `canceled`, `rejected`, `failed`).
+    example, `input-required`, `auth-required`) or a terminal state (for example,
+    `completed`, `canceled`, `rejected`, `failed`).
 
 ## Grouping Related Interactions
 
@@ -19,8 +19,7 @@ objects and independent `Message` objects, providing continuity across a series
 of interactions.
 
 *   When a client sends a message for the first time, the agent can respond
-    with a new `contextId`. If a task is initiated, it will also have a
-    `taskId`.
+    with a new `contextId`. If a task is initiated, it will also have a `taskId`.
 *   Clients can send subsequent messages and include the same `contextId` to
     indicate that they are continuing their previous interaction within the same
     context.
@@ -38,7 +37,7 @@ The choice between responding with a `Message` or a `Task` depends on the
 nature of the interaction and the agent's capabilities:
 
 *   **Messages for trivial interactions**: `Message` objects are suitable for
-    simple, transactional interactions that do not require long-running
+    transactional interactions that do not require long-running
     processing or complex state management. An agent might use messages to
     negotiate the acceptance or scope of a task before committing to a `Task`
     object.
@@ -54,12 +53,18 @@ Conceptually, agents can operate at different levels of complexity:
     `contextId` to tie messages together. These agents might directly wrap LLM
     invocations and simple tools.
 *   **Task-generating agents**: Always respond with `Task` objects, even for
-    simple responses, which are then modeled as completed tasks. This approach
-    simplifies consistency and tracking.
-*   **Hybrid agents**: Generate both `Message` and `Task` objects. They might
-    use messages to negotiate agent capability and the scope of work for a
-    task, then send a `Task` object to track execution and manage states like
-    `input-required` or error handling.
+    responses, which are then modeled as completed tasks. Once a task is
+    created, the agent will only return `Task` objects in response to messages
+    sent, and once a task is complete, no more messages can be sent. This
+    approach simplifies consistency and tracking.
+*   **Hybrid agents**: Generate both `Message` and `Task` objects. These agents
+    use messages to negotiate agent capability and the scope of work for a task,
+    then send a `Task` object to track execution and manage states like
+    `input-required` or error handling. Once a task is created, the agent will
+    only return `Task` objects in response to messages sent, and once a task is
+    complete, no more messages can be sent. A hybrid agent can use messages to
+    negotiate the scope of a task, and then generate a task to track its
+    execution.
 
 ## Task Refinements
 
@@ -77,14 +82,14 @@ it cannot restart. Any subsequent interaction related to that task, such as a
 refinement, must initiate a new task within the same `contextId`. This principle
 offers several benefits:
 
-*   Clients can reliably reference tasks and their
-    associated state, artifacts, and messages, providing a clean mapping of
-    inputs to outputs. This is valuable for orchestration and traceability.
-*   Every new request, refinement, or follow-up becomes
-    a distinct task. This simplifies bookkeeping, allows for granular tracking
-    of an agent's work, and enables tracing each artifact to a specific task.
-*   Removes ambiguity for agent developers regarding
-    whether to create a new task or restart an existing one.
+*   Clients can reliably reference tasks and their associated state, artifacts,
+    and messages, providing a clean mapping of inputs to outputs. This is
+    valuable for orchestration and traceability.
+*   Every new request, refinement, or follow-up becomes a distinct task. This
+    simplifies bookkeeping, allows for granular tracking of an agent's work, and
+    enables tracing each artifact to a specific task.
+*   Removes ambiguity for agent developers regarding whether to create a new task
+    or restart an existing one.
 
 ## Parallel Follow-ups
 
@@ -102,12 +107,12 @@ For example:
 
 ## Referencing Previous Artifacts
 
-The serving agent infers the relevant artifact from a referenced task or from
-the `contextId`. As the domain expert, the serving agent is best suited to
-resolve ambiguity or identify missing information. If there is ambiguity, the
-agent asks the client for clarification by returning an `input-required` state.
-The client can then specify the artifact in its response, optionally populating
-artifact references (`artifactId`, `taskId`) in `Part` metadata.
+The serving agent infers the relevant artifact from a referenced task or from the
+`contextId`. As the domain expert, the serving agent is best suited to resolve
+ambiguity or identify missing information. If there is ambiguity, the agent asks
+the client for clarification by returning an `input-required` state. The client
+can then specify the artifact in its response, optionally populating artifact
+references (`artifactId`, `taskId`) in `Part` metadata.
 
 ## Tracking Artifact Mutation
 
@@ -129,7 +134,7 @@ The following example illustrates a typical task flow with a follow-up:
     {
       "jsonrpc": "2.0",
       "id": "req-001",
-      "method": "message/send",
+      "method": "message.send",
       "params": {
         "message": {
           "role": "user",
@@ -168,7 +173,7 @@ The following example illustrates a typical task flow with a follow-up:
                 "file": {
                   "name": "sailboat_image.png",
                   "mimeType": "image/png",
-                  "bytes": "<base64_encoded_png_data_of_a_sailboat>"
+                  "bytes": "base64_encoded_png_data_of_a_sailboat"
                 }
               }
             ]
@@ -179,14 +184,23 @@ The following example illustrates a typical task flow with a follow-up:
     }
     ```
 
-3.  Client asks to color the boat red (refinement): This request refers to
-    previous `taskId` and uses the same `contextId`.
+    Replace the following:
+
+*   `req-001`, `req-002`: Request IDs.
+*   `msg-user-001`, `msg-user-002`: Message IDs.
+*   `ctx-conversation-abc`: Context ID.
+*   `task-boat-gen-123`, `task-boat-color-456`: Task IDs.
+*   `artifact-boat-v1-xyz`, `artifact-boat-v2-red-pqr`: Artifact IDs.
+*   `base64_encoded_png_data_of_a_sailboat`, `base64_encoded_png_data_of_a_RED_sailboat`: Base64 encoded image data.
+
+3.  Client asks to color the boat red (refinement): This request refers to the previous
+    `taskId` and uses the same `contextId`.
 
     ```json
     {
       "jsonrpc": "2.0",
       "id": "req-002",
-      "method": "message/send",
+      "method": "message.send",
       "params": {
         "message": {
           "role": "user",
@@ -207,8 +221,8 @@ The following example illustrates a typical task flow with a follow-up:
     ```
 
 4.  Agent responds with new image artifact (new task, same context, updated
-    artifact name): The agent creates a new task within the same `contextId`.
-    The new boat image artifact retains the same name but has a new `artifactId`.
+    artifact name): The agent creates a new task within the same `contextId`. The
+    new boat image artifact retains the same name but has a new `artifactId`.
 
     ```json
     {
@@ -222,8 +236,8 @@ The following example illustrates a typical task flow with a follow-up:
         },
         "artifacts": [
           {
-            "artifactId": "artifact-boat-v2-red-pqr", // New artifactId
-            "name": "sailboat_image.png", // Same name as the original artifact
+            "artifactId": "artifact-boat-v2-red-pqr",
+            "name": "sailboat_image.png",
             "description": "A generated image of a red sailboat on the ocean.",
             "parts": [
               {
@@ -231,7 +245,7 @@ The following example illustrates a typical task flow with a follow-up:
                 "file": {
                   "name": "sailboat_image.png",
                   "mimeType": "image/png",
-                  "bytes": "<base64_encoded_png_data_of_a_RED_sailboat>"
+                  "bytes": "base64_encoded_png_data_of_a_RED_sailboat"
                 }
               }
             ]
