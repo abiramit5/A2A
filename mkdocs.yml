@@ -17,7 +17,6 @@ nav:
   - Home: index.md
   - Topics:
     - A2A Protocol Overview: topics/what-is-a2a.md
-    - Get Started with A2A: topics/getting-started.md
     - Key Concepts: topics/key-concepts.md
     - Life of a Task: topics/life-of-a-task.md
     - A2A and MCP Comparison: topics/a2a-and-mcp.md
@@ -30,7 +29,9 @@ nav:
   - Partners: partners.md
   - SDK Reference:
     - Python: sdk/python/api/index.html
-  - Tutorial (Python):
+  - Tutorials
+  - Getting Started: docs/tutorials/introduction.md
+  - Tutorial1 (Python):
     - Introduction: tutorials/python/1-introduction.md
     - Setup: tutorials/python/2-setup.md
     - Agent Skills & Agent Card: tutorials/python/3-agent-skills-and-card.md
@@ -39,6 +40,8 @@ nav:
     - Interact with Server: tutorials/python/6-interact-with-server.md
     - Streaming & Multiturn: tutorials/python/7-streaming-and-multiturn.md
     - Next Steps: tutorials/python/8-next-steps.md
+  - Tutorial2 (Python):
+    - Multi-Agent Collaboration with A2A: tutorials/python/multi-agent.md
   - Roadmap: roadmap.md
 
 # Repository
