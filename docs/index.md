@@ -116,7 +116,7 @@ A2A and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) are
 
     Build your expense reimbursement multi-agent using A2A.
 
-    [:octicons-arrow-right-24: Multi-agent Collaboration Using A2A Tutorial](./topics/tutorials.md)
+    [:octicons-arrow-right-24: Multi-agent Collaboration Using A2A Tutorial](./tutorials/python/multi-agent.md)
 
 - :material-code-braces:{ .lg .middle } **Explore Code Samples**
 
