@@ -11,8 +11,8 @@ results and ongoing status, when clients maintain active HTTP connections.
 
 **Key Characteristics:**
 
--   **Initiation:** Clients use `message/stream` to send a message and
-    subscribe to updates.
+-   **Initiation:** Clients use `message/stream` to send a message and subscribe
+    to updates.
 -   **Server Capability:** Servers indicate streaming support with
     `capabilities.streaming: true`.
 -   **Connection:** Successful subscription opens an HTTP 200 OK connection
@@ -20,12 +20,14 @@ results and ongoing status, when clients maintain active HTTP connections.
 -   **Event Structure:** The server sends events as JSON-RPC 2.0 Response
     objects (`SendStreamingMessageResponse`), with `id` matching the client's
     request.
--   **Event Types:** Events within `SendStreamingMessageResponse.result`
-    include:
-    - [`Task`](../specification.md#61-task-object): Current task state.
-    - [`TaskStatusUpdateEvent`](../specification.md#722-taskstatusupdateevent-object):
+-   **Event Types:** The `SendStreamingMessageResponse.result` can contain
+    different types of events, depending on the context:
+    -   [`Message`](../specification.md#6-message-object): If the client sends
+        `message/stream` but does not want to create a Task.
+    -   [`Task`](../specification.md#61-task-object): Current task state.
+    -   [`TaskStatusUpdateEvent`](../specification.md#722-taskstatusupdateevent-object):
         Changes in task state, including intermediate messages.
-    - [`TaskArtifactUpdateEvent`](../specification.md#723-taskartifactupdateevent-object):
+    -   [`TaskArtifactUpdateEvent`](../specification.md#723-taskartifactupdateevent-object):
         New or updated artifacts, with `append` and `lastChunk` for
         reassembly.
 -   **Stream Termination:** The server sets `final: true` in a
@@ -42,8 +44,8 @@ results and ongoing status, when clients maintain active HTTP connections.
 
 Refer to the Protocol Specification for detailed structures:
 
-- [`message/stream`](../specification.md#72-messagestream)
-- [`tasks/resubscribe`](../specification.md#79-tasksresubscribe)
+-   [`message/stream`](../specification.md#72-messagestream)
+-   [`tasks/resubscribe`](../specification.md#79-tasksresubscribe)
 
 ## Push Notifications for Disconnected Scenarios
 
@@ -53,20 +55,21 @@ significant task updates.
 
 **Key Characteristics:**
 
-- **Server Capability:** Servers indicate support with
+-   **Server Capability:** Servers indicate support with
     `capabilities.pushNotifications: true`.
-- **Configuration:** Clients provide a
+-   **Configuration:** Clients provide a
     [`PushNotificationConfig`](../specification.md#68-pushnotificationconfig-object).
     -   Included in `message/send` or `message/stream` requests, or set
         separately with `tasks/pushNotificationConfig/set`.
     -   Includes:
-        - `url`: The webhook URL for notifications.
-        - `token`: An optional client-generated token for validation.
-        - `authentication`: Optional authentication details for the server to use.
-- **Notification Trigger:** Sent on significant state changes (e.g., terminal,
+        -   `url`: The webhook URL for notifications.
+        -   `token`: An optional client-generated token for validation.
+        -   `authentication`: Optional authentication details for the server to
+            use.
+-   **Notification Trigger:** Sent on significant state changes (e.g., terminal,
     `input-required`, or `auth-required`).
-- **Notification Payload:** Contains the `Task ID` and the new `TaskState`.
-- **Client Action:** Clients use `tasks/get` with the `task ID` from the
+-   **Notification Payload:** Contains the `Task ID` and the new `TaskState`.
+-   **Client Action:** Clients use `tasks/get` with the `task ID` from the
     notification to retrieve the updated `Task` object.
 
 **The Push Notification Service (Client-Side Webhook Infrastructure):**
@@ -157,14 +160,15 @@ notifications.
     -   Generates a JWT, signed with its private key.
     -   Includes claims like `iss`, `aud`, `iat`, `exp`, `jti`, and `taskId`.
     -   The JWT header (`alg` and `kid`) indicates the signing algorithm and
-        key ID.
-    -   Makes public keys available via JWKS.
+        key identifier.
+    -   Makes public keys available through JWKS.
 2.  The client webhook, upon receiving the notification:
       endpoint (caching keys is recommended).
-    - Verifies the JWT signature using the public key.
-    - Validates claims (`iss`, `aud`, `iat`, `exp`, `jti`).
-    - Checks the `PushNotificationConfig.token` if provided.
+    -   Verifies the JWT signature using the public key.
+    -   Validates claims (`iss`, `aud`, `iat`, `exp`, `jti`).
+    -   Checks the `PushNotificationConfig.token` if provided.
 
 By implementing these security measures, both the A2A Server and the client's
 webhook receiver can ensure that push notifications are authentic, secure, and
 reliable.
+
