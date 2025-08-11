@@ -2,7 +2,7 @@
 ## Advanced A2A Agent Card Configuration
 
 This guide explores advanced concepts related to A2A agent development and
-deployment to {{cloud_run_name}}. It includes detailed agent card configurations, advanced
+deployment to Google Cloud. It includes detailed agent card configurations, advanced
 authentication mechanisms, and server creation techniques using A2A SDKs. 
 
 An A2A
@@ -66,7 +66,7 @@ Additional considerations:
    These tools might require further authentication. The agent then marks the
    task with an `auth-required` status.
 *   **IAM-based auth**: If the A2A server is exposed only within the
-   {{gcp_name}} platform, IAM-based authentication can be used. In such a case,
+   Google Cloud platform, IAM-based authentication can be used. In such a case,
    omit this authentication information from the agent card.
 
 ### Sample JWT-Based Authentication Information in Agent Card
@@ -486,13 +486,13 @@ alloydb_task_store = DatabaseTaskStore(engine)
 Beyond foundational service-level authentication, A2A agents implement more
 granular and sophisticated authentication mechanisms to secure interactions.
 
-## {{iam_name_short}}-Based Authentication for Internal {{gcp_name}} Workloads
+## IAM-Based Authentication for Internal Google Cloud Workloads
 
-For clients and services operating within {{gcp_name}}, such as Agent Space,
-{{iam_name_short}}-based authentication is a highly secure and efficient method. Configure
+For clients and services operating within Google Cloud, such as Agent Space,
+IAM-based authentication is a highly secure and efficient method. Configure
 these internal clients with appropriate service accounts and grant them the
-`roles/run.invoker` {{iam_name_short}} role to securely interact with your A2A
-{{cloud_run_name}} service.
+`roles/run.invoker` IAM role to securely interact with your A2A
+Google Cloud service.
 
 ## Custom Authentication for Public A2A Agents
 
