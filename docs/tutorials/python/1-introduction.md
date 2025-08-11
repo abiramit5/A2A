@@ -1,32 +1,154 @@
-# Python Quickstart Tutorial: Building an A2A Agent
 
-Welcome to the Agent2Agent (A2A) Python Quickstart Tutorial!
+# Get Started with A2A
 
-In this tutorial, you will explore a simple "echo" A2A server using the Python SDK. This will introduce you to the fundamental concepts and components of an A2A server. You will then look at a more advanced example that integrates a Large Language Model (LLM).
+This guide provides practical guidance and examples to help you get started
+with A2A. It covers how the protocol works, supported languages, and how to use
+the Python SDK.
 
-This hands-on guide will help you understand:
+## How the A2A Protocol Works
 
-- The basic concepts behind the A2A protocol.
-- How to set up a Python environment for A2A development using the SDK.
-- How Agent Skills and Agent Cards describe an agent.
-- How an A2A server handles tasks.
-- How to interact with an A2A server using a client.
-- How streaming capabilities and multi-turn interactions work.
-- How an LLM can be integrated into an A2A agent.
+A2A defines how independent AI agent systems interact. It provides
+a standardized way for agents to communicate and collaborate.
 
-By the end of this tutorial, you will have a functional understanding of A2A agents and a solid foundation for building or integrating A2A-compliant applications.
+*   It utilizes JSON-RPC 2.0 over HTTP(S) for structuring and transmitting messages.
+*   It allows agents to advertise their capabilities and be found by others through *Agent Cards*.
+*   It outlines workflows for initiating, progressing, and completing tasks.
+*   It facilitates the exchange of text, files, and structured data.
+*   It offers guidelines for secure communication and managing long-running tasks.
 
-## Tutorial Sections
 
-The tutorial is broken down into the following steps:
+## Supported Languages and Code Samples
 
-1. **[Introduction (This Page)](./1-introduction.md)**
-2. **[Setup](./2-setup.md)**: Prepare your Python environment and the A2A SDK.
-3. **[Agent Skills & Agent Card](./3-agent-skills-and-card.md)**: Define what your agent can do and how it describes itself.
-4. **[The Agent Executor](./4-agent-executor.md)**: Understand how the agent logic is implemented.
-5. **[Starting the Server](./5-start-server.md)**: Run the Helloworld A2A server.
-6. **[Interacting with the Server](./6-interact-with-server.md)**: Send requests to your agent.
-7. **[Streaming & Multi-Turn Interactions](./7-streaming-and-multiturn.md)**: Explore advanced capabilities with the LangGraph example.
-8. **[Next Steps](./8-next-steps.md)**: Explore further possibilities with A2A.
+The A2A Project currently hosts SDKs in four languages (Python, JS, Java, .NET)
+and contributors are adding more, including Go.
 
-Let's get started!
+
+The following table lists the supported languages and their stability.
+
+| Language | Support  |
+| :------- | :------- |
+| Python   | [Stable](https://github.com/a2aproject/a2a-python) |
+| JS       | [Stable](https://github.com/a2aproject/a2a-js)   |
+| Java     | [Stable](https://github.com/a2aproject/a2a-java)   |
+| .NET     | [Stable](https://github.com/a2aproject/a2a-dotnet)   |
+| Go       | [In Progress](https://github.com/a2aproject/a2a-go) |
+
+The A2A project provides numerous samples across supported languages.
+
+### Python
+
+*   **ADK expense reimbursement agent:** This sample uses the [Agent Development
+    Kit (ADK)](/application-integration/docs/agents/about-adk) to create an
+    "Expense Reimbursement" agent. The agent hosts
+    as an A2A server. This agent takes text requests from the client. If any
+    details are missing, it returns a webform for the client or its user to fill
+    out. After the client fills out the form, the agent completes the task.
+
+
+    -   **Prerequisites**
+
+        *   Python 3.9 or higher
+        *   UV
+        *   Access to an LLM and API Key
+
+
+    -   **Run the sample**
+
+
+        1.  Navigate to the samples directory:
+            ```bash
+            cd samples/python/agents/adk_expense_reimbursement
+            ```
+
+
+        2.  Create an environment file with your API key:
+            ```bash
+            echo "GEMINI_API_KEY=your_api_key_here" > .env
+            ```
+
+
+        3.  Run an agent:
+            ```bash
+            uv run .
+            ```
+        4.  In a separate terminal, run the A2A client:
+            ```bash
+            cd samples/python/hosts/cli
+            uv run . --agent http://localhost:10002
+            ```
+               If you changed the port when starting the agent, use that port instead.
+
+            For example:
+
+               ```bash
+               # Connect to the agent (specify the agent URL with correct port)
+               uv run . --agent http://localhost:YOUR_PORT
+               ```
+
+    -   For additional Python samples, see the following:
+        *   [A2A Samples](https://github.com/a2aproject/a2a-samples/tree/main/samples/python)
+        *   [Hello World](https://github.com/a2aproject/a2a-samples/tree/main/samples/python/agents/helloworld)
+        *   [ADK agent on Cloud Run](https://github.com/a2aproject/a2a-samples/tree/main/samples/python/agents/adk_cloud_run)
+        *   [Airbnb and weather multiagent](https://github.com/a2aproject/a2a-samples/tree/main/samples/python/agents/airbnb_planner_multiagent)
+
+### Java
+
+  *   For a multi-language translator agent using Java, see [Java samples](https://github.com/a2aproject/a2a-samples/tree/main/samples/java).
+
+### JavaScript
+
+  *    For a movie research agent using JavaScript, see [JavaScript samples](https://github.com/a2aproject/a2a-samples/tree/main/samples/js).
+
+### .NET
+
+  *   For all .NET samples, see [.NET samples](https://github.com/a2aproject/a2a-dotnet/tree/main/samples).
+
+## A2A Python SDK 
+The A2A Python SDK provides Pydantic models for resources like `AgentSkill`,
+`AgentCapabilities`, and `AgentCard`. This provides an interface for expediting
+development and integration with the A2A protocol.
+An `AgentSkill` advertises a tool to other agents. For example, a currency agent
+has a tool for `get_exchange_rate`:
+
+```python
+# A2A Agent Skill definition
+skill = AgentSkill(
+   id='get_exchange_rate',
+   name='Currency Exchange Rates Tool',
+   description='Helps with exchange values between various currencies',
+   tags=['currency conversion', 'currency exchange'],
+   examples=['What is exchange rate between USD and GBP?'],
+)
+```
+
+The Agent Card lists the agent's skills and capabilities. It also includes
+additional details like input and output modes that the agent handles:
+
+```python
+# A2A Agent Card definition
+agent_card = AgentCard(
+   name='Currency Agent',
+   description='Helps with exchange rates for currencies',
+   url=f'http://{host}:{port}/',
+   version='1.0.0',
+   defaultInputModes=["text"],
+   defaultOutputModes=["text"],
+   capabilities=AgentCapabilities(streaming=True),
+   skills=[skill],
+)
+```
+
+The `AgentExecutor` interface handles the core logic of how an A2A agent
+processes requests and generates responses or events. The A2A Python SDK
+provides an abstract base class `a2a.server.agent_execution.AgentExecutor` that
+you implement. For more information, see the [A2A GitHub repository](https://github.com/google/a2a).
+
+
+## Tutorials
+
+*   [Multi-agent collaboration with A2A](./topics/tutorials.md):
+    This tutorial demonstrates multi-agent collaboration using A2A. You explore
+    a prebuilt example featuring a reimbursement agent, developed with the Agent
+    Development Kit (ADK).
+*   [Writing an A2A agent from scratch - Hello world](https://a2a-protocol.org/latest/tutorials/python/1-introduction/): This tutorial demonstrates
+    how to write an A2A agent from scratch using Python.
