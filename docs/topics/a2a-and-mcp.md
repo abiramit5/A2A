@@ -105,7 +105,7 @@ suppliers.
     communicate with a "Parts Supplier" agent to order a part.
 
     For example, the
-    Mechanic agent might ask, "Do you have part # 12345 in stock for a Toyota
+    Mechanic agent might ask, "Do you have part #12345 in stock for a Toyota
     Camry 2018?"
 -   **Order processing (agent-to-agent using A2A)**: The Parts Supplier agent,
     which is also an A2A-compliant system, responds, potentially leading to an
