@@ -30,7 +30,7 @@ nav:
   - SDK Reference:
     - Python: sdk/python/api/index.html
   - Tutorials
-  - Getting Started: docs/tutorials/introduction.md
+  - Get Started: docs/tutorials/introduction.md
   - Tutorial 1 (Python):
     - Introduction: tutorials/python/1-introduction.md
     - Setup: tutorials/python/2-setup.md
