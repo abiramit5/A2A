@@ -31,7 +31,7 @@ nav:
     - Python: sdk/python/api/index.html
   - Tutorials
   - Getting Started: docs/tutorials/introduction.md
-  - Tutorial1 (Python):
+  - Tutorial 1 (Python):
     - Introduction: tutorials/python/1-introduction.md
     - Setup: tutorials/python/2-setup.md
     - Agent Skills & Agent Card: tutorials/python/3-agent-skills-and-card.md
@@ -40,7 +40,7 @@ nav:
     - Interact with Server: tutorials/python/6-interact-with-server.md
     - Streaming & Multiturn: tutorials/python/7-streaming-and-multiturn.md
     - Next Steps: tutorials/python/8-next-steps.md
-  - Tutorial2 (Python):
+  - Tutorial 2 (Python):
     - Multi-Agent Collaboration with A2A: tutorials/python/multi-agent.md
   - Roadmap: roadmap.md
 
