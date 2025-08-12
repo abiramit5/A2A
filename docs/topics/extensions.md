@@ -1,4 +1,3 @@
-
 # Extensions in A2A
 
 The core Agent2Agent (A2A) protocol provides a robust foundation for inter-agent
