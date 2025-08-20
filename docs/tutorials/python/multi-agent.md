@@ -1,6 +1,6 @@
 # Tutorial: Multi-Agent Collaboration with A2A
 
-This tutorial demonstrates multi-agent collaboration using A2A (Agent-to-Agent)
+This tutorial demonstrates multi-agent collaboration using A2A (Agent2Agent)
 communication. A2A enables different agents to interact and solve complex
 problems together. You explore a pre-built example featuring a reimbursement
 agent, developed with the Agent Development Kit (ADK), an open-source toolkit
