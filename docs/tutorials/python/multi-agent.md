@@ -179,7 +179,7 @@ class ReimbursementAgentExecutor(AgentExecutor):
 
 ## Set Up the Environment
 
-Clone the [`a2a-samples`](https://github.com/a2aproject/a2a-samples/tree/50b7363f11477f400520affef4ac748e5117fee2)
+Clone the [`a2a-samples`](https://github.com/a2aproject/a2a-samples/)
 GitHub repository to access the prebuilt reimbursement
 agent and host client.
 
