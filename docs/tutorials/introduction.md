@@ -1,4 +1,3 @@
-
 # Get Started with A2A
 
 This guide provides practical guidance and examples to help you get started
