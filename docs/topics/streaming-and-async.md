@@ -6,7 +6,7 @@ The Agent2Agent (A2A) protocol is explicitly designed to handle tasks that might
 
 For tasks that produce incremental results (like generating a long document or streaming media) or provide ongoing status updates, A2A supports real-time communication using Server-Sent Events (SSE). This approach is ideal when the client is able to maintain an active HTTP connection with the A2A Server.
 
-### Key Features of SSE Streaming
+### Key Features 
 
 The following key features detail how SSE streaming is implemented and managed within the A2A protocol:
 
@@ -46,7 +46,7 @@ Refer to the Protocol Specification for detailed structures:
 
 For very long-running tasks (for example, lasting minutes, hours, or even days) or when clients are unable to or prefer not to maintain persistent connections (like mobile clients or serverless functions), A2A supports asynchronous updates using push notifications. This allows the A2A Server to actively notify a client-provided webhook when a significant task update occurs.
 
-### Key Features of Push Notifications
+### Key Features
 
 The following key features detail how push notifications are implemented and managed within the A2A protocol:
 
@@ -74,7 +74,7 @@ Refer to the Protocol Specification for detailed structures:
 *   [`tasks/pushNotificationConfig/set`](../specification.md#710-taskspushnotificationconfigset)
 *   [`tasks/get`](../specification.md#76-tasksget)
 
-### The Client-Side Push Notification Service
+### Client-Side Push Notification Service
 
 The `url` specified in `PushNotificationConfig.url` points to a client-side Push Notification Service. This service is responsible for receiving the HTTP POST notification from the A2A Server. Its responsibilities include authenticating the incoming notification, validating its relevance, and relaying the notification or its content to the appropriate client application logic or system.
 
