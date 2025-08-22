@@ -1,14 +1,12 @@
 # A2A and MCP: Detailed Comparison
 
-In AI agent development, two key protocol types are essential for building
-robust and collaborative systems:
+In AI agent development, two key protocol types emerge to facilitate
+interoperability. One connects agents to tools and resources. The other enables
+agent-to-agent collaboration. The Agent2Agent (A2A) Protocol and the Model
+Context Protocol (MCP) address these distinct but highly complementary needs.
 
- -  **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)**: This protocol focuses on how an agent
-    interacts with individual tools and resources. It's about enabling an agent
-    to use a specific tool, such as a database or an API.
- -  **Agent2Agent (A2A) protocol**: This protocol focuses on how different
-    agents collaborate with each other. It's about enabling agents to work
-    together to achieve a common goal.
+ -  **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)**: This protocol focuses on how an agent interacts with individual tools and resources, enabling an agent to utilize a specific tool, such as a database or an API.
+ -  **Agent2Agent (A2A) protocol**: This protocol focuses on how different agents collaborate with each other, enabling agents to work together to achieve a common goal.
 
 Both protocols are crucial for building complex AI systems, and they address
 distinct but highly complementary needs.
@@ -71,7 +69,7 @@ _An agentic application might use A2A to communicate with other agents, while ea
 
 ### Example Scenario: The Auto Repair Shop
 
-Consider an auto repair shop that is staffed by autonomous AI agent "mechanics".
+Consider an auto repair shop staffed by autonomous AI agent "mechanics".
 These mechanics use special-purpose tools, such as vehicle diagnostic scanners,
 repair manuals, and platform lifts, to diagnose and repair problems. The repair
 process can involve extensive conversations, research, and interaction with part
@@ -81,13 +79,12 @@ suppliers.
     primary assistant agent) uses A2A to communicate with the "Shop Manager"
     agent.
 
-    For example, the customer might say, "My car is making a rattling
-    noise".
+    For example, the customer might say, "My car is making a rattling noise".
 -   **Multi-turn diagnostic conversation (agent-to-agent using A2A)**: The Shop
     Manager agent uses A2A for a multi-turn diagnostic conversation.
 
     For example,
-    Manager might ask, "Can you send a video of the noise?" or "I see 
+    the Manager might ask, "Can you send a video of the noise?" or "I see
     some fluid leaking. How long has this been happening?".
 -   **Internal tool usage (agent-to-tool using MCP)**: The Mechanic agent,
     assigned the task by the Shop Manager, needs to diagnose the issue. The
@@ -105,8 +102,7 @@ suppliers.
     communicate with a "Parts Supplier" agent to order a part.
 
     For example, the
-    Mechanic agent might ask, "Do you have part #12345 in stock for a Toyota
-    Camry 2018?"
+    Mechanic agent might ask, "Do you have part #12345 in stock for a Toyota Camry 2018?"
 -   **Order processing (agent-to-agent using A2A)**: The Parts Supplier agent,
     which is also an A2A-compliant system, responds, potentially leading to an
     order.
@@ -132,3 +128,4 @@ An A2A Server (a remote agent) could expose some of its skills as MCP-compatible
 However, the primary strength of A2A lies in its support for more flexible, stateful, and collaborative interactions that go beyond typical tool invocation. A2A is about agents *partnering* on tasks, while MCP is more about agents *using* capabilities.
 
 By leveraging both A2A for inter-agent collaboration and MCP for tool integration, developers can build more powerful, flexible, and interoperable AI systems.
+
