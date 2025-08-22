@@ -1,16 +1,16 @@
 # Agent Discovery in A2A
 
-To collaborate using the Agent2Agent (A2A) protocol, AI agents must first find each other and understand their capabilities. A2A standardizes agent self-descriptions through the **[Agent Card](../specification.md#5-agent-discovery-the-agent-card)**. However, discovery methods for these Agent Cards vary by environment and requirements. The Agent Card defines what an agent offers. Various strategies exist for a client agent to discover these cards. The choice of strategy depends on the deployment environment and security requirements.
+To collaborate using the Agent2Agent (A2A) protocol, AI agents need to first find each other and understand their capabilities. A2A standardizes agent self-descriptions through the **[Agent Card](../specification.md#5-agent-discovery-the-agent-card)**. However, discovery methods for these Agent Cards vary by environment and requirements. The Agent Card defines what an agent offers. Various strategies exist for a client agent to discover these cards. The choice of strategy depends on the deployment environment and security requirements.
 
 ## The Role of the Agent Card
 
-The Agent Card is a JSON document that serves as a digital "business card" for an A2A Server (the remote agent). It is crucial for agent discovery and interaction. The key information included in an Agent Card includes:
+The Agent Card is a JSON document that serves as a digital "business card" for an A2A Server (the remote agent). It is crucial for agent discovery and interaction. The key information included in an Agent Card is as follows:
 
-- **Identity:** `name`, `description`, `provider` information.
-- **Service endpoint:** The `url` for the A2A service.
-- **A2A capabilities:** Supported features like `streaming` or `pushNotifications`.
-- **Authentication:** Required `schemes` (e.g., "Bearer", "OAuth2").
-- **Skills:** Agent's tasks (`AgentSkill` objects) with `id`, `name`, `description`, `inputModes`, `outputModes`, and `examples`.
+-   **Identity:** Includes `name`, `description`, and `provider` information.
+-   **Service endpoint:** Specifies the `url` for the A2A service.
+-   **A2A capabilities:** Lists supported features such as `streaming` or `pushNotifications`.
+-   **Authentication:** Details the required `schemes` (e.g., "Bearer", "OAuth2").
+-   **Skills:** Describes the agent's tasks using `AgentSkill` objects, including `id`, `name`, `description`, `inputModes`, `outputModes`, and `examples`.
 
 Client agents use the Agent Card to determine an agent's suitability, structure requests, and ensure secure communication.
 
@@ -20,60 +20,78 @@ The following sections detail common strategies employed by client agents to dis
 
 ### 1. Well-Known URI
 
-This strategy is ideal for public agents or those requiring broad discoverability within a specific domain.
+This approach is recommended for public agents or agents intended for broad discovery within a specific domain.
 
-- **Mechanism:** A2A Servers host Agent Cards at a standardized, 'well-known' URI.
-- **Standard Path:** `https://{agent-server-domain}/.well-known/agent-card.json` ([RFC 8615](https://www.ietf.org/rfc/rfc8615.txt)).
-- **Process:**
-    1. Client agents identify a potential A2A Server's domain (e.g., `smart-thermostat.example.com`).
-    2. The client sends an HTTP `GET` to `https://smart-thermostat.example.com/.well-known/agent-card.json`.
-    3. The server returns the Agent Card in JSON format, if accessible.
--   **Advantages:** Simple, standardized, and enables automated discovery.
--   **Considerations:** This approach is well-suited for open or domain-controlled discovery. Authentication is sometimes required at the endpoint for Agent Cards containing sensitive information.
+-   **Mechanism:** A2A Servers make their Agent Card discoverable by hosting it at a standardized, "well-known" URI on their domain. The standard path is `https://{agent-server-domain}/.well-known/agent-card.json`, following the principles of [RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615).
+
+-   **Process:**
+    1.  A client agent knows or programmatically discovers the domain of a potential A2A Server (e.g., `smart-thermostat.example.com`).
+    2.  The client performs an HTTP GET request to `https://smart-thermostat.example.com/.well-known/agent-card.json`.
+    3.  If the Agent Card exists and is accessible, the server returns it as a JSON response.
+
+-   **Advantages:**
+    -   Ease of implementation
+    -   Adheres to standards
+    -   Facilitates automated discovery
+
+-   **Considerations:**
+    -   Best suited for open or domain-controlled discovery scenarios.
+    -   Authentication is necessary at the endpoint serving the Agent Card if it contains sensitive details.
 
 ### 2. Curated Registries (Catalog-Based Discovery)
 
-In enterprise environments or marketplaces, Agent Cards are typically published to a central registry.
+This approach is employed in enterprise environments or public marketplaces, where Agent Cards are often managed by a central registry. The curated registry acts as a central repository, allowing clients to query and discover agents based on criteria like skills or tags.
 
-- **Mechanism:** A registry maintains a collection of Agent Cards. Clients can query the registry based on specific criteria (e.g., skills, tags).
+-   **Mechanism:** An intermediary service (the registry) maintains a collection of Agent Cards. Clients query this registry to find agents based on various criteria (e.g., skills offered, tags, provider name, capabilities).
+
 - **Process:**
-    1. A2A Servers register their Agent Cards with the registry.
-    2. Client agents query the registry's API (e.g., to find agents with an "image-generation" skill).
-    3. The registry returns the matching Agent Cards or references.
+    1.  A2A Servers publish their Agent Cards to the registry.
+    2.  Client agents query the registry's API, searching by criteria such as specific skills.
+    3.  The registry returns matching Agent Cards or references.
+
 - **Advantages:**
     - Centralized management and governance.
-    - Discovery based on capabilities, not just domain names.
-    - Access controls and trust mechanisms.
-    - Company-specific or public marketplaces.
-- **Considerations:** Requires a registry service. The A2A specification does not define a standard API for registries.
+    - Capability-based discovery (e.g., by skill).
+    - Support for access controls and trust frameworks.
+    - Applicable to private and public marketplaces.
+- **Considerations:**
+    - This approach requires deployment and maintenance of a registry service.
+    - The current A2A specification does not prescribe a standard API for such registries.
 
 ### 3. Direct Configuration / Private Discovery
 
-For tightly coupled systems, private agents, or development purposes, clients can be directly configured with Agent Card information or URLs.
+This approach is used for tightly coupled systems, private agents, or development purposes, where clients are directly configured with Agent Card information or URLs.
 
--   **Mechanism:** Client applications can utilize hardcoded details, configuration files, environment variables, or proprietary APIs for discovery.
--   **Process:** Application-specific.
--   **Advantages:** This method is straightforward for known, static relationships.
--   **Considerations:** This approach is inflexible for dynamic discovery scenarios. Changes to Agent Card information necessitate client reconfiguration. Furthermore, proprietary API-based discovery lacks standardization.
+-   **Mechanism:** Client applications utilize hardcoded details, configuration files, environment variables, or proprietary APIs for discovery.
+-  **Process:** The process is specific to the application's deployment and configuration strategy.
+- **Advantages:** This method is straightforward for establishing connections within known, static relationships.
+- **Considerations:**
+    -   This approach is inflexible for dynamic discovery scenarios.
+    -   Changes to Agent Card information necessitate client reconfiguration.
+    -   Proprietary API-based discovery also lacks standardization.
 
 ## Securing Agent Cards
 
-Agent Cards can contain protected information, including:
+AgenAgent Cards include sensitive information, such as:
 
--   The `url` of an internal or restricted agent.
--   `authentication.credentials` details (e.g., OAuth token URL). **Secrets must not be stored within Agent Cards.**
+-   URLs for internal or restricted agents.
 -   Descriptions of sensitive skills.
 
-**Protection Mechanisms:**
+> **Important:** Secrets (e.g., `authentication.credentials` details) must not be stored directly within Agent Cards.
 
-- **Endpoint access control:** Secure the HTTP endpoint serving the Agent Card (e.g., `/.well-known/agent-card.json`, registry API) if not for public access.
-    -   **mTLS:** Require mutual TLS (mTLS).
-    -   **Network restrictions:** Restrict access to specific IP ranges or networks.
-    -   **Authentication:** Require HTTP authentication (e.g., OAuth 2.0).
-- **Selective disclosure by registries:** Registries can implement selective disclosure, returning different Agent Cards based on client identity and permissions.
+### Protection Mechanisms
 
-If an Agent Card contains sensitive data (which is **not recommended** for secrets), it **must** be protected with robust authentication and authorization mechanisms. The A2A specification encourages the use of out-of-band dynamic credentials rather than embedding static secrets within the Agent Card.
+To mitigate risks, the following protection mechanisms should be considered:
+
+-   **Secure Endpoints:** Implement access controls on the HTTP endpoint serving the Agent Card (e.g., `/.well-known/agent-card.json` or registry API). The methods include:
+    -   Mutual TLS (mTLS)
+    -   Network restrictions (e.g., IP ranges)
+    -   HTTP Authentication (e.g., OAuth 2.0)
+      
+-   **Registry Selective Disclosure:** Registries return different Agent Cards based on the client's identity and permissions.
+
+Any Agent Card containing sensitive data must be protected with authentication and authorization mechanisms. The A2A specification strongly recommends the use of out-of-band dynamic credentials rather than embedding static secrets within the Agent Card.
 
 ## Future Considerations
 
-The A2A community explores standardizing registry interactions or advanced discovery protocols. Feedback is welcome to enhance A2A agent discoverability and interoperability.
+The A2A community explores standardizing registry interactions or advanced discovery protocols.
