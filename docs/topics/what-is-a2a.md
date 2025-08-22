@@ -66,20 +66,17 @@ The core problem: The agents are unable to work together because each has its ow
 
 ![The Interoperability Challenge](../assets/scene3.png){ width="70%" style="margin:20px auto;display:block;" }
 
-
 #### Scene 4: The "Without A2A" Problem
 
 The consequence of a lack of a standardized protocol is that these agents cannot collaborate with each other let alone discover what they can do. The individual agents (Flight, Hotel, Currency, and Tours) are isolated. Symbols like "X" indicate failed communication or incompatibility between them, representing the **significant engineering overhead** and **limited interoperability** of point-to-point solutions.
 
 ![The Without A2A Problem](../assets/scene4.png){ width="70%" style="margin:20px auto;display:block;" }
 
-
 #### Scene 5: The "With A2A" Solution
 
 The same agents are now shown as an interconnected system, communicating seamlessly through the standardized protocol (A2A). This represents how the protocol addresses the challenges of scalability and security.
 
 ![The with A2A solution](../assets/scene5.png){ width="70%" style="margin:20px auto;display:block;" }
-
 
 #### Scene 6: The Cohesive Result
 
@@ -129,46 +126,44 @@ enterprise-grade capabilities, and future-proofing.
 
 ### Understanding the Agent Stack: A2A, MCP, Agent Frameworks and Models
 
-A2A fits into a larger agentic stack:
+A2A is situated within a broader agentic stack:
 
 -   **A2A:** Standardizes communication across agents deployed in different organizations built on different frameworks.
 -   **MCP:** Connects models to data and external resources.
 -   **Frameworks (like ADK):** Provide a toolkit to assemble your agent.
--   **Models:** Fundamental to the agent's reasoning, these could be any LLM of choice.
+-   **Models:** Fundamental to the agent's reasoning, these can be any Large Language Model (LLM) of choice.
 
-#### A2A and MCP 
+#### A2A and MCP
 
-In the broader ecosystem of AI communication, you might be familiar with protocols designed for agents to interact with models and tools. Notably, the Model Context Protocol (MCP) is an emerging standard focused on connecting Large Language Models (LLMs) with data and external resources.
+In the broader ecosystem of AI communication, you might be familiar with protocols designed to facilitate interactions between agents, models, and tools. Notably, the Model Context Protocol (MCP) is an emerging standard focused on connecting Large Language Models (LLMs) with data and external resources.
 
-The Agent2Agent (A2A) protocol is designed to standardize communication between AI agents themselves, particularly for those deployed in external systems. A2A is positioned to complement MCP, addressing a different, yet related, layer of the agent interaction problem.
+The Agent2Agent (A2A) protocol is designed to standardize communication between AI agents, particularly those deployed in external systems. A2A is positioned to complement MCP, addressing a distinct yet related aspect of agent interaction.
 
--   **MCP's Focus:** Lowering the complexity to connect agents with tools and data. Tools are typically stateless and perform specific, predefined functions (e.g., a calculator, a database query).
--   **A2A's Focus:** Enabling agents to collaborate in their natural modalities, allowing them to communicate as agents (or as users) instead of as tools. This enables complex, multi-turn interactions where agents reason, plan, and delegate tasks to other agents. For example, back-and-forth communication when you want to order something, involving negotiation or clarification.
+-   **MCP's Focus:** Reducing the complexity involved in connecting agents with tools and data. Tools are typically stateless and perform specific, predefined functions (e.g., a calculator, a database query).
+-   **A2A's Focus:** Enabling agents to collaborate within their native modalities, allowing them to communicate as agents (or as users) rather than being constrained to tool-like interactions. This enables complex, multi-turn interactions where agents reason, plan, and delegate tasks to other agents. For example, this facilitates multi-turn interactions, such as those involving negotiation or clarification when placing an order.
 
 ![ADK versus MCP](../assets/a2a-mcp-readme.png){ width="70%" style="margin:20px auto;display:block;" }
 
- The practice of wrapping an agent as a simple tool is fundamentally limiting, as it fails to capture its true capabilities. This critical distinction is explored in the post, [Why Agents Are Not Tools](https://discuss.google.dev/t/agents-are-not-tools/192812).
- 
+ The practice of encapsulating an agent as a simple tool is fundamentally limiting, as it fails to capture the agent's full capabilities. This critical distinction is explored in the post, [Why Agents Are Not Tools](https://discuss.google.dev/t/agents-are-not-tools/192812).
+
 For a more in-depth comparison, refer to the [A2A and MCP Comparison](./topics/a2a-and-mcp.md) document.
 
-#### A2A and ADK 
+#### A2A and ADK
 
-[Agent Development Kit (ADK)](https://google.github.io/adk-docs)
-is an open source agent development toolkit developed by Google. A2A is a
-communication protocol for agents that helps agents communicate with each other,
-regardless of the framework used to build them (for example, ADK, LangGraph, or
-Crew AI). ADK is a flexible and modular framework for developing and deploying
-AI agents. While optimized for Gemini AI and the Google ecosystem, ADK is
-model-agnostic, deployment-agnostic, and built for compatibility with other
-frameworks.
+The [Agent Development Kit (ADK)](https://google.github.io/adk-docs)
+is an open-source agent development toolkit developed by Google. A2A is a
+communication protocol for agents that enables inter-agent communication,
+regardless of the framework used for their construction (e.g., ADK, LangGraph,
+or Crew AI). ADK is a flexible and modular framework for developing and
+deploying AI agents. While optimized for Gemini AI and the Google ecosystem,
+ADK is model-agnostic, deployment-agnostic, and built for compatibility with
+other frameworks.
 
 ![ADK versus MCP](../assets/adk.gif){ width="70%" style="margin:20px auto;display:block;" }
-
 
 ### A2A Request Lifecycle
 
 The A2A request lifecycle is a sequence that details the four main steps a request follows: agent discovery, authentication, `sendMessage` API, and `sendMessageStream` API. The following diagram provides a deeper look into the operational flow, illustrating the interactions between the client, A2A server, and auth server.
-
 
 ```mermaid
 sequenceDiagram
@@ -185,8 +180,8 @@ sequenceDiagram
     rect rgb(240, 240, 240)
     Note over Client, Auth Server: 2. Authentication
     Client->>Client: Parse Agent Card for securitySchemes
-    alt securityScheme is openIdConnect
-        Client->>Auth Server: Request token based on "authorizationUrl" and "tokenUrl"
+    alt securityScheme is "openIdConnect"
+        Client->>Auth Server: Request token based on "authorizationUrl" and "tokenUrl".
         Auth Server-->>Client: Returns JWT
     end
     end
