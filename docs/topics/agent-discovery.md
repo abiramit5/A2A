@@ -16,13 +16,13 @@ Client agents use the Agent Card to determine an agent's suitability, structure 
 
 ## Discovery Strategies
 
-The following sections detail common strategies employed by client agents to discover remote Agent Cards:
+The following sections detail common strategies used by client agents to discover remote Agent Cards:
 
 ### 1. Well-Known URI
 
 This approach is recommended for public agents or agents intended for broad discovery within a specific domain.
 
--   **Mechanism:** A2A Servers make their Agent Card discoverable by hosting it at a standardized, "well-known" URI on their domain. The standard path is `https://{agent-server-domain}/.well-known/agent-card.json`, following the principles of [RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615).
+-   **Mechanism:** A2A Servers make their Agent Card discoverable by hosting it at a standardized, `well-known` URI on their domain. The standard path is `https://{agent-server-domain}/.well-known/agent-card.json`, following the principles of [RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615).
 
 -   **Process:**
     1.  A client agent knows or programmatically discovers the domain of a potential A2A Server (e.g., `smart-thermostat.example.com`).
@@ -40,23 +40,23 @@ This approach is recommended for public agents or agents intended for broad disc
 
 ### 2. Curated Registries (Catalog-Based Discovery)
 
-This approach is employed in enterprise environments or public marketplaces, where Agent Cards are often managed by a central registry. The curated registry acts as a central repository, allowing clients to query and discover agents based on criteria like skills or tags.
+This approach is employed in enterprise environments or public marketplaces, where Agent Cards are often managed by a central registry. The curated registry acts as a central repository, allowing clients to query and discover agents based on criteria like "skills" or "tags".
 
 -   **Mechanism:** An intermediary service (the registry) maintains a collection of Agent Cards. Clients query this registry to find agents based on various criteria (e.g., skills offered, tags, provider name, capabilities).
 
 - **Process:**
     1.  A2A Servers publish their Agent Cards to the registry.
-    2.  Client agents query the registry's API, searching by criteria such as specific skills.
+    2.  Client agents query the registry's API, and search by criteria such as "specific skills".
     3.  The registry returns matching Agent Cards or references.
 
 - **Advantages:**
     - Centralized management and governance.
     - Capability-based discovery (e.g., by skill).
     - Support for access controls and trust frameworks.
-    - Applicable to private and public marketplaces.
+    - Applicable in both private and public marketplaces.
 - **Considerations:**
-    - This approach requires deployment and maintenance of a registry service.
-    - The current A2A specification does not prescribe a standard API for such registries.
+    - Requires deployment and maintenance of a registry service.
+    - The current A2A specification does not prescribe a standard API for curated registries.
 
 ### 3. Direct Configuration / Private Discovery
 
@@ -66,7 +66,7 @@ This approach is used for tightly coupled systems, private agents, or developmen
 -  **Process:** The process is specific to the application's deployment and configuration strategy.
 - **Advantages:** This method is straightforward for establishing connections within known, static relationships.
 - **Considerations:**
-    -   This approach is inflexible for dynamic discovery scenarios.
+    -   Inflexible for dynamic discovery scenarios.
     -   Changes to Agent Card information necessitate client reconfiguration.
     -   Proprietary API-based discovery also lacks standardization.
 
