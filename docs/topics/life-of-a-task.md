@@ -14,7 +14,7 @@ respond in one of two fundamental ways:
     `input-required`, `auth-required`) or a terminal state (e.g., `completed`,
     `canceled`, `rejected`, `failed`).
 
-## Grouping Related Interactions
+## Group Related Interactions
 
 A `contextId` is a crucial identifier that logically groups multiple `Task`
 objects and independent `Message` objects, providing continuity across a series of
