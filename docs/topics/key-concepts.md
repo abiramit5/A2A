@@ -16,7 +16,9 @@ systems.
     A2A protocol.
 -   **A2A server (remote agent)**: An AI agent or an agentic system that exposes
     an HTTP endpoint implementing the A2A protocol. It receives requests from
-    clients, processes tasks, and returns results or status updates.
+    clients, processes tasks, and returns results or status updates. From the client's perspective,
+    the remote agent operates as an _opaque_ (black-box) system, meaning its internal workings, memory, or tools are not exposed.
+
 
 ## Fundamental Communication Elements
 
