@@ -1,63 +1,65 @@
 # Life of a Task
 
-In the Agent2Agent (A2A) protocol, interactions can be simple, stateless
-exchanges or complex, long-running processes. When a client sends a message to an
-agent, the agent can respond in one of two ways:
+Within the Agent2Agent (A2A) Protocol, interactions between a client and an
+agent can vary significantly, from simple, stateless exchanges to complex,
+long-running processes. Upon receiving a message from a client, an agent can
+respond in one of two fundamental ways:
 
-*   **Message**: The agent replies with a stateless `Message`. In this
-    case, the interaction is typically complete.
-*   **Task**: The agent initiates a stateful `Task`. In this case, the agent
-    processes the task through a defined lifecycle. It communicates progress and
-    requires input as needed, until the task reaches an interrupted state (for
-    example, `input-required`, `auth-required`) or a terminal state (for example,
-    `completed`, `canceled`, `rejected`, `failed`).
+-   **Respond with a simple, stateless `Message`**: This type of response is
+    typically used for immediate, self-contained interactions that conclude
+    without requiring further state management.
+-   **Initiate a stateful `Task`**: If the response is a `Task`, the agent will
+    process it through a defined lifecycle, communicating progress and requiring
+    input as needed, until it reaches an interrupted state (e.g.,
+    `input-required`, `auth-required`) or a terminal state (e.g., `completed`,
+    `canceled`, `rejected`, `failed`).
 
 ## Grouping Related Interactions
 
 A `contextId` is a crucial identifier that logically groups multiple `Task`
-objects and independent `Message` objects, providing continuity across a series
-of interactions.
+objects and independent `Message` objects, providing continuity across a series of
+interactions.
 
-*   When a client sends a message for the first time, the agent can respond
+-   When a client sends a message for the first time, the agent can respond
     with a new `contextId`. If a task is initiated, it will also have a `taskId`.
-*   Clients can send subsequent messages and include the same `contextId` to
+-   Clients can send subsequent messages and include the same `contextId` to
     indicate that they are continuing their previous interaction within the same
     context.
-*   Clients can optionally attach the `taskId` to a subsequent message to
-    indicate that the message is a continuation of that specific task.
+-   Clients can optionally attach the `taskId` to a subsequent message to
+    indicate that it continues that specific task.
 
-The `contextId` enables collaboration towards a common goal or shared
-contextual session across multiple, potentially concurrent, tasks. Internally,
-an A2A agent (especially one using an LLM) can leverage the `contextId` to
-manage its internal conversational state or LLM context.
+The `contextId` enables collaboration towards a common goal or a shared
+contextual session across multiple, potentially concurrent tasks. Internally, an
+A2A agent (especially one using an LLM) can use the `contextId` to manage its internal
+conversational state or its LLM context.
 
 ## Agent Response: Message or Task
 
 The choice between responding with a `Message` or a `Task` depends on the
 nature of the interaction and the agent's capabilities:
 
-*   **Messages for trivial interactions**: `Message` objects are suitable for
-    transactional interactions that do not require long-running
+-   **Messages for trivial interactions**: `Message` objects are suitable for
+    transactional interactions that don't require long-running
     processing or complex state management. An agent might use messages to
     negotiate the acceptance or scope of a task before committing to a `Task`
     object.
-*   **Tasks for stateful workflows**: Once an agent maps the intent of an
+-   **Tasks for stateful workflows**: Once an agent maps the intent of an
     incoming message to a supported capability that requires substantial,
     trackable work over an extended period, the agent responds with a `Task`
     object.
 
 Conceptually, agents can operate at different levels of complexity:
 
-*   **Message-only agents**: Always respond with `Message` objects. They
+-   **Message-only agents**: Always respond with `Message` objects. They
     typically don't manage complex state or long-running executions, and use
     `contextId` to tie messages together. These agents might directly wrap LLM
     invocations and simple tools.
-*   **Task-generating agents**: Always respond with `Task` objects, even for
+-   **Task-generating agents**: Always respond with `Task` objects, even for
     responses, which are then modeled as completed tasks. Once a task is
     created, the agent will only return `Task` objects in response to messages
     sent, and once a task is complete, no more messages can be sent. This
     approach simplifies consistency and tracking.
-*   **Hybrid agents**: Generate both `Message` and `Task` objects. These agents
+-   **Hybrid agents**: Generate both `Message` and `Task` objects. These agents
     use messages to negotiate agent capability and the scope of work for a task,
     then send a `Task` object to track execution and manage states like
     `input-required` or error handling. Once a task is created, the agent will
@@ -68,9 +70,9 @@ Conceptually, agents can operate at different levels of complexity:
 
 ## Task Refinements
 
-Clients often need to send new requests based on task results or refine previous
-task outputs. This is modeled by starting another interaction using the same
-`contextId` as the original task. Clients can further hint the agent by
+Clients often need to send new requests based on task results or refine the
+outputs of previous tasks. This is modeled by starting another interaction using
+the same `contextId` as the original task. Clients can further hint the agent by
 providing references to the original task using `referenceTaskIds` in the
 `Message` object. The agent then responds with either a new `Task` or a
 `Message`.
@@ -82,14 +84,15 @@ it cannot restart. Any subsequent interaction related to that task, such as a
 refinement, must initiate a new task within the same `contextId`. This principle
 offers several benefits:
 
-*   Clients can reliably reference tasks and their associated state, artifacts,
-    and messages, providing a clean mapping of inputs to outputs. This is
-    valuable for orchestration and traceability.
-*   Every new request, refinement, or follow-up becomes a distinct task. This
-    simplifies bookkeeping, allows for granular tracking of an agent's work, and
-    enables tracing each artifact to a specific task.
-*   Removes ambiguity for agent developers regarding whether to create a new task
-    or restart an existing one.
+-   **Task Immutability.** Clients can reliably reference tasks and their
+    associated state, artifacts, and messages, providing a clean mapping of
+    inputs to outputs. This is valuable for orchestration and traceability.
+-   **Clear Unit of Work.** Every new request, refinement, or follow-up becomes
+    a distinct task. This simplifies bookkeeping, allows for granular tracking
+    of an agent's work, and enables tracing each artifact to a specific unit of
+    work.
+-   **Easier Implementation.** This removes ambiguity for agent developers
+    regarding whether to create a new task or restart an existing one.
 
 ## Parallel Follow-ups
 
@@ -100,10 +103,10 @@ prerequisite task is complete.
 
 For example:
 
-*   Task 1: Book a flight to Helsinki.
-*   Task 2: Based on Task 1, book a hotel.
-*   Task 3: Based on Task 1, book a snowmobile activity.
-*   Task 4: Based on Task 2, add a spa reservation to the hotel booking.
+-   Task 1: Book a flight to Helsinki.
+-   Task 2: Based on Task 1, book a hotel.
+-   Task 3: Based on Task 1, book a snowmobile activity.
+-   Task 4: Based on Task 2, add a spa reservation to the hotel booking.
 
 ## Referencing Previous Artifacts
 
@@ -128,7 +131,7 @@ when generating a refinement on an original artifact.
 
 The following example illustrates a typical task flow with a follow-up:
 
-1.  Client sends message to agent:
+1.  Client sends a message to the agent:
 
     ```json
     {
@@ -150,7 +153,7 @@ The following example illustrates a typical task flow with a follow-up:
     }
     ```
 
-2.  Agent responds with boat image (completed task):
+2.  Agent responds with a boat image (completed task):
 
     ```json
     {
@@ -184,8 +187,8 @@ The following example illustrates a typical task flow with a follow-up:
     }
     ```
 
-3.  Client asks to color the boat red (refinement): This request refers to the previous
-    `taskId` and uses the same `contextId`.
+3.  Client asks to color the boat red. This refinement request refers to the
+    previous `taskId` and uses the same `contextId`.
 
     ```json
     {
@@ -203,7 +206,7 @@ The following example illustrates a typical task flow with a follow-up:
           "parts": [
             {
               "kind": "text",
-              "text": "That's great! Can you make the sailboat red?"
+              "text": "Please modify the sailboat to be red."
             }
           ]
         }
@@ -211,7 +214,7 @@ The following example illustrates a typical task flow with a follow-up:
     }
     ```
 
-4.  Agent responds with new image artifact (new task, same context, updated
+4.  Agent responds with a new image artifact (new task, same context, updated
     artifact name): The agent creates a new task within the same `contextId`. The
     new boat image artifact retains the same name but has a new `artifactId`.
 
