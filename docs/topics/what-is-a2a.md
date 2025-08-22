@@ -126,12 +126,14 @@ enterprise-grade capabilities, and future-proofing.
 
 ### Understanding the Agent Stack: A2A, MCP, Agent Frameworks and Models
 
-A2A is situated within a broader agentic stack:
+A2A is situated within a broader agent stack, which includes:
 
--   **A2A:** Standardizes communication across agents deployed in different organizations built on different frameworks.
+-   **A2A:** Standardizes communication among agents deployed in different organizations and developed using diverse frameworks.
 -   **MCP:** Connects models to data and external resources.
--   **Frameworks (like ADK):** Provide a toolkit to assemble your agent.
--   **Models:** Fundamental to the agent's reasoning, these can be any Large Language Model (LLM) of choice.
+-   **Frameworks (like ADK):** Provide toolkits for constructing agents.
+-   **Models:** Fundamental to an agent's reasoning, these can be any Large Language Model (LLM).
+
+![ADK versus MCP](../assets/agentic-stack.png){ width="70%" style="margin:20px auto;display:block;" }
 
 #### A2A and MCP
 
