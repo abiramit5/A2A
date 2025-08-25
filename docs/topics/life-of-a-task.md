@@ -1,9 +1,8 @@
 # Life of a Task
 
-Within the Agent2Agent (A2A) Protocol, interactions between a client and an
-agent vary significantly, from simple, stateless exchanges to complex,
-long-running processes. Upon receiving a message from a client, an agent
-responds in one of two fundamental ways:
+In the Agent2Agent (A2A) Protocol, interactions can range from simple, stateless
+exchanges to complex, long-running processes. When an agent receives a message
+from a client, it can respond in one of two fundamental ways:
 
 -   **Respond with a simple, stateless `Message`**: This type of response is
     typically used for immediate, self-contained interactions that conclude
