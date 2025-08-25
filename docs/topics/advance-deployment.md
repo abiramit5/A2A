@@ -4,7 +4,7 @@ This guide provides an in-depth exploration of advanced concepts related to A2A 
 
 ## Advanced A2A Agent Card Configuration
 
-An A2A agent exposes an [agent card](https://a2a-protocol.org/latest/specification/#5-agent-discovery-the-agent-card), which serves as a manifest detailing its capabilities, skills, and critical authentication information.
+An A2A agent exposes an [agent card](../specification.md#5-agent-discovery-the-agent-card), which serves as a manifest detailing its capabilities, skills, and critical authentication information.
 
 ### Sample Advanced Agent Card Definition
 
@@ -97,7 +97,7 @@ npm install @a2a-js/sdk
 
 The SDKs abstract away A2A protocol constructs, such as `TaskStore` management, task lifecycles, and underlying transport layer handling (for example, JSON-RPC and gRPC). This allows you to primarily focus on implementing an `AgentExecutor` that efficiently processes incoming user requests and emits relevant messages or task events.
 For information on how to integrate with SDKs in your preferred language, see [A2A samples for SDK integration](https://github.com/a2aproject/a2a-samples/tree/main/samples).
-For SDK repositories, see [Python SDK repository](https://github.com/a2aproject/a2a-python) and [JavaScript SDK repository](./a2aproject/a2a-js).
+For SDK repositories, see [Python SDK repository](https://github.com/a2aproject/a2a-python) and [JavaScript SDK repository](../a2aproject/a2a-js).
 
 ### A2A Agent Executor Implementation with ADK
 
