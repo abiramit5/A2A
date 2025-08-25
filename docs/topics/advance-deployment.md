@@ -4,7 +4,7 @@ This guide provides an in-depth exploration of advanced concepts related to A2A 
 
 ## Advanced A2A agent card configuration
 
-An A2A agent exposes an [agent card](./specification.md#5-agent-discovery-the-agent-card), which serves as a manifest detailing its capabilities, skills, and critical authentication information.
+An A2A agent exposes an [agent card](https://a2a-protocol.org/latest/specification/#5-agent-discovery-the-agent-card), which serves as a manifest detailing its capabilities, skills, and critical authentication information.
 
 ### Sample advanced agent card definition
 
@@ -96,12 +96,12 @@ npm install @a2a-js/sdk
 ```
 
 The SDKs abstract away A2A protocol constructs, such as `TaskStore` management, task lifecycles, and underlying transport layer handling (for example, JSON-RPC and gRPC). This allows you to primarily focus on implementing an `AgentExecutor` that efficiently processes incoming user requests and emits relevant messages or task events.
-For information on how to integrate with SDKs in your preferred language, see [A2A samples for SDK integration](./a2aproject/a2a-samples/tree/main/samples).
-For SDK repositories, see [Python SDK repository](./a2aproject/a2a-python) and [JavaScript SDK repository](./a2aproject/a2a-js).
+For information on how to integrate with SDKs in your preferred language, see [A2A samples for SDK integration](https://github.com/a2aproject/a2a-samples/tree/main/samples).
+For SDK repositories, see [Python SDK repository](https://github.com/a2aproject/a2a-python) and [JavaScript SDK repository](./a2aproject/a2a-js).
 
 ### A2A agent executor implementation with ADK
 
-The [Agent Development Kit (ADK)](/adk-docs/) can be effectively utilized for developing and orchestrating A2A agents. For ADK sample agent implementations, see [samples](./google/adk-samples).
+The [Agent Development Kit (ADK)](/adk-docs/) can be effectively utilized for developing and orchestrating A2A agents. For ADK sample agent implementations, see [samples](https://github.com/google/adk-samples).
 
 #### Basic ADK agent definition
 
@@ -117,7 +117,7 @@ facts_agent = LlmAgent(
 )
 ```
 
-However, a specific [agent executor](/a2aproject/a2a-samples/blob/main/samples/python/agents/adk_expense_reimbursement/agent_executor.py) interface must be implemented to seamlessly integrate with the A2A SDKs and properly expose the A2A APIs. See the [Official A2A wrapper for ADK](./google/adk-python/blob/main/src/google/adk/a2a/executor/a2a_agent_executor.py).
+However, a specific [agent executor](https://github.com/a2aproject/a2a-samples/blob/main/samples/python/agents/adk_expense_reimbursement/agent_executor.py) interface must be implemented to seamlessly integrate with the A2A SDKs and properly expose the A2A APIs. See the [Official A2A wrapper for ADK](https://github.com/google/adk-python/blob/main/src/google/adk/a2a/executor/a2a_agent_executor.py).
 
 
 ### Sample Wrapper: Convert ADK agent to A2A executor
@@ -294,12 +294,12 @@ async def execute(
 ### Optional task: Nested authentication for A2A agents
 
 A highly sophisticated A2A agent is capable of handling complex scenarios where it requires additional authentication scopes or entirely separate authentication credentials to invoke external APIs, tools, or even other A2A agents. In such cases, the agent is designed to intelligently transition the respective task to an `auth-required` state, signaling the need for further authentication.
-For information on how to capture auth-event for a tool within ADK agent, see [Capture auth events within ADK agent](./a2aproject/a2a-samples/blob/main/samples/python/agents/birthday_planner_adk/calendar_agent/adk_agent_executor.py#L370).
+For information on how to capture auth-event for a tool within ADK agent, see [Capture auth events within ADK agent](https://github.com/a2aproject/a2a-samples/blob/main/samples/python/agents/birthday_planner_adk/calendar_agent/adk_agent_executor.py#L370).
 
 
 ## TaskStore management for A2A protocol
 
-The A2A protocol fundamentally operates with tasks, and therefore, A2A SDKs require a [TaskStore](./a2aproject/a2a-python/blob/main/src/a2a/server/tasks/task_store.py) for efficient task management throughout the agent's lifecycle.
+The A2A protocol fundamentally operates with tasks, and therefore, A2A SDKs require a [TaskStore](https://github.com/a2aproject/a2a-python/blob/main/src/a2a/server/tasks/task_store.py) for efficient task management throughout the agent's lifecycle.
 
 ### In-memory TaskStore
 
