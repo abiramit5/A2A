@@ -4,10 +4,10 @@ In the Agent2Agent (A2A) Protocol, interactions can range from simple, stateless
 exchanges to complex, long-running processes. When an agent receives a message
 from a client, it can respond in one of two fundamental ways:
 
--   **Respond with a simple, stateless `Message`**: This type of response is
+-   **Respond with a Simple, Stateless `Message`**: This type of response is
     typically used for immediate, self-contained interactions that conclude
     without requiring further state management.
--   **Initiate a stateful `Task`**: If the response is a `Task`, the agent will
+-   **Initiate a Stateful `Task`**: If the response is a `Task`, the agent will
     process it through a defined lifecycle, communicating progress and requiring
     input as needed, until it reaches an interrupted state (e.g.,
     `input-required`, `auth-required`) or a terminal state (e.g., `completed`,
@@ -37,28 +37,28 @@ conversational state or its LLM context.
 The choice between responding with a `Message` or a `Task` depends on the
 nature of the interaction and the agent's capabilities:
 
--   **Messages for trivial interactions**: `Message` objects are suitable for
+-   **Messages for Trivial Interactions**: `Message` objects are suitable for
     transactional interactions that don't require long-running
     processing or complex state management. An agent might use messages to
     negotiate the acceptance or scope of a task before committing to a `Task`
     object.
--   **Tasks for stateful workflows**: Once an agent maps the intent of an
+-   **Tasks for Stateful Workflows**: Once an agent maps the intent of an
     incoming message to a supported capability that requires substantial,
     trackable work over an extended period, the agent responds with a `Task`
     object.
 
 Conceptually, agents operate at different levels of complexity:
 
--   **Message-only agents**: Always respond with `Message` objects. They
+-   **Message-only Agents**: Always respond with `Message` objects. They
     typically don't manage complex state or long-running executions, and use
     `contextId` to tie messages together. These agents might directly wrap LLM
     invocations and simple tools.
--   **Task-generating agents**: Always respond with `Task` objects, even for
+-   **Task-generating Agents**: Always respond with `Task` objects, even for
     responses, which are then modeled as completed tasks. Once a task is
     created, the agent will only return `Task` objects in response to messages
     sent, and once a task is complete, no more messages can be sent. This
     approach simplifies consistency and tracking.
--   **Hybrid agents**: Generate both `Message` and `Task` objects. These agents
+-   **Hybrid Agents**: Generate both `Message` and `Task` objects. These agents
     use messages to negotiate agent capability and the scope of work for a task,
     then send a `Task` object to track execution and manage states like
     `input-required` or error handling. Once a task is created, the agent will
