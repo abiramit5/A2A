@@ -217,7 +217,7 @@ async def execute(
             )
 ```
 
--   **Run the ADK agent**: Execute the ADK agent to generate a response based on the user's query.
+-   **Run the ADK Agent**: Execute the ADK agent to generate a response based on the user's query.
 
 ```python
 async def execute(
