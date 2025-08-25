@@ -2,7 +2,7 @@
 
 This tutorial demonstrates multi-agent collaboration using A2A (Agent2Agent)
 communication. A2A enables different agents to interact and solve complex
-problems together. You explore a pre-built example featuring a reimbursement
+problems together. You explore a prebuilt example featuring a reimbursement
 agent, developed with the Agent Development Kit (ADK), an open-source toolkit
 from Google. This example illustrates how to expose a remote agent's endpoint to
 a client, facilitating seamless collaboration.
@@ -20,15 +20,12 @@ This tutorial uses open-source tools and local execution. It does not incur any 
 
 ## Before You Begin
 
-<ol>
-<li>In the Google Cloud console, on the project selector page, select or create a Google Cloud project.</li>
- <li>Install <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a>.</li>
- Note: If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-Go to project selector
- <li>Install <a href="https://www.python.org/downloads/">Python 3.9 or later</a>.</li>
- <li>Install <a href="https://pip.pypa.io/en/stable/installation/">pip</a>, the Python package installer.</li>
-</ol>
-
+1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
+    **Note**: If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
+1.  Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+1.  Install [Python 3.9 or later](https://www.python.org/downloads/).
+1.  Install [pip](https://pip.pypa.io/en/stable/installation/), the Python package installer.
 
 ## Understand A2A Agent Components
 
@@ -36,26 +33,23 @@ A2A facilitates collaboration between agents. To convert an agent into an A2A
 agent, define three key components: an `AgentSkill`, an `AgentCard`, and an
 `AgentExecutor`.
 
-
 An `AgentSkill` defines a specific capability or tool the agent offers. The
 `AgentCard` provides metadata about the agent, including its name, description,
 and available skills. The `AgentExecutor` handles the agent's execution logic,
 processing requests and generating responses.
 
-
 The following code defines the `AgentSkill` and `AgentCard` for a reimbursement
 agent:
-
 
 ```python
 skill = AgentSkill(
            id='process_reimbursement',
            name='Process Reimbursement Tool',
            description='Helps with the reimbursement process for users given the amount and purpose of the reimbursement.',
-           tags=\['reimbursement'\],
-           examples=\[
+           tags=['reimbursement'],
+           examples=[
                'Can you reimburse me $20 for my lunch with the clients?'
-           \],
+           ],
        )
 agent_card = AgentCard(
            name='Reimbursement Agent',
@@ -65,16 +59,14 @@ agent_card = AgentCard(
            default_input_modes=ReimbursementAgent.SUPPORTED_CONTENT_TYPES,
            default_output_modes=ReimbursementAgent.SUPPORTED_CONTENT_TYPES,
            capabilities=capabilities,
-           skills=\[skill\],
+           skills=[skill],
        )
 ```
-
 
 The `ReimbursementAgentExecutor` class implements the `AgentExecutor` interface.
 This class defines how the reimbursement agent processes incoming requests and
 interacts with the A2A framework. It manages task states, updates, and artifact
 processing requests and generating responses.
-
 
 ```python
 import json
@@ -176,7 +168,6 @@ class ReimbursementAgentExecutor(AgentExecutor):
        raise ServerError(error=UnsupportedOperationError())   
 ```
 
-
 ## Set Up the Environment
 
 Clone the [`a2a-samples`](https://github.com/a2aproject/a2a-samples/)
@@ -193,24 +184,20 @@ agent and host client.
    cd a2a-samples/demo
    ```
 
-
 ## Run the Reimbursement Agent
 
 Start the remote reimbursement agent. This agent exposes its endpoint for client
 interaction.
-
 
 1.  From the `demo` directory, navigate to the `reimbursement_agent` directory:
    ```bash
    cd reimbursement_agent
    ```
 
-
 2.  Install the required Python dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-
 
 3.  Run the agent:
    ```bash
@@ -219,18 +206,15 @@ interaction.
    The agent starts and
    listens for incoming requests. Keep this terminal window open.
 
-
 ## Run the host client
 
 Start the host client. This client interacts with the reimbursement agent.
-
 
 1.  Open a new terminal or command prompt window.
 2.  Navigate to the `demo` directory within your cloned repository:
    ```bash
    cd a2a-samples/demo
    ```
-
 
 3.  Navigate to the `host_agent` directory:
    ```bash
@@ -241,14 +225,12 @@ Start the host client. This client interacts with the reimbursement agent.
    pip install -r requirements.txt
    ```
 
-
 5.  Run the host client:
    ```bash
    python main.py
    ```
    The host client
    starts and presents a user interface for interaction.
-
 
 ## Observe Multi-agent Collaboration
 
@@ -257,4 +239,3 @@ request. Observe how the host client communicates with the remote reimbursement
 agent to process the request. The agents collaborate to gather necessary
 information and complete the reimbursement task. This interaction demonstrates
 the multi-agent collaboration pattern.
-
