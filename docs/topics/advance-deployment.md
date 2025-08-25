@@ -95,7 +95,7 @@ pip install a2a-sdk
 npm install @a2a-js/sdk
 ```
 
-The SDKs abstract away A2A protocol constructs, such as `TaskStore` management, task lifecycles, and underlying transport layer handling (for example, JSON-RPC and gRPC). This allows you to primarily focus on implementing an `AgentExecutor` that efficiently processes incoming user requests and emits relevant messages or task events.
+The SDKs abstract away A2A protocol constructs, such as `TaskStore` management, task lifecycle, and underlying transport layer handling (for example, JSON-RPC and gRPC). This allows you to primarily focus on implementing an `AgentExecutor` that efficiently processes incoming user requests and emits relevant messages or task events.
 For information on how to integrate with SDKs in your preferred language, see [A2A samples for SDK integration](https://github.com/a2aproject/a2a-samples/tree/main/samples).
 For SDK repositories, see [Python SDK repository](https://github.com/a2aproject/a2a-python) and [JavaScript SDK repository](https://github.com/a2aproject/a2a-js).
 
