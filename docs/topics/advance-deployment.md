@@ -97,11 +97,11 @@ npm install @a2a-js/sdk
 
 The SDKs abstract away A2A protocol constructs, such as `TaskStore` management, task lifecycles, and underlying transport layer handling (for example, JSON-RPC and gRPC). This allows you to primarily focus on implementing an `AgentExecutor` that efficiently processes incoming user requests and emits relevant messages or task events.
 For information on how to integrate with SDKs in your preferred language, see [A2A samples for SDK integration](https://github.com/a2aproject/a2a-samples/tree/main/samples).
-For SDK repositories, see [Python SDK repository](https://github.com/a2aproject/a2a-python) and [JavaScript SDK repository](../a2aproject/a2a-js).
+For SDK repositories, see [Python SDK repository](https://github.com/a2aproject/a2a-python) and [JavaScript SDK repository](https://github.com/a2aproject/a2a-js).
 
 ### A2A Agent Executor Implementation with ADK
 
-The [Agent Development Kit (ADK)](/adk-docs/) can be effectively utilized for developing and orchestrating A2A agents. For ADK sample agent implementations, see [samples](https://github.com/google/adk-samples).
+The [Agent Development Kit (ADK)](/adk-docs/) can be effectively utilized for developing and orchestrating A2A agents. For ADK sample agent implementations, see [Samples](https://github.com/google/adk-samples).
 
 #### Basic ADK Agent Definition
 
