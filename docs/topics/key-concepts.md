@@ -11,10 +11,10 @@ systems.
 -   **User**: The end user, which can be a human operator or an automated
     service. The user initiates a request or defines a goal that requires
     assistance from one or more AI agents.
--   **A2A client (client agent)**: An application, service, or another AI agent
+-   **A2A Client (Client Agent)**: An application, service, or another AI agent
     that acts on behalf of the user. The client initiates communication using the
     A2A protocol.
--   **A2A server (remote agent)**: An AI agent or an agentic system that exposes
+-   **A2A Server (Remote Agent)**: An AI agent or an agentic system that exposes
     an HTTP endpoint implementing the A2A protocol. It receives requests from
     clients, processes tasks, and returns results or status updates. From the client's perspective,
     the remote agent operates as an _opaque_ (black-box) system, meaning its internal workings, memory, or tools are not exposed.
@@ -40,13 +40,13 @@ needs for responsiveness and persistence. These mechanisms ensure that agents
 can exchange information efficiently and reliably, regardless of the task's
 complexity or duration:
 
--   **Request/response (polling)**: Clients send a request and the server
+-   **Request/Response (Polling)**: Clients send a request and the server
     responds. For long-running tasks, the client periodically polls the server
     for updates.
--   **Streaming (server-sent events - SSE)**: Clients initiate a stream to
+-   **Streaming with Server-Sent Events (SSE)**: Clients initiate a stream to
     receive real-time, incremental results or status updates from the server
     over an open HTTP connection.
--   **Push notifications**: For very long-running tasks or disconnected
+-   **Push Notifications**: For very long-running tasks or disconnected
     scenarios, the server can actively send asynchronous notifications to a
     client-provided webhook when significant task updates occur.
 
@@ -62,7 +62,7 @@ given task, how to structure requests, and how to communicate securely. Key
 information includes identity, service endpoint (URL), A2A capabilities,
 authentication requirements, and a list of skills.
 
-## Messages and parts
+## Messages and Parts
 
 A message represents a single turn of communication between a client and an
 agent. It includes a role ("user" or "agent") and a unique `messageId`. It
