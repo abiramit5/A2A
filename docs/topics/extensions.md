@@ -21,22 +21,22 @@ The exact set of possible ways to use extensions is intentionally broad,
 facilitating the ability to expand A2A beyond known use cases.
 However, some foreseeable applications include:
 
--   **Data-only extensions**: Exposing new, structured information in the Agent
+-   **Data-only Extensions**: Exposing new, structured information in the Agent
     `Card` that doesn't impact the request-response flow. For example, an
     extension could add structured data about an agent's GDPR compliance.
--   **Profile extensions**: Overlaying additional structure and state change
+-   **Profile Extensions**: Overlaying additional structure and state change
     requirements on the core request-response messages. This type effectively
     acts as a profile on the core A2A protocol, narrowing the space of allowed
     values (for example, requiring all messages to use `DataParts` adhering to
     a specific schema).
--   **Method extensions (extended skills)**: Adding entirely new RPC methods
+-   **Method Extensions (Extended Skills)**: Adding entirely new RPC methods
     beyond the core set defined by the protocol. An Extended Skill refers to a
     capability or function an agent gains or exposes specifically through the
     implementation of an extension that defines new RPC methods. For example, a
     `task-history` extension might add a `tasks/search` RPC method to retrieve
     a list of previous tasks, effectively providing the agent with a new,
     extended skill.
-- **State machine extensions**: Adding new states or transitions to the task
+- **State Machine Extensions**: Adding new states or transitions to the task
   state machine.
 
 ## Limitations
@@ -44,11 +44,11 @@ However, some foreseeable applications include:
 There are some changes to the protocol that extensions don't allow, primarily
 to prevent breaking core type validations:
 
--   **Changing the definition of core data structures**: For example, adding new
+-   **Changing the Definition of Core Data Structures**: For example, adding new
     fields or removing required fields to protocol-defined data structures).
     Extensions should place custom attributes in the `metadata` map present on
     core data structures.
--   **Adding new values to enum types**: Extensions should use existing enum values
+-   **Adding New Values to Enum Types**: Extensions should use existing enum values
     and annotate additional semantic meaning in the `metadata` field.
 
 ## Extension Declaration
@@ -141,10 +141,10 @@ Extensions default to being inactive, providing a baseline
 experience for extension-unaware clients. Clients and agents perform
 negotiation to determine which extensions are active for a specific request.
 
-1.  **Client request**: A client requests extension activation by including the
+1.  **Client Request**: A client requests extension activation by including the
     `X-A2A-Extensions` header in the HTTP request to the agent. The value is a
     comma-separated list of extension URIs the client intends to activate.
-2.  **Agent processing**: Agents are responsible for identifying supported
+2.  **Agent Processing**: Agents are responsible for identifying supported
     extensions in the request and performing the activation. Any requested
     extensions not supported by the agent can be ignored.
 3.  **Response**: Once the agent has identified all activated extensions, the
@@ -208,21 +208,21 @@ versioning, and distributing extension implementations.
     - **Recommendation**: Use the extension's URI as the primary version
         identifier, ideally including a version number (for example,
         `https://example.com/ext/my-extension/v1`).
-    - **Breaking changes**: A new URI MUST be used when introducing a breaking
+    - **Breaking Changes**: A new URI MUST be used when introducing a breaking
         change to an extension's logic, data structures, or required parameters.
     - Handling Mismatches: If a client requests a version not supported by
         the agent, the agent SHOULD ignore the activation request for that
         extension; it MUST NOT fall back to a different version.
--   **Discoverability and publication**:
-    - **Specification hosting**: The extension specification document **should** be
+-   **Discoverability and Publication**:
+    - **Specification Hosting**: The extension specification document **should** be
         hosted at the extension's URI.
-    - **Permanent identifiers**: Authors are encouraged to use a permanent
+    - **Permanent Identifiers**: Authors are encouraged to use a permanent
         identifier service, such as `w3id.org`, for their extension URIs to
         prevent broken links.
-    - **Community registry (future)**: The A2A community might establish a
+    - **Community Registry (Future)**: The A2A community might establish a
         central registry for discovering and browsing available extensions in
         the future.
--   **Packaging and reusability (A2A SDKs and libraries)**:
+-   **Packaging and Reusability (A2A SDKs and Libraries)**:
     To promote adoption, extension logic should be packaged into reusable
         libraries that can be integrated into existing A2A client and
         server applications.
@@ -264,15 +264,15 @@ versioning, and distributing extension implementations.
 -   **Security**: Extensions modify the core behavior of the A2A protocol, and therefore
     introduce new security considerations:
 
-    -   **Input validation**: Any new data fields, parameters, or methods
+    -   **Input Validation**: Any new data fields, parameters, or methods
         introduced by an extension MUST be rigorously validated. Treat all
         extension-related data from an external party as untrusted input.
-    -   **Scope of required extensions**: Be mindful when marking an extension as
+    -   **Scope of Required Extensions**: Be mindful when marking an extension as
         `required: true` in an `Agent Card`. This creates a hard dependency for
         all clients and should only be used for extensions fundamental to the
         agent's core function and security (for example, a message signing
         extension).
-    -   **Authentication and authorization**: If an extension adds new methods,
+    -   **Authentication and Authorization**: If an extension adds new methods,
         the implementation MUST ensure these methods are subject to the same
         authentication and authorization checks as the core A2A methods. An
         extension MUST NOT provide a way to bypass the agent's primary security
