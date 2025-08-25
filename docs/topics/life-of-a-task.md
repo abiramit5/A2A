@@ -1,9 +1,9 @@
 # Life of a Task
 
 Within the Agent2Agent (A2A) Protocol, interactions between a client and an
-agent can vary significantly, from simple, stateless exchanges to complex,
-long-running processes. Upon receiving a message from a client, an agent can
-respond in one of two fundamental ways:
+agent vary significantly, from simple, stateless exchanges to complex,
+long-running processes. Upon receiving a message from a client, an agent
+responds in one of two fundamental ways:
 
 -   **Respond with a simple, stateless `Message`**: This type of response is
     typically used for immediate, self-contained interactions that conclude
@@ -20,17 +20,17 @@ A `contextId` is a crucial identifier that logically groups multiple `Task`
 objects and independent `Message` objects, providing continuity across a series of
 interactions.
 
--   When a client sends a message for the first time, the agent can respond
+-   When a client sends a message for the first time, the agent responds
     with a new `contextId`. If a task is initiated, it will also have a `taskId`.
--   Clients can send subsequent messages and include the same `contextId` to
+-   Clients send subsequent messages and include the same `contextId` to
     indicate that they are continuing their previous interaction within the same
     context.
--   Clients can optionally attach the `taskId` to a subsequent message to
+-   Clients optionally attach the `taskId` to a subsequent message to
     indicate that it continues that specific task.
 
 The `contextId` enables collaboration towards a common goal or a shared
 contextual session across multiple, potentially concurrent tasks. Internally, an
-A2A agent (especially one using an LLM) can use the `contextId` to manage its internal
+A2A agent (especially one using an LLM) uses the `contextId` to manage its internal
 conversational state or its LLM context.
 
 ## Agent Response: Message or Task
@@ -48,7 +48,7 @@ nature of the interaction and the agent's capabilities:
     trackable work over an extended period, the agent responds with a `Task`
     object.
 
-Conceptually, agents can operate at different levels of complexity:
+Conceptually, agents operate at different levels of complexity:
 
 -   **Message-only agents**: Always respond with `Message` objects. They
     typically don't manage complex state or long-running executions, and use
@@ -64,7 +64,7 @@ Conceptually, agents can operate at different levels of complexity:
     then send a `Task` object to track execution and manage states like
     `input-required` or error handling. Once a task is created, the agent will
     only return `Task` objects in response to messages sent, and once a task is
-    complete, no more messages can be sent. A hybrid agent can use messages to
+    complete, no more messages can be sent. A hybrid agent uses messages to
     negotiate the scope of a task, and then generate a task to track its
     execution.
 
@@ -72,7 +72,7 @@ Conceptually, agents can operate at different levels of complexity:
 
 Clients often need to send new requests based on task results or refine the
 outputs of previous tasks. This is modeled by starting another interaction using
-the same `contextId` as the original task. Clients can further hint the agent by
+the same `contextId` as the original task. Clients further hint the agent by
 providing references to the original task using `referenceTaskIds` in the
 `Message` object. The agent then responds with either a new `Task` or a
 `Message`.
@@ -84,7 +84,7 @@ it cannot restart. Any subsequent interaction related to that task, such as a
 refinement, must initiate a new task within the same `contextId`. This principle
 offers several benefits:
 
--   **Task Immutability.** Clients can reliably reference tasks and their
+-   **Task Immutability.** Clients reliably reference tasks and their
     associated state, artifacts, and messages, providing a clean mapping of
     inputs to outputs. This is valuable for orchestration and traceability.
 -   **Clear Unit of Work.** Every new request, refinement, or follow-up becomes
@@ -114,14 +114,14 @@ The serving agent infers the relevant artifact from a referenced task or from th
 `contextId`. As the domain expert, the serving agent is best suited to resolve
 ambiguity or identify missing information. If there is ambiguity, the agent asks
 the client for clarification by returning an `input-required` state. The client
-can then specify the artifact in its response, optionally populating artifact
+then specifies the artifact in its response, optionally populating artifact
 references (`artifactId`, `taskId`) in `Part` metadata.
 
 ## Tracking Artifact Mutation
 
-A follow-up or refinement can result in an older artifact being modified or
+A follow-up or refinement results in an older artifact being modified or
 newer artifacts being generated. Although the A2A protocol doesn't directly
-manage a linked list of artifact mutations, clients can maintain this linkage to
+manage a linked list of artifact mutations, clients maintain this linkage to
 track the latest version of a task result. This allows clients to decide what
 they consider an acceptable result and ensures they are using the most up-to-date
 information. To aid this, serving agents should maintain the same artifact name
