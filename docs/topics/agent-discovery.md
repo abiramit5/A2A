@@ -7,8 +7,8 @@ To collaborate using the Agent2Agent (A2A) protocol, AI agents need to first fin
 The Agent Card is a JSON document that serves as a digital "business card" for an A2A Server (the remote agent). It is crucial for agent discovery and interaction. The key information included in an Agent Card is as follows:
 
 -   **Identity:** Includes `name`, `description`, and `provider` information.
--   **Service endpoint:** Specifies the `url` for the A2A service.
--   **A2A capabilities:** Lists supported features such as `streaming` or `pushNotifications`.
+-   **Service Endpoint:** Specifies the `url` for the A2A service.
+-   **A2A Capabilities:** Lists supported features such as `streaming` or `pushNotifications`.
 -   **Authentication:** Details the required `schemes` (e.g., "Bearer", "OAuth2").
 -   **Skills:** Describes the agent's tasks using `AgentSkill` objects, including `id`, `name`, `description`, `inputModes`, `outputModes`, and `examples`.
 
