@@ -145,9 +145,9 @@ you implement. For more information, see the [A2A GitHub repository](https://git
 
 ## Tutorials
 
-*   [Multi-agent collaboration with A2A](./tutorials/python/multi-agent.md):
+*   [Multi-agent collaboration with A2A](../tutorials/python/multi-agent.md):
     This tutorial demonstrates multi-agent collaboration using A2A. You explore
     a prebuilt example featuring a reimbursement agent, developed with the Agent
     Development Kit (ADK).
-*   [Writing an A2A agent from scratch - Hello world](./tutorials/python/1-introduction/): This tutorial demonstrates
+*   [Writing an A2A agent from scratch - Hello world](../tutorials/python/1-introduction/): This tutorial demonstrates
     how to write an A2A agent from scratch using Python.
