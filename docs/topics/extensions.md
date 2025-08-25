@@ -8,7 +8,7 @@ base protocol.
 
 Extensions allow for extending the A2A protocol with new data, requirements,
 RPC methods, and state machines. Agents declare their support for specific
-extensions in their Agent Card, and clients can then opt-in to the behavior
+extensions in their `Agent Card`, and clients can then opt-in to the behavior
 offered by an extension as part of requests they make to the agent. Extensions
 are identified by a URI and defined by their own specification. Anyone is able to define, publish, and implement an extension. Any party can define, publish, and implement an extension.
 
@@ -22,7 +22,7 @@ facilitating the ability to expand A2A beyond known use cases.
 However, some foreseeable applications include:
 
 -   **Data-only extensions**: Exposing new, structured information in the Agent
-    Card that doesn't impact the request-response flow. For example, an
+    `Card` that doesn't impact the request-response flow. For example, an
     extension could add structured data about an agent's GDPR compliance.
 -   **Profile extensions**: Overlaying additional structure and state change
     requirements on the core request-response messages. This type effectively
@@ -46,26 +46,26 @@ to prevent breaking core type validations:
 
 -   **Changing the definition of core data structures**: For example, adding new
     fields or removing required fields to protocol-defined data structures).
-    Extensions should place custom attributes in the metadata map present on
+    Extensions should place custom attributes in the `metadata` map present on
     core data structures.
 -   **Adding new values to enum types**: Extensions should use existing enum values
-    and annotate additional semantic meaning in the metadata field.
+    and annotate additional semantic meaning in the `metadata` field.
 
 ## Extension Declaration
 
-Agents declare their support for extensions in their Agent Card by including
+Agents declare their support for extensions in their `Agent Card` by including
 `AgentExtension` objects within their `AgentCapabilities` object.
 
 The following table describes the fields of the `AgentExtension` object:
 
 | Field Name  | Type    | Required | Description                                                                                                                               |
 | ----------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `uri`       | `string`| Yes      | The URI that uniquely identifies the extension. Implementations use this URI to activate, and clients use it to determine compatibility. |
-| `required`  | `boolean`| No       | Indicates whether the agent requires clients to use this extension for specific interactions.                                             |
-| `description`| `string`| No       | A brief explanation of how the agent uses the declared extension.                                                                         |
-| `params`    | `object` | No       | Extension-specific configuration parameters, as defined by the extension's specification.                                                  |
+| `uri`       | `string`  | Yes      | The URI that uniquely identifies the extension. Implementations use this URI to activate, and clients use it to determine compatibility. |
+| `required`  | `boolean` | No       | Indicates whether the agent requires clients to use this extension for specific interactions.                                             |
+| `description`| `string`  | No       | A brief explanation of how the agent uses the declared extension.                                                                         |
+| `params`    | `object`  | No       | Extension-specific configuration parameters, as defined by the extension's specification.                                                  |
 
-The following is an example of an Agent Card with an extension:
+The following is an example of an `Agent Card` with an extension:
 
 ```json
 {
@@ -105,8 +105,8 @@ The following is an example of an Agent Card with an extension:
 ## Required Extensions
 
 While extensions generally offer optional functionality, some agents may have
-stricter requirements. When an Agent Card declares an extension as `required:
-true`, it signals to clients that some aspect of the extension impacts how
+stricter requirements. When an `Agent Card` declares an extension as
+`required: true`, it signals to clients that some aspect of the extension impacts how
 requests are structured or processed, and that the client must abide by it.
 Agents shouldn't mark data-only extensions as required. If a client does not
 request activation of a required extension, or fails to follow its protocol,
@@ -116,7 +116,7 @@ the agent should reject the incoming request with an appropriate error.
 
 The detailed behavior and structure of an extension are defined by its
 **specification**. While the exact format is not mandated, it should contain at
-least:
+at least:
 
 *   The specific URI(s) that identify the extension.
 *   The schema and meaning of objects specified in the `params` field of the
@@ -260,19 +260,19 @@ versioning, and distributing extension implementations.
 
         This example showcases how A2A SDKs or libraries (like `a2a.server` in
         Python) facilitate the implementation of A2A agents and extensions.
--   **Security**:
-    Extensions modify the core behavior of the A2A protocol, and therefore
-        introduce new security considerations:
 
-    - **Input validation**: Any new data fields, parameters, or methods
+-   **Security**: Extensions modify the core behavior of the A2A protocol, and therefore
+    introduce new security considerations:
+
+    -   **Input validation**: Any new data fields, parameters, or methods
         introduced by an extension MUST be rigorously validated. Treat all
         extension-related data from an external party as untrusted input.
-    - **Scope of required extensions**: Be mindful when marking an extension as
-        `required: true` in an Agent Card. This creates a hard dependency for
+    -   **Scope of required extensions**: Be mindful when marking an extension as
+        `required: true` in an `Agent Card`. This creates a hard dependency for
         all clients and should only be used for extensions fundamental to the
         agent's core function and security (for example, a message signing
         extension).
-    - **Authentication and authorization**: If an extension adds new methods,
+    -   **Authentication and authorization**: If an extension adds new methods,
         the implementation MUST ensure these methods are subject to the same
         authentication and authorization checks as the core A2A methods. An
         extension MUST NOT provide a way to bypass the agent's primary security
