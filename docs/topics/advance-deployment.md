@@ -50,7 +50,7 @@ const movieAgentCard: AgentCard = {
 The A2A agent card incorporates authentication information using `[securitySchemes]`(/specification.md#5-agent-discovery-the-agent-card) and `security parameters`, adhering to the [standard OpenAPI specification](https://swagger.io/docs/specification/v3_0/authentication) for describing API security. 
 Clients parse this authentication information from the agent card to authorize themselves with the A2A server when invoking A2A APIs. This process establishes the initial layer of authentication.
 When an A2A agent uses tools to serve a user query, and these tools require further authentication, the agent marks the task with an `auth-required` status.
-If the A2A server is exposed only within the Google Cloud Platform (GCP), you can use [IAM-based authentication](https://cloud.google.com/run/docs/host-a2a-agents#iam-roles). In this case, you can omit authentication information from the agent card.
+If the A2A server is exposed only within the Google Cloud Platform, you can use [IAM-based authentication](https://cloud.google.com/run/docs/host-a2a-agents#iam-roles). In this case, you can omit authentication information from the agent card.
 
 #### Sample JWT-based Authentication Information in Agent Card
 
@@ -273,7 +273,7 @@ async def execute(
                     )
                     await updater.complete()
 
-                # 2. If there's function response. Normally LLM summarises it and adds to text parts. If not, we simply include the function response.
+                # 2. If there's function response. Normally LLM summarizes it and adds to text parts. If not, we simply include the function response.
                 elif event.actions and event.actions.skip_summarization and event.get_function_responses():
                     response_data = event.get_function_responses()
                     await updater.add_artifact(
@@ -391,7 +391,7 @@ alloydb_task_store = DatabaseTaskStore(engine)
 
 Beyond foundational service-level authentication, A2A agents can implement more granular and sophisticated authentication mechanisms to secure interactions.
 
-### IAM-based Authentication for Internal GCP Workloads
+### IAM-based Authentication for Internal Google Cloud Platform Workloads
 
 For clients and [services operating within Google Cloud](https://cloud.google.com/run/docs/authenticating/service-to-service) (for example, Agentspace is an internal client), IAM-based authentication is a highly secure and efficient method. These internal clients must be configured with appropriate service accounts and granted the `roles/run.invoker` IAM role to securely interact with your A2A [Cloud Run](https://cloud.google.com/run/docs/host-a2a-agents) service.
 
