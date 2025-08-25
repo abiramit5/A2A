@@ -10,7 +10,7 @@ Extensions allow for extending the A2A protocol with new data, requirements,
 RPC methods, and state machines. Agents declare their support for specific
 extensions in their Agent Card, and clients can then opt-in to the behavior
 offered by an extension as part of requests they make to the agent. Extensions
-are identified by a URI and defined by their own specification. Anyone is able to define, publish, and implement an extension. Any party can define, publish, and implement an extension.
+are identified by a URI and defined by their own specification. Anyone is able to define, publish, and implement an extension. 
 
 The flexibility of extensions allows for customizing A2A without fragmenting
 the core standard, fostering innovation and domain-specific optimizations.
