@@ -2,11 +2,11 @@
 
 This guide provides an in-depth exploration of advanced concepts related to A2A agent development and deployment, including detailed agent card configurations, advanced authentication mechanisms, and server creation techniques using A2A SDKs.
 
-## Advanced A2A agent card configuration
+## Advanced A2A Agent Card Configuration
 
 An A2A agent exposes an [agent card](https://a2a-protocol.org/latest/specification/#5-agent-discovery-the-agent-card), which serves as a manifest detailing its capabilities, skills, and critical authentication information.
 
-### Sample advanced agent card definition
+### Sample Advanced Agent Card Definition
 
 The following example shows an advanced agent card definition:
 
@@ -45,14 +45,14 @@ const movieAgentCard: AgentCard = {
 };
 ```
 
-### Auth information within the agent card
+### Authentication Information within the Agent Card
 
 The A2A agent card incorporates authentication information using `[securitySchemes]`(/specification.md#5-agent-discovery-the-agent-card) and `security parameters`, adhering to the [standard OpenAPI specification](https://swagger.io/docs/specification/v3_0/authentication) for describing API security. 
 Clients parse this authentication information from the agent card to authorize themselves with the A2A server when invoking A2A APIs. This process establishes the initial layer of authentication.
 When an A2A agent uses tools to serve a user query, and these tools require further authentication, the agent marks the task with an `auth-required` status.
 If the A2A server is exposed only within the Google Cloud Platform (GCP), you can use [IAM-based authentication](https://cloud.google.com/run/docs/host-a2a-agents#iam-roles). In this case, you can omit authentication information from the agent card.
 
-#### Sample JWT-based authentication information in agent card
+#### Sample JWT-based Authentication Information in Agent Card
 
 The following example demonstrates how to include JWT-based authentication information within the agent card:
 
@@ -75,21 +75,21 @@ const movieAgentCard: AgentCard = {
 };
 ```
 
-## Build the A2A server
+## Build the A2A Server
 
 Developing an A2A server involves leveraging specialized Software Development Kits (SDKs) to streamline the process and implementing the `AgentExecutor` to efficiently handle diverse user requests and interactions.
 
-### Use A2A SDKs for agent development
+### Use A2A SDKs for Agent Development
 
 A2A provides SDKs in both Python and JavaScript, simplifying the development of A2A-compliant agents for developers.
 
-**Python A2A SDK installation**:
+**Python A2A SDK Installation**:
 
 ```bash
 pip install a2a-sdk
 ```
 
-**JavaScript A2A SDK installation**:
+**JavaScript A2A SDK Installation**:
 
 ```bash
 npm install @a2a-js/sdk
@@ -99,11 +99,11 @@ The SDKs abstract away A2A protocol constructs, such as `TaskStore` management, 
 For information on how to integrate with SDKs in your preferred language, see [A2A samples for SDK integration](https://github.com/a2aproject/a2a-samples/tree/main/samples).
 For SDK repositories, see [Python SDK repository](https://github.com/a2aproject/a2a-python) and [JavaScript SDK repository](./a2aproject/a2a-js).
 
-### A2A agent executor implementation with ADK
+### A2A Agent Executor Implementation with ADK
 
 The [Agent Development Kit (ADK)](/adk-docs/) can be effectively utilized for developing and orchestrating A2A agents. For ADK sample agent implementations, see [samples](https://github.com/google/adk-samples).
 
-#### Basic ADK agent definition
+#### Basic ADK Agent Definition
 
 ```python
 from google.adk.agents import LlmAgent
@@ -120,7 +120,7 @@ facts_agent = LlmAgent(
 However, a specific [agent executor](https://github.com/a2aproject/a2a-samples/blob/main/samples/python/agents/adk_expense_reimbursement/agent_executor.py) interface must be implemented to seamlessly integrate with the A2A SDKs and properly expose the A2A APIs. See the [Official A2A wrapper for ADK](https://github.com/google/adk-python/blob/main/src/google/adk/a2a/executor/a2a_agent_executor.py).
 
 
-### Sample Wrapper: Convert ADK agent to A2A executor
+### Sample Wrapper: Convert ADK Agent to A2A Executor
 
 The following code block shows a sample implementation of an `AgentExecutor` that wraps an ADK agent, allowing it to be used with the A2A SDK:
 
@@ -168,9 +168,9 @@ class AdkAgentToA2AExecutor(AgentExecutor):
         raise ServerError(error=UnsupportedOperationError())
 ```
 
-### Implement the `execute` method
+### Implement the `execute` Method
 
--   **Create a task**: An agent can either directly respond with a message or, more commonly, generate a `Task` object. In the provided example, the agent consistently produces `Task` objects. If no current task is associated with the request, a new one is automatically created and enqueued.
+-   **Create a Task**: An agent can either directly respond with a message or, more commonly, generate a `Task` object. In the provided example, the agent consistently produces `Task` objects. If no current task is associated with the request, a new one is automatically created and enqueued.
 
 ```python
 async def execute(
@@ -193,7 +193,7 @@ async def execute(
         updater = TaskUpdater(event_queue, task.id, task.contextId)
 ```
 
--   **Manage and retrieve sessions**: Based on the `contextId` from the `RequestContext`, the `execute()` method initiates or retrieves an existing session. A `contextId` logically groups multiple `Task` or `Message` objects.
+-   **Manage and Retrieve Sessions**: Based on the `contextId` from the `RequestContext`, the `execute()` method initiates or retrieves an existing session. A `contextId` logically groups multiple `Task` or `Message` objects.
 
 ```python
 async def execute(
@@ -244,7 +244,7 @@ async def execute(
                 full_response_text += event.content.parts[0].text
 ```
 
--   **Finalize task**: Make sure the task's lifecycle is properly concluded, and the task is marked as complete once the final response from the agent is received and processed.
+-   **Finalize Task**: Make sure the task's lifecycle is properly concluded, and the task is marked as complete once the final response from the agent is received and processed.
 
 ```python
 async def execute(
@@ -291,13 +291,13 @@ async def execute(
                     break;
 ```
 
-### Optional task: Nested authentication for A2A agents
+### Optional Task: Nested Authentication for A2A Agents
 
 A highly sophisticated A2A agent is capable of handling complex scenarios where it requires additional authentication scopes or entirely separate authentication credentials to invoke external APIs, tools, or even other A2A agents. In such cases, the agent is designed to intelligently transition the respective task to an `auth-required` state, signaling the need for further authentication.
 For information on how to capture auth-event for a tool within ADK agent, see [Capture auth events within ADK agent](https://github.com/a2aproject/a2a-samples/blob/main/samples/python/agents/birthday_planner_adk/calendar_agent/adk_agent_executor.py#L370).
 
 
-## TaskStore management for A2A protocol
+## TaskStore Management for A2A Protocol
 
 The A2A protocol fundamentally operates with tasks, and therefore, A2A SDKs require a [TaskStore](https://github.com/a2aproject/a2a-python/blob/main/src/a2a/server/tasks/task_store.py) for efficient task management throughout the agent's lifecycle.
 
@@ -305,7 +305,7 @@ The A2A protocol fundamentally operates with tasks, and therefore, A2A SDKs requ
 
 The [InMemoryTaskStore](https://github.com/a2aproject/a2a-python/blob/main/src/a2a/server/tasks/inmemory_task_store.py#L11) provides an in-memory implementation of a task store. This can be used for local testing, but a production A2A server should use persistent storage.
 
-### AlloyDB for persistent storage
+### AlloyDB for Persistent Storage
 
 Google Cloud AlloyDB can be used to persist A2A tasks. The [setup steps for an AlloyDB cluster](https://cloud.google.com/run/docs/deploy-a2a-agents#deploy-with-alloydb) are detailed. The following is a sample implementation demonstrating how to integrate an AlloyDB-backed task store into your A2A agent.
 
@@ -387,19 +387,19 @@ engine, connector = await create_sqlalchemy_engine(
 alloydb_task_store = DatabaseTaskStore(engine)
 ```
 
-## Advanced agent authentication methods
+## Advanced Agent Authentication Methods
 
 Beyond foundational service-level authentication, A2A agents can implement more granular and sophisticated authentication mechanisms to secure interactions.
 
-### IAM-based authentication for internal GCP workloads
+### IAM-based Authentication for Internal GCP Workloads
 
 For clients and [services operating within Google Cloud](https://cloud.google.com/run/docs/authenticating/service-to-service) (for example, Agentspace is an internal client), IAM-based authentication is a highly secure and efficient method. These internal clients must be configured with appropriate service accounts and granted the `roles/run.invoker` IAM role to securely interact with your A2A [Cloud Run](https://cloud.google.com/run/docs/host-a2a-agents) service.
 
-### Custom authentication for public A2A agents
+### Custom Authentication for Public A2A Agents
 
 If your A2A service is designed for public exposure, custom authentication logic can be implemented directly within the service itself. In such scenarios, the [custom authentication security schemes](https://learn.openapis.org/specification/security.html) must be defined and exposed within the A2A agent card.
 
-#### Sample custom authentication implementation
+#### Sample Custom Authentication Implementation
 
 ```python
 # Sample for JWTAuthBackend
@@ -435,7 +435,7 @@ class JWTAuthBackend(AuthenticationBackend):
       raise HTTPException(status_code=401, detail="Invalid token format")
 ```
 
-## Construct the A2A server
+## Construct the A2A Server
 
 Each A2A SDK provides mechanisms to construct an HTTP application instance. This instance integrates with your defined agent executor and exposes the A2A APIs using either JSON-RPC or gRPC communication protocols. The application URL is typically configured through an environment variable, which is automatically populated during the [Google Cloud Run deployment](https://cloud.google.com/run/docs/deploy-a2a-agents) process.
 
