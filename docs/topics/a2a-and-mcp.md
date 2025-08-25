@@ -6,7 +6,7 @@ agent-to-agent collaboration. The Agent2Agent (A2A) Protocol and the Model
 Context Protocol (MCP) address these distinct but highly complementary needs.
 
  -  **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)**: This protocol focuses on how an agent interacts with individual tools and resources, enabling an agent to utilize a specific tool, such as a database or an API.
- -  **Agent2Agent (A2A) protocol**: This protocol focuses on how different agents collaborate with each other, enabling agents to work together to achieve a common goal.
+ -  **Agent2Agent (A2A) Protocol**: This protocol focuses on how different agents collaborate with each other, enabling agents to work together to achieve a common goal.
 
 Both protocols are crucial for building complex AI systems, and they address
 distinct but highly complementary needs.
@@ -16,7 +16,7 @@ distinct but highly complementary needs.
 The distinction between A2A and MCP arises from the nature of what an agent
 interacts with.
 
- -  **Tools and resources (MCP domain)**:
+ -  **Tools and Resources (MCP Domain)**:
     -  **Characteristics:** These are typically primitives with well-defined,
         structured inputs and outputs. They perform specific, often stateless,
         functions. Examples include a calculator, a database query API, or a
@@ -75,18 +75,18 @@ repair manuals, and platform lifts, to diagnose and repair problems. The repair
 process can involve extensive conversations, research, and interaction with part
 suppliers.
 
--   **Customer interaction (user-to-agent using A2A)**: A customer (or their
+-   **Customer Interaction (User-to-Agent using A2A)**: A customer (or their
     primary assistant agent) uses A2A to communicate with the "Shop Manager"
     agent.
 
     For example, the customer might say, "My car is making a rattling noise".
--   **Multi-turn diagnostic conversation (agent-to-agent using A2A)**: The Shop
+-   **Multi-turn Diagnostic Conversation (Agent-to-Agent using A2A)**: The Shop
     Manager agent uses A2A for a multi-turn diagnostic conversation.
 
     For example,
     the Manager might ask, "Can you send a video of the noise?" or "I see
     some fluid leaking. How long has this been happening?".
--   **Internal tool usage (agent-to-tool using MCP)**: The Mechanic agent,
+-   **Internal Tool Usage (Agent-to-Tool using MCP)**: The Mechanic agent,
     assigned the task by the Shop Manager, needs to diagnose the issue. The
     Mechanic agent uses MCP to interact with its specialized tools.
 
@@ -97,13 +97,12 @@ suppliers.
         `get_repair_procedure(error_code='P0300', vehicle_make='Toyota',
         vehicle_model='Camry')`
     -   MCP call to a "Platform Lift" tool: `raise_platform(height_meters=2)`
--   **Supplier interaction (agent-to-agent using A2A)**: The Mechanic agent
+-   **Supplier Interaction (Agent-to-Agent using A2A)**: The Mechanic agent
     determines that a specific part is needed. The Mechanic agent uses A2A to
     communicate with a "Parts Supplier" agent to order a part.
-
     For example, the
     Mechanic agent might ask, "Do you have part #12345 in stock for a Toyota Camry 2018?"
--   **Order processing (agent-to-agent using A2A)**: The Parts Supplier agent,
+-   **Order processing (Agent-to-Agent using A2A)**: The Parts Supplier agent,
     which is also an A2A-compliant system, responds, potentially leading to an
     order.
 
