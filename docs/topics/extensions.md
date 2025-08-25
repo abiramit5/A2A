@@ -258,8 +258,8 @@ versioning, and distributing extension implementations.
         server.run()
         ```
 
-        This example showcases how A2A SDKs or libraries (like `a2a.server` in
-        Python) facilitate the implementation of A2A agents and extensions.
+        This example showcases how A2A SDKs or libraries such as `a2a.server` in
+        Python facilitate the implementation of A2A agents and extensions.
 
 -   **Security**: Extensions modify the core behavior of the A2A protocol, and therefore
     introduce new security considerations:
