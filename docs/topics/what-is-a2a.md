@@ -31,15 +31,15 @@ Without A2A, integrating these diverse agents presents several challenges:
     Platform (Model Context Protocol). However, this approach is inefficient because agents are
     designed to negotiate directly. Wrapping agents as tools limits their capabilities.
     A2A allows agents to be exposed as they are, without requiring this wrapping.
--  **Custom integrations**: Each interaction requires custom, point-to-point
+-  **Custom Integrations**: Each interaction requires custom, point-to-point
     solutions, creating significant engineering overhead.
--  **Slow innovation**: Bespoke development for each new integration slows
+-  **Slow Innovation**: Bespoke development for each new integration slows
     innovation.
--  **Scalability issues**: Systems become difficult to scale and maintain as
+-  **Scalability Issues**: Systems become difficult to scale and maintain as
     the number of agents and interactions grows.
 -  **Interoperability**: This approach limits interoperability,
     preventing the organic formation of complex AI ecosystems.
--  **Security gaps**: Ad hoc communication often lacks consistent security
+-  **Security Gaps**: Ad hoc communication often lacks consistent security
     measures.
 
 The A2A protocol addresses these challenges by establishing interoperability for
@@ -110,16 +110,16 @@ enterprise-grade capabilities, and future-proofing.
  - **Simplicity**: A2A leverages existing standards like HTTP, JSON-RPC, and
     Server-Sent Events (SSE). This avoids reinventing core technologies and
     accelerates developer adoption.
- - **Enterprise readiness**: A2A addresses critical enterprise needs. It aligns
+ - **Enterprise Readiness**: A2A addresses critical enterprise needs. It aligns
     with standard web practices for robust authentication, authorization,
     security, privacy, tracing, and monitoring.
- - **Asynchronous first**: A2A natively supports long-running tasks. It handles
+ - **Asynchronous**: A2A natively supports long-running tasks. It handles
     scenarios where agents or users might not remain continuously connected. It
     uses mechanisms like streaming and push notifications.
- - **Modality independent**: The protocol allows agents to communicate using a
+ - **Modality Independent**: The protocol allows agents to communicate using a
     wide variety of content types. This enables rich and flexible interactions
     beyond plain text.
- - **Opaque execution**: Agents collaborate effectively without exposing their
+ - **Opaque Execution**: Agents collaborate effectively without exposing their
     internal logic, memory, or proprietary tools. Interactions rely on declared
     capabilities and exchanged context. This preserves intellectual property and
     enhances security.
