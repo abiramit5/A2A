@@ -31,18 +31,18 @@ nav:
   - SDK Reference:
     - Python: sdk/python/api/index.html
   - Tutorials
-  - Get Started: docs/tutorials/introduction.md
-  - Tutorial 1 (Python):
-    - Introduction: tutorials/python/1-introduction.md
-    - Setup: tutorials/python/2-setup.md
-    - Agent Skills & Agent Card: tutorials/python/3-agent-skills-and-card.md
-    - Agent Executor: tutorials/python/4-agent-executor.md
-    - Start Server: tutorials/python/5-start-server.md
-    - Interact with Server: tutorials/python/6-interact-with-server.md
-    - Streaming & Multiturn: tutorials/python/7-streaming-and-multiturn.md
-    - Next Steps: tutorials/python/8-next-steps.md
-  - Tutorial 2 (Python):
-    - Multi-Agent Collaboration with A2A: tutorials/python/multi-agent.md
+    - Get Started: docs/tutorials/introduction.md
+    - Tutorial 1 (Python):
+      - Introduction: tutorials/python/1-introduction.md
+      - Setup: tutorials/python/2-setup.md
+      - Agent Skills & Agent Card: tutorials/python/3-agent-skills-and-card.md
+      - Agent Executor: tutorials/python/4-agent-executor.md
+      - Start Server: tutorials/python/5-start-server.md
+      - Interact with Server: tutorials/python/6-interact-with-server.md
+      - Streaming & Multiturn: tutorials/python/7-streaming-and-multiturn.md
+      - Next Steps: tutorials/python/8-next-steps.md
+    - Tutorial 2 (Python):
+      - Multi-Agent Collaboration with A2A: tutorials/python/multi-agent.md
   - Roadmap: roadmap.md
 
 # Repository
