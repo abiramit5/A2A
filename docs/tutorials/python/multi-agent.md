@@ -165,7 +165,7 @@ class ReimbursementAgentExecutor(AgentExecutor):
    async def cancel(
        self, request: RequestContext, event_queue: EventQueue
    ) -> Task | None:
-       raise ServerError(error=UnsupportedOperationError())   
+       raise ServerError(error=UnsupportedOperationError())
 ```
 
 ## Set Up the Environment
@@ -176,13 +176,13 @@ agent and host client.
 
 1.  Open your terminal or command prompt.
 2.  Clone the repository:
-   ```bash
-   git clone https://github.com/a2aproject/a2a-samples.git
-   ```
+    ```bash
+    git clone https://github.com/a2aproject/a2a-samples.git
+    ```
 3.  Navigate to the `demo` directory:
-   ```bash
-   cd a2a-samples/demo
-   ```
+    ```bash
+    cd a2a-samples/demo
+    ```
 
 ## Run the Reimbursement Agent
 
@@ -190,21 +190,20 @@ Start the remote reimbursement agent. This agent exposes its endpoint for client
 interaction.
 
 1.  From the `demo` directory, navigate to the `reimbursement_agent` directory:
-   ```bash
-   cd reimbursement_agent
-   ```
+    ```bash
+      cd reimbursement_agent
+    ```
 
 2.  Install the required Python dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+    ```bash
+      pip install -r requirements.txt
+    ```
 
 3.  Run the agent:
-   ```bash
-   python main.py
-   ```
-   The agent starts and
-   listens for incoming requests. Keep this terminal window open.
+    ```bash
+      python main.py
+    ```
+    The agent starts and listens for incoming requests. Keep this terminal window open.
 
 ## Run the host client
 
@@ -212,25 +211,22 @@ Start the host client. This client interacts with the reimbursement agent.
 
 1.  Open a new terminal or command prompt window.
 2.  Navigate to the `demo` directory within your cloned repository:
-   ```bash
-   cd a2a-samples/demo
-   ```
-
+    ```bash
+      cd a2a-samples/demo
+    ```
 3.  Navigate to the `host_agent` directory:
-   ```bash
-   cd host_agent
-   ```
+    ```bash
+      cd host_agent
+    ```
 4.  Install the required Python dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
+    ```bash
+      pip install -r requirements.txt
+    ```
 5.  Run the host client:
-   ```bash
-   python main.py
-   ```
-   The host client
-   starts and presents a user interface for interaction.
+    ```bash
+      python main.py
+    ```
+    The host client starts and presents a user interface for interaction.
 
 ## Observe Multi-agent Collaboration
 
