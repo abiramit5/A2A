@@ -245,13 +245,21 @@ async def execute(
 ```
 
 -   **Finalize task**: Make sure the task's lifecycle is properly concluded, and the task is marked as complete once the final response from the agent is received and processed.
-    instruction=("You are a helpful agent who can provide interesting facts."),
-    tools=[google_search],
-)
 
-def make_sync(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+```python
+async def execute(
+        self,
+        context: RequestContext,
+        event_queue: EventQueue,
+    ) -> None:
+        ...
+        # To record partial text chunks
+        full_response_text = ""
+
+        async for event in self._runner.run_async(
+            user_id=self._user_id, session_id=session.id, new_message=content
+        ):
+            if event.partial and event.content and event.content.parts and event.content.parts[0].text:
       full_response_text += event.content.parts[0].text
 
     # Check if this event marks the final response.
