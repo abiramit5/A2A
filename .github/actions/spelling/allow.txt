@@ -162,6 +162,8 @@ direnv
 docstrings
 documentai
 dotnet
+eaf
+ebedef
 efaab
 efbd
 embeddings
@@ -171,6 +173,7 @@ evt
 excinfo
 faa
 fafd
+fdebd
 ffbb
 firewalls
 flightbook
