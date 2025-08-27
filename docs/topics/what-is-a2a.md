@@ -156,7 +156,7 @@ The Agent2Agent (A2A) protocol is designed to standardize communication between 
 
 The practice of encapsulating an agent as a simple tool is fundamentally limiting, as it fails to capture the agent's full capabilities. This critical distinction is explored in the post, [Why Agents Are Not Tools](https://discuss.google.dev/t/agents-are-not-tools/192812).
 
-For a more in-depth comparison, refer to the [A2A and MCP Comparison](./topics/a2a-and-mcp.md) document.
+For a more in-depth comparison, refer to the [A2A and MCP Comparison](a2a-and-mcp.md) document.
 
 #### A2A and ADK
 
