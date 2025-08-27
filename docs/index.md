@@ -7,7 +7,7 @@ hide:
 # Agent2Agent (A2A) Protocol
 
 <figure class="hero" markdown>
-  ![A2A Banner](assets/a2a-banner.png){width="70%"}
+  ![A2A Banner](https://storage.googleapis.com/gweb-developer-goog-blog-assets/images/image2.original_6xqVyTd.jpg){width="70%"}
   <figcaption>
     The <strong>Agent2Agent (A2A) Protocol</strong> is an open standard
     designed to enable seamless communication and collaboration between AI agents.<br>
@@ -53,8 +53,23 @@ hide:
 
 ## Why A2A Matters
 
-![A2A Main Graphic](assets/a2a-main.png){width="50%"}
-{style="text-align: center; margin-bottom:1em; margin-top:2em;"}
+<div style="text-align:center">
+
+```mermaid
+graph LR
+    User(🧑‍💻 User) <--> ClientAgent(🤖 Client Agent)
+    ClientAgent --> A2A1(**↔️ A2A**) --> RemoteAgent1(🤖 Remote Agent 1)
+    ClientAgent --> A2A2(**↔️ A2A**) --> RemoteAgent2(🤖 Remote Agent 2)
+
+    style User fill:#fdebd0,stroke:#e67e22,stroke-width:2px
+    style ClientAgent fill:#d6eaf8,stroke:#3498db,stroke-width:2px
+    style RemoteAgent1 fill:#d6eaf8,stroke:#3498db,stroke-width:2px
+    style RemoteAgent2 fill:#d6eaf8,stroke:#3498db,stroke-width:2px
+    style A2A1 fill:#ebedef,stroke:#909497,stroke-width:2px
+    style A2A2 fill:#ebedef,stroke:#909497,stroke-width:2px
+```
+
+</div>
 
 <div class="grid cards" markdown>
 
