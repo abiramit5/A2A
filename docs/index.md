@@ -120,14 +120,14 @@ A2A and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) are
 
 - :material-code-braces:{ .lg .middle } **Download the SDK**
 
-    [:octicons-arrow-right-24: Python](https://github.com/a2aproject/a2a-python)
+    [:fontawesome-brands-python: Python](https://github.com/a2aproject/a2a-python)
 
-    [:octicons-arrow-right-24: JavaScript](https://github.com/a2aproject/a2a-js)
+    [:fontawesome-brands-js: JavaScript](https://github.com/a2aproject/a2a-js)
 
-    [:octicons-arrow-right-24: Java](https://github.com/a2aproject/a2a-java)
+    [:fontawesome-brands-java: Java](https://github.com/a2aproject/a2a-java)
 
-    [:octicons-arrow-right-24: C#/.NET](https://github.com/a2aproject/a2a-dotnet)
+    [:octicons-code-24: C#/.NET](https://github.com/a2aproject/a2a-dotnet)
 
-    [:octicons-arrow-right-24: Golang](https://github.com/a2aproject/a2a-go)
+    [:fontawesome-brands-golang: Golang](https://github.com/a2aproject/a2a-go)
 
 </div>
