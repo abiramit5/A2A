@@ -229,28 +229,7 @@ versioning, and distributing extension implementations.
         to add it to their server with minimal code, for example:
 
         ```python
-        # Hypothetical Python Server Integration
-        from konami_code_extension import CheatCodeHandler
-        from a2a.server import A2AServer, DefaultRequestHandler
-
-        # Using a2a.server, a component of the A2A Python library
-        # The extension hooks into the request handler to process its logic
-        extension = CheatCodeHandler(description="")
-        extension.add_cheat(
-            code="motherlode",
-            hint="When your sims need extra cash fast",
-        )
-        extension.add_cheat(
-            code="thereisnocowlevel",
-            hint="You might deny it, but we've seen the evidence of those cows.",
-        )
-        request_handler = DefaultRequestHandler(
-            agent_executor=MyAgentExecutor(extension),
-            task_store=InMemoryTaskStore(),
-            extensions=[extension]
-        )
-        server = A2AServer(agent_card, request_handler)
-        server.run()
+        --8<-- "https://raw.githubusercontent.com/a2aproject/a2a-samples/refs/heads/main/samples/python/agents/adk_expense_reimbursement/__main__.py"
         ```
 
         This example showcases how A2A SDKs or libraries such as `a2a.server` in
