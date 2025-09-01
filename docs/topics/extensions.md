@@ -28,7 +28,10 @@ However, some foreseeable applications include:
     requirements on the core request-response messages. This type effectively
     acts as a profile on the core A2A protocol, narrowing the space of allowed
     values (for example, requiring all messages to use `DataParts` adhering to
-    a specific schema).
+    a specific schema). This can also include augmenting existing states in the
+    task state machine by using metadata. For example, an extension could define
+    a 'generating-image' sub-state when `TaskStatus.state` is 'working' and
+    `TaskStatus.message.metadata["generating-image"]` is true.
 - **Method Extensions (Extended Skills)**: Adding entirely new RPC methods
     beyond the core set defined by the protocol. An Extended Skill refers to a
     capability or function an agent gains or exposes specifically through the
