@@ -4,7 +4,7 @@ In the Agent2Agent (A2A) Protocol, interactions can range from simple, stateless
 exchanges to complex, long-running processes. When an agent receives a message
 from a client, it can respond in one of two fundamental ways:
 
-- **Respond with a Simple, Stateless `Message`**: This type of response is
+- **Respond with a Stateless `Message`**: This type of response is
     typically used for immediate, self-contained interactions that conclude
     without requiring further state management.
 - **Initiate a Stateful `Task`**: If the response is a `Task`, the agent will
@@ -21,7 +21,7 @@ interactions.
 
 - When a client sends a message for the first time, the agent responds
     with a new `contextId`. If a task is initiated, it will also have a `taskId`.
-- Clients send subsequent messages and include the same `contextId` to
+- Clients can send subsequent messages and include the same `contextId` to
     indicate that they are continuing their previous interaction within the same
     context.
 - Clients optionally attach the `taskId` to a subsequent message to
@@ -42,7 +42,7 @@ nature of the interaction and the agent's capabilities:
     processing or complex state management. An agent might use messages to
     negotiate the acceptance or scope of a task before committing to a `Task`
     object.
-- **Tasks for Stateful Workflows**: Once an agent maps the intent of an
+- **Tasks for Stateful Interactions**: Once an agent maps the intent of an
     incoming message to a supported capability that requires substantial,
     trackable work over an extended period, the agent responds with a `Task`
     object.
@@ -57,7 +57,8 @@ Conceptually, agents operate at different levels of complexity:
     responses, which are then modeled as completed tasks. Once a task is
     created, the agent will only return `Task` objects in response to messages
     sent, and once a task is complete, no more messages can be sent. This
-    approach simplifies consistency and tracking.
+    approach avoids deciding between `Task` versus `Message`, but creates completed task objects
+    for even simple interactions.
 - **Hybrid Agents**: Generate both `Message` and `Task` objects. These agents
     use messages to negotiate agent capability and the scope of work for a task,
     then send a `Task` object to track execution and manage states like
@@ -66,6 +67,7 @@ Conceptually, agents operate at different levels of complexity:
     complete, no more messages can be sent. A hybrid agent uses messages to
     negotiate the scope of a task, and then generate a task to track its
     execution.
+    For more information about hybrid agents, see [A2A protocol: Demystifying Tasks vs Messages](https://discuss.google.dev/t/a2a-protocol-demystifying-tasks-vs-messages/255879).
 
 ## Task Refinements
 
