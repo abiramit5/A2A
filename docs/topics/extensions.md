@@ -151,7 +151,7 @@ negotiation to determine which extensions are active for a specific request.
 
 **Example request showing extension activation:**
 
-```text
+```http
 POST /agents/eightball HTTP/1.1
 Host: example.com
 Content-Type: application/json
@@ -177,7 +177,7 @@ Content-Length: 519
 
 **Corresponding response echoing activated extensions:**
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 X-A2A-Extensions: https://example.com/ext/konami-code/v1
