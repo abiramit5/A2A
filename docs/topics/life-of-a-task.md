@@ -124,7 +124,7 @@ Follow-up or refinement tasks often lead to the creation of new artifacts based 
 
 However, the client is in the best position to manage this artifact linkage. The client determines what constitutes an acceptable result and has the ability to accept or reject new versions. Therefore, the serving agent shouldn't be responsible for tracking artifact mutations, and this linkage is not part of the A2A protocol specification. Clients should maintain this version history on their end and present the latest acceptable version to the user. 
 
-To facilitate client-side tracking, serving agents should use a consistent `artifact-name` when generating a refined version of an existing artifact. 
+To facilitate client-side tracking, serving agents should use a consistent `artifact-name` when generating a refined version of an existing artifact.
 
 When initiating follow-up or refinement tasks, the client should explicitly reference the specific artifact they intend to refine, ideally the "latest" version from their perspective. If the artifact reference is not provided, the serving agent can:
 
