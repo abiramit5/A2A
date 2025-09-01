@@ -120,13 +120,16 @@ references (`artifactId`, `taskId`) in `Part` metadata.
 
 ## Tracking Artifact Mutation
 
-A follow-up or refinement results in an older artifact being modified or
-newer artifacts being generated. Although the A2A protocol doesn't directly
-manage a linked list of artifact mutations, clients maintain this linkage to
-track the latest version of a task result. This allows clients to decide what
-they consider an acceptable result and ensures they are using the most up-to-date
-information. To aid this, serving agents should maintain the same artifact name
-when generating a refinement on an original artifact.
+Follow-up or refinement tasks often lead to the creation of new artifacts based on older ones. Tracking these mutations is important to ensure that only the most recent version of an artifact is used in subsequent interactions. This could be conceptualized as a version history, where each new artifact is linked to its predecessor.
+
+However, the client is in the best position to manage this artifact linkage. The client determines what constitutes an acceptable result and has the ability to accept or reject new versions. Therefore, the serving agent shouldn't be responsible for tracking artifact mutations, and this linkage is not part of the A2A protocol specification. Clients should maintain this version history on their end and present the latest acceptable version to the user. 
+
+To facilitate client-side tracking, serving agents should use a consistent `artifact-name` when generating a refined version of an existing artifact. 
+
+When initiating follow-up or refinement tasks, the client should explicitly reference the specific artifact they intend to refine, ideally the "latest" version from their perspective. If the artifact reference is not provided, the serving agent can:
+
+-   Attempt to infer the intended artifact based on the current `contextId`.
+-   If there is ambiguity or insufficient context, the agent should respond with an `input-required` task state to request clarification from the client.
 
 ## Example Follow-up Scenario
 
