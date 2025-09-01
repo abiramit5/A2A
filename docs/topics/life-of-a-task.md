@@ -128,8 +128,8 @@ To facilitate client-side tracking, serving agents should use a consistent `arti
 
 When initiating follow-up or refinement tasks, the client should explicitly reference the specific artifact they intend to refine, ideally the "latest" version from their perspective. If the artifact reference is not provided, the serving agent can:
 
--   Attempt to infer the intended artifact based on the current `contextId`.
--   If there is ambiguity or insufficient context, the agent should respond with an `input-required` task state to request clarification from the client.
+- Attempt to infer the intended artifact based on the current `contextId`.
+- If there is ambiguity or insufficient context, the agent should respond with an `input-required` task state to request clarification from the client.
 
 ## Example Follow-up Scenario
 
