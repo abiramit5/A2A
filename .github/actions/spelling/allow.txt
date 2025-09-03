@@ -123,6 +123,7 @@ affef
 agentcard
 agentic
 agentskill
+agntcy
 ainvoke
 airbnb
 aldridge
