@@ -63,13 +63,13 @@ and contributors are adding more, including Go.
 
 The following table lists the supported languages and their stability.
 
-| Language | Support  |
-| :------- | :------- |
-| Python   | [Stable](https://github.com/a2aproject/a2a-python) |
-| JS       | [Stable](https://github.com/a2aproject/a2a-js)   |
-| Java     | [Stable](https://github.com/a2aproject/a2a-java)   |
-| .NET     | [Stable](https://github.com/a2aproject/a2a-dotnet)   |
-| Go       | [In Progress](https://github.com/a2aproject/a2a-go) |
+| Language   | Support  |
+| :--------- | :------- |
+| Python     | [Stable](https://github.com/a2aproject/a2a-python) |
+| Java       | [Stable](https://github.com/a2aproject/a2a-java)   |
+| JavaScript | [Stable](https://github.com/a2aproject/a2a-js)     |
+| C#/.NET    | [Stable](https://github.com/a2aproject/a2a-dotnet) |
+| Go         | [In Progress](https://github.com/a2aproject/a2a-go)|
 
 The A2A project provides numerous samples across supported languages in the [a2a-samples repository](https://github.com/a2aproject/a2a-samples)
 
@@ -89,6 +89,6 @@ The A2A project provides numerous samples across supported languages in the [a2a
 
 - For a movie research agent using JavaScript, see [JavaScript samples](https://github.com/a2aproject/a2a-samples/tree/main/samples/js).
 
-### .NET
+### C#/.NET
 
 - For all .NET samples, see [.NET samples](https://github.com/a2aproject/a2a-dotnet/tree/main/samples).
