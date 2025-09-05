@@ -67,8 +67,8 @@ Push notifications are ideal for:
 
 Refer to the Protocol Specification for detailed structures:
 
-- [`tasks/pushNotificationConfig/set`](../specification.md#710-taskspushnotificationconfigset)
-- [`tasks/get`](../specification.md#76-tasksget)
+- [`tasks/pushNotificationConfig/set`](../specification.md#75-taskspushnotificationconfigset)
+- [`tasks/get`](../specification.md#76-taskspushnotificationconfigget)
 
 ### Client-Side Push Notification Service
 
