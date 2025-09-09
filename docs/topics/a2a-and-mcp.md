@@ -5,10 +5,9 @@ interoperability. One connects agents to tools and resources. The other enables
 agent-to-agent collaboration. The Agent2Agent (A2A) Protocol and the
 [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) address these distinct but highly complementary needs.
 
-## Model Context Protocol (MCP)
+## Model Context Protocol
 
-The Model Context Protocol (MCP) defines how an AI agent interacts with and uses
-individual tools and resources, such as a database or an API.
+The Model Context Protocol defines how an AI agent interacts with and utilizes individual tools and resources, such as a database or an API.
 
 This protocol offers the following capabilities:
 
@@ -20,10 +19,9 @@ This protocol offers the following capabilities:
 - Supports common use cases, such as an LLM calling an external API, an agent
   querying a database, or an agent connecting to predefined functions.
 
-## Agent-to-Agent (A2A) Protocol
+## Agent2Agent Protocol
 
-The Agent-to-Agent (A2A) Protocol focuses on letting different agents
-collaborate with one another to achieve a common goal.
+The Agent2Agent protocol focuses on enabling different agents to collaborate with one another to achieve a common goal.
 
 This protocol offers the following capabilities:
 
@@ -38,25 +36,26 @@ This protocol offers the following capabilities:
 
 ## Why Different Protocols?
 
-Both the Message Control Protocol (MCP) and Agent-to-Agent (A2A) protocols are
+Both the MCP and A2A protocols are
 essential for building complex AI systems, and they address distinct but highly
 complementary needs. The distinction between A2A and MCP depends on what an
 agent interacts with.
 
 - **Tools and Resources (MCP Domain)**:
-    - **Characteristics:** These are typically primitives with well-defined,
+  - **Characteristics:** These are typically primitives with well-defined,
         structured inputs and outputs. They perform specific, often stateless,
         functions. Examples include a calculator, a database query API, or a
         weather lookup service.
-    - **Purpose:** Agents use tools to gather information and perform discrete
+  - **Purpose:** Agents use tools to gather information and perform discrete
         functions.
 - **Agents (A2A domain)**:
-    - **Characteristics:** These are more autonomous systems. They reason,
+  - **Characteristics:** These are more autonomous systems. They reason,
         plan, use multiple tools, maintain state over longer interactions, and
         engage in complex, often multi-turn dialogues to achieve novel or
         evolving tasks.
-    - **Purpose:** Agents collaborate with other agents to tackle broader, more
+  - **Purpose:** Agents collaborate with other agents to tackle broader, more
         complex goals.
+
 
 ## A2A ❤️ MCP: Complementary Protocols for Agentic Systems
 
