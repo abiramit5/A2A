@@ -42,18 +42,18 @@ complementary needs. The distinction between A2A and MCP depends on what an
 agent interacts with.
 
 - **Tools and Resources (MCP Domain)**:
-  - **Characteristics:** These are typically primitives with well-defined,
+      - **Characteristics:** These are typically primitives with well-defined,
         structured inputs and outputs. They perform specific, often stateless,
         functions. Examples include a calculator, a database query API, or a
         weather lookup service.
-  - **Purpose:** Agents use tools to gather information and perform discrete
+      - **Purpose:** Agents use tools to gather information and perform discrete
         functions.
 - **Agents (A2A domain)**:
-  - **Characteristics:** These are more autonomous systems. They reason,
+      - **Characteristics:** These are more autonomous systems. They reason,
         plan, use multiple tools, maintain state over longer interactions, and
         engage in complex, often multi-turn dialogues to achieve novel or
         evolving tasks.
-  - **Purpose:** Agents collaborate with other agents to tackle broader, more
+      - **Purpose:** Agents collaborate with other agents to tackle broader, more
         complex goals.
 
 ## A2A ❤️ MCP: Complementary Protocols for Agentic Systems
