@@ -13,7 +13,7 @@ offered by an extension as part of requests they make to the agent. Extensions
 are identified by a URI and defined by their own specification. Anyone is able to define, publish, and implement an extension.
 
 The flexibility of extensions allows for customizing A2A without fragmenting
-the core standard, fostering innovation and domain-specific optimizations. 
+the core standard, fostering innovation and domain-specific optimizations.
 
 ## Scope of Extensions
 
