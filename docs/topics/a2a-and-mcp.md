@@ -2,56 +2,59 @@
 
 In AI agent development, two key protocol types emerge to facilitate
 interoperability. One connects agents to tools and resources. The other enables
-agent-to-agent collaboration. The Agent2Agent (A2A) Protocol and the Model
-Context Protocol (MCP) address these distinct but highly complementary needs.
+agent-to-agent collaboration. The Agent2Agent (A2A) Protocol and the
+[Model Context Protocol](https://modelcontextprotocol.io/) (MCP) address these distinct but highly complementary needs.
 
-- **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)**: This protocol focuses on how an agent interacts with individual tools and resources, enabling an agent to utilize a specific tool, such as a database or an API.
-- **Agent2Agent (A2A) Protocol**: This protocol focuses on how different agents collaborate with each other, enabling agents to work together to achieve a common goal.
+## Model Context Protocol
 
-Both protocols are crucial for building complex AI systems, and they address
-distinct but highly complementary needs.
+The Model Context Protocol (MCP) defines how an AI agent interacts with and utilizes individual tools and resources, such as a database or an API.
+
+This protocol offers the following capabilities:
+
+- Standardizes how AI models and agents connect to and interact with tools,
+  APIs, and other external resources.
+- Defines a structured way to describe tool capabilities, similar to function
+  calling in Large Language Models.
+- Passes inputs to tools and receives structured outputs.
+- Supports common use cases, such as an LLM calling an external API, an agent
+  querying a database, or an agent connecting to predefined functions.
+
+## Agent2Agent Protocol
+
+The Agent2Agent Protocol focuses on enabling different agents to collaborate with one another to achieve a common goal.
+
+This protocol offers the following capabilities:
+
+- Standardizes how independent, often opaque, AI agents communicate and
+  collaborate as peers.
+- Provides an application-level protocol for agents to discover each other,
+  negotiate interactions, manage shared tasks, and exchange conversational
+  context and complex data.
+- Supports typical use cases, including a customer service agent delegating an
+  inquiry to a billing agent, or a travel agent coordinating with flight,
+  hotel, and activity agents.
 
 ## Why Different Protocols?
 
-The distinction between A2A and MCP arises from the nature of what an agent
-interacts with.
+Both the MCP and A2A protocols are
+essential for building complex AI systems, and they address distinct but highly
+complementary needs. The distinction between A2A and MCP depends on what an
+agent interacts with.
 
 - **Tools and Resources (MCP Domain)**:
-    - **Characteristics:** These are typically primitives with well-defined,
+      - **Characteristics:** These are typically primitives with well-defined,
         structured inputs and outputs. They perform specific, often stateless,
         functions. Examples include a calculator, a database query API, or a
         weather lookup service.
-    - **Purpose:** Agents use tools to gather information and perform discrete
+      - **Purpose:** Agents use tools to gather information and perform discrete
         functions.
 - **Agents (A2A domain)**:
-    - **Characteristics:** These are more autonomous systems. They reason,
+      - **Characteristics:** These are more autonomous systems. They reason,
         plan, use multiple tools, maintain state over longer interactions, and
         engage in complex, often multi-turn dialogues to achieve novel or
         evolving tasks.
-    - **Purpose:** Agents collaborate with other agents to tackle broader, more
+      - **Purpose:** Agents collaborate with other agents to tackle broader, more
         complex goals.
-
-## Model Context Protocol (MCP)
-
-- Standardizes how AI models and agents connect to and interact with tools,
-        APIs, data sources, and other external resources.
-- Defines a structured way to describe tool capabilities, similar to
-        function calling in Large Language Models.
-- Passes inputs to tools and receives structured outputs.
-- Use cases include enabling an LLM to call an external API, allowing an
-        agent to query a database, or connecting an agent to a set of predefined
-        functions.
-
-## Agent2Agent Protocol (A2A)
-
-- Standardizes how independent, often opaque, AI agents communicate and
-        collaborate with each other as peers.
-- Provides an application-level protocol for agents to discover each other,
-        negotiate interaction modalities, manage shared Tasks, and exchange
-        conversational context and complex Artifacts.
-- Use cases include a customer service agent delegating an inquiry to a
-        billing agent, or a travel agent coordinating with flight, hotel, and
-        activity agents.
 
 ## A2A ❤️ MCP: Complementary Protocols for Agentic Systems
 
