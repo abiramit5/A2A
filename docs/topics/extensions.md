@@ -149,7 +149,7 @@ negotiation to determine which extensions are active for a specific request.
     response SHOULD include the `X-A2A-Extensions` header, listing all
     extensions that were successfully activated for that request.
 
-![A2A Extension Flow Diagram](../assets/a2a-extension.png){ width="70%" style="margin:20px auto;display:block;" }
+![A2A Extension Flow Diagram](https://storage.googleapis.com/gweb-developer-goog-blog-assets/images/Screenshot_2025-09-04_at_13.03.31.original.png){ width="70%" style="margin:20px auto;display:block;" }
 
 **Example request showing extension activation:**
 
