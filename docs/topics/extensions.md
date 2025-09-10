@@ -13,7 +13,7 @@ offered by an extension as part of requests they make to the agent. Extensions
 are identified by a URI and defined by their own specification. Anyone is able to define, publish, and implement an extension.
 
 The flexibility of extensions allows for customizing A2A without fragmenting
-the core standard, fostering innovation and domain-specific optimizations.
+the core standard, fostering innovation and domain-specific optimizations. 
 
 ## Scope of Extensions
 
@@ -149,7 +149,7 @@ negotiation to determine which extensions are active for a specific request.
     response SHOULD include the `X-A2A-Extensions` header, listing all
     extensions that were successfully activated for that request.
 
-![A2A Extension Flow Diagram](../assets/a2a-extension.png)
+![A2A Extension Flow Diagram](../assets/a2a-extension.png){ width="70%" style="margin:20px auto;display:block;" }
 
 **Example request showing extension activation:**
 
@@ -256,3 +256,5 @@ versioning, and distributing extension implementations.
         authentication and authorization checks as the core A2A methods. An
         extension MUST NOT provide a way to bypass the agent's primary security
         controls.
+
+For more information, see the [A2A Extensions: Empowering Custom Agent Functionality](https://developers.googleblog.com/en/a2a-extensions-empowering-custom-agent-functionality/) blog post.
