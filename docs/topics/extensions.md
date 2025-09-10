@@ -149,6 +149,8 @@ negotiation to determine which extensions are active for a specific request.
     response SHOULD include the `X-A2A-Extensions` header, listing all
     extensions that were successfully activated for that request.
 
+![A2A Extension Flow Diagram](../assets/a2a-extension.png)
+
 **Example request showing extension activation:**
 
 ```http
