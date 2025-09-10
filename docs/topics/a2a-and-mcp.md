@@ -80,28 +80,31 @@ suppliers.
     agent.
 
     For example, the customer might say, "My car is making a rattling noise".
+
 - **Multi-turn Diagnostic Conversation (Agent-to-Agent using A2A)**: The Shop
     Manager agent uses A2A for a multi-turn diagnostic conversation.
 
-    For example,
-    the Manager might ask, "Can you send a video of the noise?" or "I see
-    some fluid leaking. How long has this been happening?".
+    For example, the Manager might ask, "Can you send a video of the noise?" or "I see some fluid leaking. How long has this been happening?".
+
 - **Internal Tool Usage (Agent-to-Tool using MCP)**: The Mechanic agent,
     assigned the task by the Shop Manager, needs to diagnose the issue. The
     Mechanic agent uses MCP to interact with its specialized tools.
 
     For example:
+
     - MCP call to a "Vehicle Diagnostic Scanner" tool:
         `scan_vehicle_for_error_codes(vehicle_id='XYZ123')`
     - MCP call to a "Repair Manual Database" tool:
         `get_repair_procedure(error_code='P0300', vehicle_make='Toyota',
         vehicle_model='Camry')`
     - MCP call to a "Platform Lift" tool: `raise_platform(height_meters=2)`
+
 - **Supplier Interaction (Agent-to-Agent using A2A)**: The Mechanic agent
     determines that a specific part is needed. The Mechanic agent uses A2A to
     communicate with a "Parts Supplier" agent to order a part.
     For example, the
     Mechanic agent might ask, "Do you have part #12345 in stock for a Toyota Camry 2018?"
+
 - **Order processing (Agent-to-Agent using A2A)**: The Parts Supplier agent,
     which is also an A2A-compliant system, responds, potentially leading to an
     order.
