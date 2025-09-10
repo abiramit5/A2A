@@ -3,7 +3,7 @@
 site_name: Agent2Agent (A2A) Protocol Documentation
 site_url: https://a2a-protocol.org/
 site_description: >-
-  The A2A protocol is an open standard that allows different AI agents to 
+  The A2A protocol is an open standard that allows different AI agents to
   securely communicate, collaborate, and solve complex problems together.
 site_author: The Linux Foundation
 site_dir: site
