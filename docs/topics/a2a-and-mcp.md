@@ -36,10 +36,7 @@ This protocol offers the following capabilities:
 
 ## Why Different Protocols?
 
-Both the MCP and A2A protocols are
-essential for building complex AI systems, and they address distinct but highly
-complementary needs. The distinction between A2A and MCP depends on what an
-agent interacts with.
+Both the MCP and A2A protocols are essential for building complex AI systems, and they address distinct but highly complementary needs. The distinction between A2A and MCP depends on what an agent interacts with.
 
 - **Tools and Resources (MCP Domain)**:
       - **Characteristics:** These are typically primitives with well-defined,
