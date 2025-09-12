@@ -26,6 +26,6 @@ Tutorial | Description
 
 ## C#/.NET
 
-Tutorial         | Description
-:---------------------|:-------------------------------------------------------------------
+Tutorial | Description
+:--------|:------------
 [All .NET samples](https://github.com/a2aproject/a2a-dotnet/tree/main/samples)  | Repository of foundational samples showing how to build A2A clients and servers, including an Echo Agent, using the C#/.NET SDK.
