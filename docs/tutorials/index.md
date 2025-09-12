@@ -21,7 +21,7 @@ Tutorial | Description
 ## JavaScript
 
 Tutorial | Description
-------------|-----
+:--------|:------------
 [Movie research agent using JavaScript](https://github.com/a2aproject/a2a-samples/tree/main/samples/js) | Build an A2A agent with Node.js that uses the TMDB (The Movie Database) API to handle movie searches and queries.
 
 ## C#/.NET
