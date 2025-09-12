@@ -55,7 +55,7 @@ INR
 Ikp
 Imh
 Imprd
-Ipynb
+ipynb
 JFUz
 JHv
 JPY
