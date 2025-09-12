@@ -15,7 +15,7 @@ Tutorial | Description | Difficulty
 ## Java
 
 Tutorial | Description
-------------|-----------
+:--------|:-----------
 [Multi-language translator agent using Java](https://github.com/a2aproject/a2a-samples/tree/main/samples/java) | Implement the A2A protocol using Java SDK to create an interactive language translation service.
 
 ## JavaScript
