@@ -3,7 +3,7 @@
 ## Python
 
 Tutorial | Description | Difficulty
-:------- | :--- | :---------
+:--------|:------------|:-----------
 [A2A and Python quickstart](./python/1-introduction.md) | Learn to build a simple Python-based "echo" A2A server and client.  | Easy
 [ADK facts](https://github.com/a2aproject/a2a-samples/tree/main/samples/python/agents/adk_facts) | Build and test a simple Personal Assistant agent using the Agent Development Kit (ADK) that can provide interesting facts. | Easy
 [ADK agent on Cloud Run](https://github.com/a2aproject/a2a-samples/tree/main/samples/python/agents/adk_cloud_run) | Deploy, manage, and observe an ADK-based agent as a scalable, serverless service on Google Cloud Run.| Easy
