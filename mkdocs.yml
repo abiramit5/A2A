@@ -50,7 +50,7 @@ nav:
       - sdk/index.md
       - Python: sdk/python/api/index.html
   - Community: community.md
-  - Partners: partners.md  
+  - Partners: partners.md
   - Roadmap: roadmap.md
 
 # Repository
