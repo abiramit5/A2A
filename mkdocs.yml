@@ -44,10 +44,11 @@ nav:
     - Multi-language translator agent using Java: /a2aproject/a2a-samples/tree/main/samples/java
     - Movie research agent using JavaScript: /a2aproject/a2a-samples/tree/main/samples/js
     - All .NET samples: /a2aproject/a2a-dotnet/tree/main/samples    
-  - Specification: specification.md
-  - SDK Reference:
-    - sdk/index.md
-    - Python: sdk/python/api/index.html
+  - References:
+    - Specification: specification.md
+    - SDK Reference:
+      - sdk/index.md
+      - Python: sdk/python/api/index.html
   - Community: community.md
   - Partners: partners.md  
   - Roadmap: roadmap.md
