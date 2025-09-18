@@ -1,5 +1,5 @@
 # Project information
-site_name: A2A Protocol 
+site_name: A2A Protocol
 site_url: https://a2a-protocol.org/
 site_description: >-
   The Agent2Agent protocol is an open standard that allows different AI agents to securely communicate, collaborate, and solve complex problems together.
@@ -40,7 +40,7 @@ nav:
     - sdk/index.md
     - Python: sdk/python/api/index.html
   - Community: community.md
-  - Partners: partners.md  
+  - Partners: partners.md
   - Roadmap: roadmap.md
 
 # Repository
