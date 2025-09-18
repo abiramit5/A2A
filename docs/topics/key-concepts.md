@@ -4,7 +4,7 @@ A2A uses a set of core concepts that define how agents interact.
 Understand these core building blocks to develop or integrate with A2A-compliant
 systems.
 
-![A2A Actors showing a User, A2A Client (Client Agent), and A2A Server (Remote Agent)](../assets/a2a-actors.png){ width="70%" style="margin:20px auto;display:block;" }
+![A2A Actors showing a User, A2A Client (Client Agent), and A2A Server (Remote Agent)](../assets/a2a-actor.png){ width="70%" style="margin:20px auto;display:block;" }
 
 ## Core Actors in A2A Interactions
 
