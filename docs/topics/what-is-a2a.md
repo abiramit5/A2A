@@ -89,7 +89,7 @@ The A2A Protocol provides standard methods and data structures for agents to com
 
 The AI assistant, now acting as an orchestrator, receives the cohesive information from all the A2A-enabled agents. It then presents a single, complete travel plan as a seamless response to the user's initial prompt.
 
-![A2A Actors showing a User, A2A Client (Client Agent), and A2A Server (Remote Agent)](../assets/a2a-actor.png){ width="70%" style="margin:20px auto;display:block;" }
+![A2A Actors showing a User, A2A Client (Client Agent), and A2A Server (Remote Agent)](../assets/a2a-actors.png){ width="70%" style="margin:20px auto;display:block;" }
 
 ### Core Benefits of A2A
 
